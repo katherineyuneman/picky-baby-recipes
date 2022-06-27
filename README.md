@@ -1,9 +1,8 @@
-# Project Template: React/Rails API
+# Picky Baby APp
 
 ## Description
 
-This project is scaffolded so that you can build a React frontend and Rails
-backend together, and easily deploy them to Heroku.
+Picky Baby app provides a food database that includes details about foods babies can eat and when along with when they can start eating this food.  Users who create an account can also view recipes with these foods and create new recipes.
 
 ## Requirements
 
