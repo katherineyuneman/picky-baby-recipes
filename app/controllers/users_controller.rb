@@ -3,23 +3,31 @@ class UsersController < ApplicationController
 
     #signup
     def create
-        new_user = User.create(user_params)
-        byebug
-        render json: new_user
+        user = User.create(user_params)
+        if user.valid?
+            session[:user_id] = user.id
+            render json: user
+        else  
+            render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
+        end
         #Create new user & login
     end
 
     #/me
     def show
-        current_user = User.find_by(id: session[:user_id])
-        render json: current_user
+        user = User.find_by(id: session[:user_id])
+        if user
+            render json: user
+        else
+            render json: {error: "Not authorized"}, status: :unauthorized
         #Get current user & render in json
+        end
     end
 
     private
 
     def user_params
-        params.require(:newUser).permit(:email, :password, :password_confirmation)
+        params.permit(:email, :password, :password_confirmation)
     end
 
 end

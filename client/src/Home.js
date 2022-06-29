@@ -5,14 +5,14 @@ function Home() {
 
     const { user } = useContext(UserContext)
 
-    const renderHello = !user ? <h1>Sign in!</h1> : <h1>Hello, {user.first_name}</h1>
+    console.log("user in home:", user)
 
-  return (
-    <div>
-      {renderHello}
-    </div>
+    if (!user ||  user.error) {
+        return <h1>Please login or signup</h1>
+    } else {
+        return <h1>Hello, {user.first_name}</h1>
+        }
 
-  )
 }
 
 export default Home

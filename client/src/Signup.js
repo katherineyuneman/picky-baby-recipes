@@ -1,5 +1,6 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { signup, UserContext } from './context/user'
 
 function Signup() {
 
@@ -8,6 +9,8 @@ function Signup() {
         password:"",
         password_confirmation: ""
     })
+    const [errorsList, setErrorsList] = useState([])
+    const { signup } = useContext(UserContext)
 
     const history = useNavigate()
 
@@ -21,27 +24,35 @@ function Signup() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log("submit")
+        
 
-        const newSignup ={
-            email: signupCredentials.email,
-            password: signupCredentials.password,
-            password_confirmation: signupCredentials.password_confirmation
-        }
+        // const user ={
+        //     email: signupCredentials.email,
+        //     password: signupCredentials.password,
+        //     password_confirmation: signupCredentials.password_confirmation
+        // }
 
         fetch('http://localhost:3000/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify(newSignup)
+        body:JSON.stringify({
+            email: signupCredentials.email,
+            password: signupCredentials.password,
+            password_confirmation: signupCredentials.password_confirmation
+        })
         })
         .then(resp => resp.json())
-        .then((data) => {
-            if (data.errors){
-                alert(data.errors)
+        .then((user) => {
+            if (user.errors){
+                // setSignupCredentials({})
+                const errorLis = user.errors.map((e) => <li>{e}</li>)
+                setErrorsList(errorLis)
             } else {
-                history.push("/")
+                signup(user)
+                console.log("user after signup:", user)
+                // history.push('/')
             }
         })
 
@@ -66,6 +77,9 @@ function Signup() {
             <br/>
               <button>Create Account</button>
         </form>
+        <ul>
+            {errorsList}
+        </ul>
     </div>
   )
 }

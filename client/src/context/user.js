@@ -10,7 +10,7 @@ function UserProvider({children}){
     const [ user, setUser ] = useState({})
 
     useEffect (() => {
-        fetch ('/me')
+        fetch ('http://localhost:3000/me')
         .then(resp => resp.json())
         .then(data => {
             setUser(data)
@@ -26,8 +26,8 @@ function UserProvider({children}){
 
     }
 
-    const signup = () => {
-
+    const signup = (user) => {
+        setUser(user)
     }
 
     return (
