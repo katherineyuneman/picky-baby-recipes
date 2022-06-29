@@ -13,27 +13,9 @@ function App() {
       <BrowserRouter>
       <Navbar/>
         <Routes>
-        {/* <Route path="/posts/new">
-            <PostForm />
-          </Route>
-          <Route path="/posts/:postId/comments">
-            <CommentsList />
-          </Route>
-          <Route path="/posts/:id">
-            <PostCard />
-          </Route>
-          <Route path="/posts">
-            <PostsContainer />
-          </Route> */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/me">
-            <Profile />
-          </Route> */}
           <Route path="/signup" element={<Signup />} />
-          {/* <Route path="/logout">
-            <Logout />
-          </Route> */}
           
         </Routes>
       </BrowserRouter>

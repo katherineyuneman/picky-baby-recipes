@@ -5,14 +5,14 @@ class UsersController < ApplicationController
     def create
         new_user = User.create(user_params)
         byebug
-        render json: :new_user
+        render json: new_user
         #Create new user & login
     end
 
     #/me
     def show
-        current_user = User.find_by_id(id: session[:user_id])
-        render json: :current_user
+        current_user = User.find_by(id: session[:user_id])
+        render json: current_user
         #Get current user & render in json
     end
 
