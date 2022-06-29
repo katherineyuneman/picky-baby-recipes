@@ -4,11 +4,12 @@ import Navbar from './Navbar';
 import Login from './Login';
 import Signup from './Signup';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
+import { UserProvider } from '../context/user';
 
 function App() {
   return (
     <div className="App">
-      
+      <UserProvider>
       <BrowserRouter>
       <Navbar/>
         <Routes>
@@ -36,6 +37,7 @@ function App() {
           
         </Routes>
       </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }

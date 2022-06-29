@@ -6,5 +6,4 @@ def create
     byebug
 end
 
-
 end
