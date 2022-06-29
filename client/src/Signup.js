@@ -1,19 +1,20 @@
 import {useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { signup, UserContext } from './context/user'
+import { UserContext } from './context/user'
 
 function Signup() {
 
     const [signupCredentials, setSignupCredentials] = useState ({
         email:"",
         password:"",
-        password_confirmation: ""
+        password_confirmation: "",
+        first_name: "",
+        last_name:""
     })
     const [errorsList, setErrorsList] = useState([])
-    const { signup } = useContext(UserContext)
+    const { signUp } = useContext(UserContext)
 
-    const history = useNavigate()
-
+    const navigate = useNavigate()
 
     const handleInputs = e => {
         console.log(e.target.value)
@@ -40,7 +41,9 @@ function Signup() {
         body:JSON.stringify({
             email: signupCredentials.email,
             password: signupCredentials.password,
-            password_confirmation: signupCredentials.password_confirmation
+            password_confirmation: signupCredentials.password_confirmation,
+            first_name: signupCredentials.first_name,
+            last_name: signupCredentials.last_name
         })
         })
         .then(resp => resp.json())
@@ -50,9 +53,9 @@ function Signup() {
                 const errorLis = user.errors.map((e) => <li>{e}</li>)
                 setErrorsList(errorLis)
             } else {
-                signup(user)
+                signUp(user)
                 console.log("user after signup:", user)
-                // history.push('/')
+                navigate('/')
             }
         })
 
@@ -65,6 +68,14 @@ function Signup() {
       <form onSubmit={handleSubmit}>
             <label>Email Address:
               <input type="text" name="email" value={signupCredentials.email} maxLength={20} onChange={handleInputs}/>
+            </label>
+            <br/>
+            <label>First Name:
+              <input type="text" name="first_name" value={signupCredentials.first_name} maxLength={20} onChange={handleInputs}/>
+            </label>
+            <br/>
+            <label>Last Name:
+              <input type="text" name="last_name" value={signupCredentials.last_name} maxLength={20} onChange={handleInputs}/>
             </label>
             <br/>
             <label>Password:

@@ -26,12 +26,13 @@ function UserProvider({children}){
 
     }
 
-    const signup = (user) => {
+    const signUp = (user) => {
         setUser(user)
+        console.log("user within context set user:", user)
     }
 
     return (
-        <UserContext.Provider value={{user, login, logout, signup}}>
+        <UserContext.Provider value={{user, login, logout, signUp}}>
             {children}
         </UserContext.Provider>
     )
