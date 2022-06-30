@@ -10,16 +10,16 @@ class UsersController < ApplicationController
         else  
             render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
         end
-        #Create new user & login
+        #Create new user AND login
     end
 
     #/me
     def show
-        user = User.find_by(id: session[:user_id])
+        user = User.find_by_id(session[:user_id])
         if user
             render json: user
         else
-            render json: {error: "Not authorized"}, status: :unauthorized
+            render json: {errors: "Not authorized"}, status: :unauthorized
         #Get current user & render in json
         end
     end

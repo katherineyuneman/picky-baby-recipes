@@ -1,20 +1,45 @@
-import React from 'react'
+import React, { useContext } from 'react'
 // import Login from './Login'
 // import Signup from './Signup'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from './context/user'
 
 function Navbar() {
-  return (
+
+    const { user, logout } = useContext(UserContext)
+    console.log("user inside navbar:", user)
+
+    const navigate = useNavigate()
+
+    const logoutUser = () => {
+        fetch('/logout')
+        .then(() => {
+            logout();
+            navigate('/')
+        })
+    }
+   
+    if (!user ||  user.error){
+        return (
+            <div>
+                <h2>NavBar</h2>
+                <h2>
+                    <Link to="/signup">
+                        <button>Signup</button>
+                    </Link>
+                    <Link to="/login">
+                        <button>Login</button>
+                    </Link>
+                </h2>
+            </div>)
+    } else
+            {return (
     <div>
-      <h2>NavBar</h2>
-      <Link to="/signup">
-      <button>Signup</button>
-      </Link>
-      <Link to="/login">
-      <button>Login</button>
-      </Link>
-    </div>
-  )
+      
+      <button onClick={logoutUser}>Logout</button>
+    </div>)
+        }
+  
 }
 
 export default Navbar

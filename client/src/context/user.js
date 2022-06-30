@@ -7,23 +7,32 @@ const UserContext = React.createContext();
 
 function UserProvider({children}){
 
-    const [ user, setUser ] = useState({})
+    const [ user, setUser ] = useState(null)
 
     useEffect (() => {
         fetch ('http://localhost:3000/me')
         .then(resp => resp.json())
+        // .then(data => {
+        //     setUser(data)
+        // })
         .then(data => {
-            setUser(data)
-
+            if (data.errors){
+                console.log("errors from /me fetch:", data.errors)
+            } else {
+                setUser(data)
+                console.log("data from fetch:", data)
+            }
         })
     }, [])
 
-    const login = () => {
-
+    const login = (user) => {
+        setUser(user)
+        console.log("user within context set user:", user)
     }
 
     const logout = () => {
-
+        setUser(null)
+        console.log("user within context set user:", user)
     }
 
     const signUp = (user) => {
