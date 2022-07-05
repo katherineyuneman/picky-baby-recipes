@@ -12,7 +12,10 @@ function Navbar() {
     const navigate = useNavigate()
 
     const logoutUser = () => {
-        fetch('/logout')
+        fetch('http://localhost:3000/logout', {
+            method: 'DELETE',
+            headers: { 'Content-type': 'application/json'}
+        })
         .then(() => {
             logout();
             navigate('/')

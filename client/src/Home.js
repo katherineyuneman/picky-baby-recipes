@@ -4,12 +4,13 @@ import { UserContext } from './context/user'
 
 function Home() {
 
-    const { user } = useContext(UserContext)
+    const { user, loggedIn } = useContext(UserContext)
 
-    console.log("user in home:", user)
+    console.log("user in home:", user, "logged in:", loggedIn)
 
-    if (user) {
-        return <h1>Hello, {user.first_name}</h1>
+    
+    if (loggedIn === true) {
+        return <h1>Hello, {user.first_name} </h1>
     } else {
         return <h1>Please login or signup</h1>
         }
