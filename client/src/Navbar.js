@@ -33,6 +33,9 @@ function Navbar() {
                     <Link to="/login">
                         <button>Login</button>
                     </Link>
+                    <Link to="/foods">
+                        <button>Food List</button>
+                    </Link>
                 </h2>
             </div>)
     } else

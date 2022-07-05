@@ -10,10 +10,14 @@ function UserProvider({children}){
     const [ user, setUser ] = useState(null)
     const [ loggedIn, setLoggedIn ] = useState(false)
 
+
     useEffect (() => {
         fetch('http://localhost:3000/me')
         .then(resp => resp.json())
-        .then(data => {
+        // .then(data => {
+        //     setUser(data)
+        // })
+        .then((data)=> {
             console.log("fetch", data.errors)
             setUser(data)
             console.log("DATA.ERROR user from context /me fetch", data.errors)
