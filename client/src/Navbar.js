@@ -6,13 +6,13 @@ import { UserContext } from './context/user'
 
 function Navbar() {
 
-    const { user, logout } = useContext(UserContext)
+    const { user, logout, loggedIn } = useContext(UserContext)
     console.log("user inside navbar:", user)
 
     const navigate = useNavigate()
 
     const logoutUser = () => {
-        fetch('http://localhost:3000/logout', {
+        fetch('/logout', {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json'}
         })
@@ -21,8 +21,8 @@ function Navbar() {
             navigate('/')
         })
     }
-   
-    if (!user ||  user.error){
+   console.log(loggedIn)
+    if (!loggedIn){
         return (
             <div>
                 <h2>NavBar</h2>
@@ -33,7 +33,7 @@ function Navbar() {
                     <Link to="/login">
                         <button>Login</button>
                     </Link>
-                    <Link to="/foods">
+                    <Link to="/foodlist">
                         <button>Food List</button>
                     </Link>
                 </h2>
@@ -43,7 +43,14 @@ function Navbar() {
     <div>
       
       <button onClick={logoutUser}>Logout</button>
-    </div>)
+      <Link to="/foodlist">
+                        <button>Food List</button>
+                    </Link>
+    <Link to="/myrecipes">
+        <button>My Recipes</button>
+    </Link>
+    </div>
+    )
         }
   
 }

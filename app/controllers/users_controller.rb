@@ -6,6 +6,7 @@ class UsersController < ApplicationController
         user = User.create(user_params)
         if user.valid?
             session[:user_id] = user.id
+            byebug
             render json: user, status: :created
         else  
             render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
     #/me
     def show
         @current_user = User.find_by(id: session[:user_id])
+        #byebug
         if @current_user = @current_user || User.find_by(id: session[:user_id])
             render json: @current_user
         else

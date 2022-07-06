@@ -33,23 +33,22 @@ function Signup() {
         //     password_confirmation: signupCredentials.password_confirmation
         // }
 
-        fetch('http://localhost:3000/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({
-            email: signupCredentials.email,
-            password: signupCredentials.password,
-            password_confirmation: signupCredentials.password_confirmation,
-            first_name: signupCredentials.first_name,
-            last_name: signupCredentials.last_name
-        })
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                email: signupCredentials.email,
+                password: signupCredentials.password,
+                password_confirmation: signupCredentials.password_confirmation,
+                first_name: signupCredentials.first_name,
+                last_name: signupCredentials.last_name
+            })
         })
         .then(resp => resp.json())
         .then((user) => {
             if (user.errors){
-                // setSignupCredentials({})
                 const errorLis = user.errors.map((e) => <li>{e}</li>)
                 setErrorsList(errorLis)
             } else {

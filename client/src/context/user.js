@@ -12,7 +12,7 @@ function UserProvider({children}){
 
 
     useEffect (() => {
-        fetch('http://localhost:3000/me')
+        fetch('/me')
         .then(resp => resp.json())
         // .then(data => {
         //     setUser(data)
@@ -24,6 +24,17 @@ function UserProvider({children}){
             data.errors ? setLoggedIn(false) : setLoggedIn(true)
         })
     }, [])
+
+
+    // useEffect(() => {
+    //     fetch("http://localhost:3000/me").then((response) => {
+    //       if (response.ok) {
+    //         response.json().then((user) => setUser(user));
+    //       }
+    //     });
+    //   }, []);
+
+
 
     const login = (user) => {
         setUser(user)

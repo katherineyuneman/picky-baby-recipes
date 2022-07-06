@@ -6,6 +6,7 @@ import Signup from './Signup';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import { UserProvider } from './context/user';
 import FoodList from './components/FoodList';
+import RecipeList from './components/RecipeList';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/foodlist" element={<FoodList />} />
+          <Route path="/myrecipes" element={<RecipeList />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           

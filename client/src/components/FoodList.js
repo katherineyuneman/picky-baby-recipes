@@ -4,7 +4,7 @@ function FoodList() {
     const [foods, setFoods] = useState([]);
 
     useEffect(() => {
-      fetch("http://localhost:3000/foods")
+      fetch("/foods")
         .then((r) => r.json())
         .then((fetchedFood) => setFoods(fetchedFood))
     }, []);

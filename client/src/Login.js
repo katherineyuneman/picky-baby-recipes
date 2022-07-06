@@ -16,7 +16,7 @@ function Login() {
     const handleSubmit = e => {
         e.preventDefault()
         console.log("login")
-        fetch('http://localhost:3000/login', {
+        fetch('/login', {
             method: 'POST',
             headers: { 'Content-type': 'application/json'},
             body: JSON.stringify(loginCredentials)
