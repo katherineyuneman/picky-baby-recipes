@@ -9,22 +9,25 @@ function FoodList() {
         .then((fetchedFood) => setFoods(fetchedFood))
     }, []);
 
+    console.log('fetched food', foods[0])
+
     const foodList = foods.map((food) => (
-        <div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <h2 key={food.id}>{food.name}</h2>
+        <div key={food.id}>
+            <h2 >{food.name}</h2>
             <p>
-              <em key={food.id}>Type {food.food_type}</em>
-              {/* <cite key={food.id}>By {food.user.user_id}</cite> */}
+              <h3>
+                  Type: {food.food_type}
+                  <br/>
+                  Common Allergen: {food.common_allergen.toString()}
+                  <br/>
+                  Age: {food.age}
+                  <br/>
+                  Nutrition Rating: {food.nutrition_rating}
+                  <br/>
+                  Description: {food.full_desc}
+
+              </h3>
+              <cite>By {food.user_id}</cite>
             </p>
             </div>
       ))
@@ -34,5 +37,17 @@ function FoodList() {
     </div>
   )
 }
+
+// t.string "name"
+//     t.string "food_type"
+//     t.string "age"
+//     t.integer "nutrition_rating"
+//     t.boolean "common_allergen"
+//     t.text "full_desc"
+//     t.string "image_url"
+//     t.bigint "user_id", null: false
+//     t.datetime "created_at", precision: 6, null: false
+//     t.datetime "updated_at", precision: 6, null: false
+//     t.index ["user_id"], name: "index_foods_on_user_id"
 
 export default FoodList

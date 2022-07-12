@@ -9,34 +9,29 @@ function RecipeList() {
         .then((fetchedRecipes) => setRecipes(fetchedRecipes))
     }, []);
 
+    console.log("recipes inside RecipeList:", recipes)
 
+    // console.log("recipes:", recipes.ingredients[0])
     const eachRecipe = recipes.map((recipe) => {
-        <div key={recipe.id}>
+        return <div key={recipe.id}>
             <br/>
-            <h2>{recipe.title}</h2>
-            <em>Ingredients:
-
-            </em>
-            <br/>
-            <em>Directions: {recipe.directions}</em>
-            <em>{recipe.map((ingredient => {
+            <h2>{recipe.title}</h2>     
+            Ingredients:
+            <em>{recipe.ingredients.map((ingredient => {
+                
                 return <div>
-                    <em>{ingredient.amount}</em>
+                    <em>{ingredient.amount} {ingredient.measurement} {ingredient.food.name}</em> 
                 </div>
             }))}</em>
+            <br/>
+            <em>Directions: {recipe.directions}</em>
+            <br/>
         </div>
     })
 
-    
-    const recipeList = recipes.map((recipe) => (
-        <div key={recipe.id}>
-              {/* <cite key={food.id}>By {food.user.user_id}</cite> */}
-            </div>
-      ))
-
   return (
     <div>
-      {recipeList}
+      {eachRecipe}
     </div>
   )
 }
