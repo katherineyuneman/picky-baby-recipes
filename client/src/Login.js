@@ -24,8 +24,8 @@ function Login() {
         .then(resp => resp.json())
         .then((user) => {
             if (user.errors){
-                const errorLis = user.errors.map((e) => <li>{e}</li>)
-                setErrorsList(errorLis)
+                console.log(user.errors)
+                setErrorsList(user.errors)
             } else {
                 login(user)
                 console.log("user after login:", user)

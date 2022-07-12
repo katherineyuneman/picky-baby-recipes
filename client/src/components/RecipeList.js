@@ -19,7 +19,7 @@ function RecipeList() {
             Ingredients:
             <em>{recipe.ingredients.map((ingredient => {
                 
-                return <div>
+                return <div key={ingredient.id}>
                     <em>{ingredient.amount} {ingredient.measurement} {ingredient.food.name}</em> 
                 </div>
             }))}</em>
