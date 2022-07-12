@@ -15,7 +15,6 @@ function Login() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log("login")
         fetch('/login', {
             method: 'POST',
             headers: { 'Content-type': 'application/json'},
@@ -28,7 +27,6 @@ function Login() {
                 setErrorsList(user.errors)
             } else {
                 login(user)
-                console.log("user after login:", user)
                 navigate('/')
             }
         })

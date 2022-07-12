@@ -5,4 +5,8 @@ class FoodsController < ApplicationController
         render json: food_list, status: :ok
     end
 
+    def create
+        
+    end
+
 end

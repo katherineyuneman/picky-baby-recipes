@@ -6,7 +6,8 @@ class RecipesController < ApplicationController
     end
     
     def create
-        
+        new_recipe = current_user.recipes.create(recipe_params)
+        render json: new_recipe, status: :created
     end
 
     def destroy
@@ -16,5 +17,10 @@ class RecipesController < ApplicationController
 
     def current_user
         @current_user = User.find_by(id: session[:user_id])
+    end
+
+    private
+    def recipe_params
+        params.require(:recipe).permit(:title, :directions, :source)
     end
 end

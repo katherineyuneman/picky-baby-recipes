@@ -49,6 +49,9 @@ function Navbar() {
     <Link to="/myrecipes">
         <button>My Recipes</button>
     </Link>
+    <Link to="/recipes/new">
+        <button>Add a Recipe</button>
+    </Link>
     </div>
     )
         }
