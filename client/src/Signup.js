@@ -25,14 +25,7 @@ function Signup() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        
-
-        // const user ={
-        //     email: signupCredentials.email,
-        //     password: signupCredentials.password,
-        //     password_confirmation: signupCredentials.password_confirmation
-        // }
-
+      
         fetch('/signup', {
             method: 'POST',
             headers: {

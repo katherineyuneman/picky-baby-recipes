@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+    # accepts_nested_attributes_for :ingredients
 
     def index
         user_recipes = current_user.recipes
@@ -21,6 +22,6 @@ class RecipesController < ApplicationController
 
     private
     def recipe_params
-        params.require(:recipe).permit(:title, :directions, :source)
+        params.require(:full_recipe).permit(:title, :directions, :source, ingredients_attributes: [:amount, :measurement, :food_id])
     end
 end

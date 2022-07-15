@@ -34,82 +34,103 @@ function RecipeForm() {
             [e.target.name]: e.target.value})
     }
 
-    const handleIngredientInputs = e => {
-        setIngredientInputs([{
-            ...ingredientInputs,
-            [e.target.name]: e.target.value}])
+    const handleIngredientInputs = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...ingredientInputs];
+        list[index][name] = value;
+        setIngredientInputs(list);
+        console.log(ingredientInputs)
+        
+        // setIngredientInputs([{
+        //     ...ingredientInputs,
+        //     [e.target.name]: e.target.value}])
     }
 
-    const handleAddIngredient = () => {
-        return <div>
-            <select name="food_id" value={ingredientInputs.food_id} required onChange={handleIngredientInputs}>
-        <option name="default" value="default">Select Food Item</option>
-        {foodDropDownOptions}
-    </select>
-    <label>Amount:
-      <input type="decimal" name="amount" value={ingredientInputs.amount} maxLength={10} onChange={handleIngredientInputs}/>
-    </label>
-    <label>Measurement
-      <input type="decimal" name="measurement" value={ingredientInputs.measurement} maxLength={30} onChange={handleIngredientInputs}/>
-    </label>
-    </div>
+    const addIngredientField = (e) => {
+        e.preventDefault();
+        setIngredientInputs([...ingredientInputs, {
+            amount:"",
+            measurement: "",
+            food_id:""
+        }])
     }
+
+    // const handleAddIngredient = () => {
+    //     return <div> <select name="food_id" value={ingredientInputs.food_id} required onChange={handleIngredientInputs}>
+    //                 <option name="default" value="default">Select Food Item</option>
+    //                 {foodDropDownOptions}
+    //             </select></div>
+    
 
     const handleSubmit = e => {
         e.preventDefault()
-  
+        console.log("ingredient inputs:", ingredientInputs)
+        // set up the array to send
+        const full_recipe = 
+            {...recipeInputs, 
+            ingredients_attributes: [...ingredientInputs]
+            }
+            
+
         fetch('/recipes', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body:JSON.stringify({
-            title: recipeInputs.title,
-            directions: recipeInputs.directions,
-            source: recipeInputs.source
-        })
+          body:JSON.stringify({full_recipe})
           })
+
           .then(resp => resp.json())
           .then((data) => {
               if (data.errors){
                   alert(data.errors)
               } else {
                 // setCreatedRecipe(data)
-                handleIngredientSubmit(data)
+                // handleIngredientSubmit(data)
                 setRecipeInputs({title:"",
                 directions: "",
                 source:""})
-                
+                setIngredientInputs([{
+                    amount:"",
+                    measurement: "",
+                    food_id:""
+                }])
                 //   history.push("/myrecipes")
               }
           })
           // .catch(error => alert(error))
     }
-    const handleIngredientSubmit = (data) => {
-        fetch('/ingredients', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-              amount: ingredientInputs.amount,
-              measurement: ingredientInputs.measurement,
-              food_id: ingredientInputs.food_id,
-              recipe_id: data.id
-          })
-            })
-            .then(resp => resp.json())
-            .then((data) => {
-                if (data.errors){
-                    alert(data.errors)
-                } else {
-                  setIngredientInputs({ amount:"",
-                  measurement: "",
-                  food_id:""})
-                  //   history.push("/myrecipes")
-                }
-            })
-    }
+
+
+    // const handleIngredientSubmit = (data) => {
+    //     const ingredientsForFetch = ingredientInputs.map((ingredient)=>{
+    //        ({...ingredient, 
+    //         recipe_id: data.id
+    //         })
+    //     }) 
+    //     console.log('ingredient inputs pre-submit:', ingredientsForFetch)
+    //     fetch('/ingredients', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body:JSON.stringify([ingredientsForFetch])
+    //         })
+    //         .then(resp => resp.json())
+    //         .then((data) => {
+    //             if (data.errors){
+    //                 alert(data.errors)
+    //             } else {
+    //                 console.log("data post post fetch:", data)
+    //             //   setIngredientInputs({ amount:"",
+    //             //   measurement: "",
+    //             //   food_id:""})
+    //               //   history.push("/myrecipes")
+    //             }
+    //         })
+    // }
+
+
 
   return (
         <form onSubmit={handleSubmit}>
@@ -126,29 +147,39 @@ function RecipeForm() {
             </label>
             <br/>
             <br/>
-            <button onClick={handleAddIngredient}>Ingredients:</button>
             <br/>
-            {/* <select name="food_id" value={ingredientInputs.food_id} required onChange={handleIngredientInputs}>
-                <option name="default" value="default">Select Food Item</option>
-                {foodDropDownOptions}
-            </select>
-            <label>Amount:
-              <input type="decimal" name="amount" value={ingredientInputs.amount} maxLength={10} onChange={handleIngredientInputs}/>
-            </label>
-            <label>Measurement
-              <input type="decimal" name="measurement" value={ingredientInputs.measurement} maxLength={30} onChange={handleIngredientInputs}/>
-            </label> */}
-            {/* <label>Ingredients:
-              <input type="password" name="password" value={signupCredentials.password} maxLength={20} onChange={handleInputs}/>
-            </label>
+            
+
+            {ingredientInputs.map((data, index) => {
+                return (
+                    <div>
+                        <select name="food_id" value={data.food_id} required onChange={(e)=>handleIngredientInputs(e, index)}>
+                            <option name="default" value="default">Select Food Item</option>
+                            {foodDropDownOptions}
+                        </select>
+
+                        <label>Amount:
+                            <input type="decimal" name="amount" value={data.amount} maxLength={10} onChange={(e)=>handleIngredientInputs(e, index)}/>
+                        </label>
+                        <label>Measurement
+                            <input type="decimal" name="measurement" value={data.measurement} maxLength={30} onChange={(e)=>handleIngredientInputs(e, index)}/>
+                        </label>
+                    </div>
+                )
+                })
+            }
+
+
+
+
             <br/>
-            <label>Password Confirmation:
-              <input type="password" name="password_confirmation" value={signupCredentials.password_confirmation} maxLength={20} onChange={handleInputs}/>
-            </label> */}
+            <button onClick={addIngredientField}>Add another Ingredient</button>
+            <br/>
             <br/>
               <button>Create Recipe</button>
         </form>
   )
-}
+        }
+
 
 export default RecipeForm
