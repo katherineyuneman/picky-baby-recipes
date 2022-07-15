@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-    # accepts_nested_attributes_for :ingredients
 
     def index
         user_recipes = current_user.recipes

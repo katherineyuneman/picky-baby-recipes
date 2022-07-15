@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function RecipeForm() {
 
     const [foodIngredientOptions, setFoodIngredientOptions] = useState([])
+    const navigate = useNavigate()
     
     const [ recipeInputs, setRecipeInputs ] = useState({
         title:"",
@@ -55,13 +57,6 @@ function RecipeForm() {
         }])
     }
 
-    // const handleAddIngredient = () => {
-    //     return <div> <select name="food_id" value={ingredientInputs.food_id} required onChange={handleIngredientInputs}>
-    //                 <option name="default" value="default">Select Food Item</option>
-    //                 {foodDropDownOptions}
-    //             </select></div>
-    
-
     const handleSubmit = e => {
         e.preventDefault()
         console.log("ingredient inputs:", ingredientInputs)
@@ -85,8 +80,6 @@ function RecipeForm() {
               if (data.errors){
                   alert(data.errors)
               } else {
-                // setCreatedRecipe(data)
-                // handleIngredientSubmit(data)
                 setRecipeInputs({title:"",
                 directions: "",
                 source:""})
@@ -95,40 +88,11 @@ function RecipeForm() {
                     measurement: "",
                     food_id:""
                 }])
-                //   history.push("/myrecipes")
+                  navigate("/myrecipes")
               }
           })
-          // .catch(error => alert(error))
     }
 
-
-    // const handleIngredientSubmit = (data) => {
-    //     const ingredientsForFetch = ingredientInputs.map((ingredient)=>{
-    //        ({...ingredient, 
-    //         recipe_id: data.id
-    //         })
-    //     }) 
-    //     console.log('ingredient inputs pre-submit:', ingredientsForFetch)
-    //     fetch('/ingredients', {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body:JSON.stringify([ingredientsForFetch])
-    //         })
-    //         .then(resp => resp.json())
-    //         .then((data) => {
-    //             if (data.errors){
-    //                 alert(data.errors)
-    //             } else {
-    //                 console.log("data post post fetch:", data)
-    //             //   setIngredientInputs({ amount:"",
-    //             //   measurement: "",
-    //             //   food_id:""})
-    //               //   history.push("/myrecipes")
-    //             }
-    //         })
-    // }
 
 
 
