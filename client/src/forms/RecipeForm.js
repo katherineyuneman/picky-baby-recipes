@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
+import FoodForm from './FoodForm'
 
 function RecipeForm() {
 
     const [foodIngredientOptions, setFoodIngredientOptions] = useState([])
+    const [ displayFoodForm, setDisplayFoodForm ] = useState(false)
+
     const navigate = useNavigate()
     
     const [ recipeInputs, setRecipeInputs ] = useState({
@@ -18,6 +21,8 @@ function RecipeForm() {
         food_id:""
     }])
 
+
+
     useEffect(() => {
         fetch ('/foods')
         .then(response => response.json())
@@ -30,23 +35,25 @@ function RecipeForm() {
         <option key={food.id} value={food.id}>{food.name}</option>
         )
 
+
+
     const handleRecipeInputs = e => {
         setRecipeInputs({
             ...recipeInputs,
             [e.target.name]: e.target.value})
     }
 
+
     const handleIngredientInputs = (e, index) => {
+        if (e.target.value === "addNew"){
+            setDisplayFoodForm(true)
+            console.log(displayFoodForm)
+        }
         const { name, value } = e.target;
         const list = [...ingredientInputs];
         list[index][name] = value;
         setIngredientInputs(list);
-        console.log(ingredientInputs)
-        
-        // setIngredientInputs([{
-        //     ...ingredientInputs,
-        //     [e.target.name]: e.target.value}])
-    }
+        }
 
     const addIngredientField = (e) => {
         e.preventDefault();
@@ -55,6 +62,31 @@ function RecipeForm() {
             measurement: "",
             food_id:""
         }])
+    }
+
+    const handleFoodSubmit = (e, foodInputs) => {
+        e.preventDefault()
+        console.log(foodInputs)
+
+        fetch('/foods', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(foodInputs)
+            })
+  
+            .then(resp => resp.json())
+            .then((data) => {
+                if (data.errors){
+                    alert(data.errors)
+                } else {
+                  setDisplayFoodForm(false)
+                  console.log("data inside post-fecth:", data)
+                  setFoodIngredientOptions([...foodIngredientOptions, data])
+                  console.log("updated food ingredient options:", foodIngredientOptions)
+                }
+            })
     }
 
     const handleSubmit = e => {
@@ -93,10 +125,9 @@ function RecipeForm() {
           })
     }
 
-
-
-
+    
   return (
+      <div>
         <form onSubmit={handleSubmit}>
             <label>Recipe Title:
               <input type="text" name="title" value={recipeInputs.title} maxLength={30} onChange={handleRecipeInputs}/>
@@ -112,16 +143,14 @@ function RecipeForm() {
             <br/>
             <br/>
             <br/>
-            
-
             {ingredientInputs.map((data, index) => {
                 return (
                     <div>
                         <select name="food_id" value={data.food_id} required onChange={(e)=>handleIngredientInputs(e, index)}>
                             <option name="default" value="default">Select Food Item</option>
                             {foodDropDownOptions}
+                            <option name="addNew" value="addNew">Add New Food</option>
                         </select>
-
                         <label>Amount:
                             <input type="decimal" name="amount" value={data.amount} maxLength={10} onChange={(e)=>handleIngredientInputs(e, index)}/>
                         </label>
@@ -133,17 +162,18 @@ function RecipeForm() {
                 })
             }
 
-
-
-
             <br/>
             <button onClick={addIngredientField}>Add another Ingredient</button>
             <br/>
             <br/>
               <button>Create Recipe</button>
         </form>
+        { displayFoodForm === true ? <FoodForm handleFoodSubmit={handleFoodSubmit}/> : console.log("else statement food_id:",ingredientInputs[0].food_id)}
+        <br/>
+        <br/>
+        
+        </div>
   )
-        }
-
-
+    
+}
 export default RecipeForm

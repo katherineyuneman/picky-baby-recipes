@@ -7,19 +7,34 @@ class RecipesController < ApplicationController
     
     def create
         new_recipe = current_user.recipes.create(recipe_params)
-        render json: new_recipe, status: :created
+        if new_recipe.valid?
+            render json: new_recipe, status: :created
+        else
+        render json: {errors: new_recipe.errors.full_messages}, status: :unprocessable_entity
+        end
     end
 
     def destroy
+        recipe = current_user.recipes.find_by_id(params[:id])
+        if recipe
+            recipe.destroy
+            head :no_content
+        else
+            render json: {errors: ["This recipe no longer exists"]}, status: :unauthorized
+        end
+    end
+
+    def update
         
     end
 
+
+    private
 
     def current_user
         @current_user = User.find_by(id: session[:user_id])
     end
 
-    private
     def recipe_params
         params.require(:full_recipe).permit(:title, :directions, :source, ingredients_attributes: [:amount, :measurement, :food_id])
     end

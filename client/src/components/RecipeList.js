@@ -11,6 +11,19 @@ function RecipeList() {
 
     console.log("recipes inside RecipeList:", recipes)
 
+    const handleDelete = (id) => {
+      fetch(`/recipes/${id}`, {
+        method: "DELETE",
+      }).then((r) => {
+        if (r.ok) {
+          setRecipes((recipes) =>
+            recipes.filter((recipe) => recipe.id !== id)
+          );
+        }
+      });
+    }
+
+
     // console.log("recipes:", recipes.ingredients[0])
     const eachRecipe = recipes.map((recipe) => {
         return <div key={recipe.id}>
@@ -26,6 +39,7 @@ function RecipeList() {
             <br/>
             <em>Directions: {recipe.directions}</em>
             <br/>
+            <button onClick={() => handleDelete(recipe.id)}>Delete Recipe</button>
         </div>
     })
 
