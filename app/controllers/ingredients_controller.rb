@@ -17,15 +17,8 @@ class IngredientsController < ApplicationController
 
 
     def ingredient_params
-       
-        # params.require(:ingredients).map do |p|
-        #   p.permit([:amount, :measurement, :food_id, :recipe_id])
-        # end
- 
-        # params.permit(ingredient: [:amount, :measurement, :food_id, :recipe_id])
-        # params.permit(ingredient: [:amount, :measurement, :food_id, :recipe_id]).to_h
-        # params.permit(ingredient: [:amount, :measurement, :food_id, :recipe_id]).to_json
-        params.permit(:ingredient => [:amount, :measurement, :food_id, :recipe_id] )
+        params.require(:full_recipe).permit(
+            :title, :directions, :source, ingredients_attributes: [:amount, :measurement, :food_id])
     end
 
    
