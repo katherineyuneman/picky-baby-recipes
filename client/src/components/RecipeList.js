@@ -33,6 +33,10 @@ function RecipeList() {
       setIsEditing(true)
     }
 
+    const handleUpdatedRecipe = (updatedRecipe) => {
+      console.log("updated recipe after handle:", updatedRecipe)
+    }
+
     const eachRecipe = recipes.map((recipe) => {
         return <div key={recipe.id}>
             <br/>
@@ -48,7 +52,7 @@ function RecipeList() {
             <em>Directions: {recipe.directions}</em>
             <br/>
             <button onClick={() => handleDelete(recipe.id)}>Delete Recipe</button>
-            {isEditing && selectedRecipe.id === recipe.id ? <RecipeEditForm isEditing={isEditing} setIsEditing={setIsEditing} selectedRecipe={selectedRecipe}/> :  <button onClick={(e) => handleEdit(e, recipe)}>Edit Recipe</button>}
+            {isEditing && selectedRecipe.id === recipe.id ? <RecipeEditForm handleUpdatedRecipe={handleUpdatedRecipe} isEditing={isEditing} setIsEditing={setIsEditing} selectedRecipe={selectedRecipe}/> :  <button onClick={(e) => handleEdit(e, recipe)}>Edit Recipe</button>}
             
         </div>
     })

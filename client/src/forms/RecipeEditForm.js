@@ -3,21 +3,16 @@ import FoodForm from './FoodForm'
 
 
 
-function RecipeEditForm({selectedRecipe, setIsEditing, isEditing}) {
+function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedRecipe}) {
 
     const [foodIngredientOptions, setFoodIngredientOptions] = useState([])
     const [ recipeInputs, setRecipeInputs ] = useState({
+        id: selectedRecipe.id,
         title: selectedRecipe.title,
         directions: selectedRecipe.directions,
         source: selectedRecipe.source
     })
     const [ ingredientInputs, setIngredientInputs ] = useState(selectedRecipe.ingredients)
-        // [
-        //     selectedRecipe.ingredients.map((ingredient) => {
-        //         return ingredient.amount, ingredient.measurement, ingredient.food_id})
-        // ]
-    // )
-
  
 
     const [ displayFoodForm, setDisplayFoodForm ] = useState(false)
@@ -35,6 +30,7 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing}) {
         )
 
         const handleIngredientInputs = (e, index) => {
+            console.log("ingredient input change:", e.target.value)
             if (e.target.value === "addNew"){
                 setDisplayFoodForm(true)
                 console.log(displayFoodForm)
@@ -43,6 +39,7 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing}) {
             const list = [...ingredientInputs];
             list[index][name] = value;
             setIngredientInputs(list);
+            console.log("ingredient inputs after set:",ingredientInputs)
             }
     
         const addIngredientField = (e) => {
@@ -63,10 +60,12 @@ const handleSelectedRecipe = (e) => {
 
 const handleSubmit = (e) => {
 e.preventDefault();
+console.log("ingredient inputs:", ingredientInputs)
 const full_recipe = 
             {...recipeInputs, 
-            ingredients_attributes: [{...ingredientInputs, food_attributes: [ingredientInputs.food]}]
+            ingredients_attributes: ingredientInputs
             }
+            console.log("full_recipe:", full_recipe)
 
 fetch(`/recipes/${full_recipe.id}`, {
     method: 'PATCH',
@@ -82,6 +81,8 @@ fetch(`/recipes/${full_recipe.id}`, {
             alert(data.errors)
         } else {
           setIsEditing(false)
+          handleUpdatedRecipe(data)
+
         //   updatedRecipes(data)
           
           // console.log("data inside post-fecth:", data)

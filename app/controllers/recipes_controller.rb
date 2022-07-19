@@ -25,11 +25,10 @@ class RecipesController < ApplicationController
     end
 
     def update
-        byebug
             recipe = current_user.recipes.find_by_id(params[:id])
             if recipe
               recipe.update(update_recipe_params)
-              render json: recipe
+              render json: recipe, include: ['ingredients', 'ingredients.food']
             else
               render json: { error: "Recipe not Found" }, status: :not_found
             end
@@ -47,7 +46,8 @@ class RecipesController < ApplicationController
     end
 
     def update_recipe_params
-        params.require(:recipe).permit(:id, :title, :directions, :source, ingredients_attributes: [:amount, :measurement, :food_id, {:name, :food_type, :age, :nutrition_rating,:common_allergen, :full_desc, :image_url, :user_id}])
+        params.require(:recipe).permit(
+            :id, :title, :directions, :source, ingredients_attributes: [:id, :amount, :measurement, :food_id])
     end
 
 end
