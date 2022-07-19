@@ -8,6 +8,7 @@ import { UserProvider } from './context/user';
 import FoodList from './components/FoodList';
 import RecipeList from './components/RecipeList';
 import RecipeForm from './forms/RecipeForm';
+import RecipeEditForm from './forms/RecipeEditForm';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/foodlist" element={<FoodList />} />
           <Route path="/myrecipes" element={<RecipeList />} />
           <Route path="/recipes/new" element={<RecipeForm />} />
+          <Route path="/recipes/edit/:id" element={<RecipeEditForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           

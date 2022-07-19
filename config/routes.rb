@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
 
   resources :foods, only: [:index, :create]
-  resources :recipes, only: [:index, :create, :destroy, :update]
+  resources :recipes
   resources :ingredients, only: [:create]
   
 
