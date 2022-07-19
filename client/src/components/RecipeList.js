@@ -6,6 +6,7 @@ function RecipeList() {
     const [recipes, setRecipes] = useState([]);
     const [ selectedRecipe, setSelectedRecipe ] = useState({})
     const [ isEditing, setIsEditing ] = useState(false)
+    const [ updatedRecipe, setUpdatedRecipe ] = useState([])
     
 
     useEffect(() => {
@@ -13,6 +14,12 @@ function RecipeList() {
         .then((r) => r.json())
         .then((fetchedRecipes) => setRecipes(fetchedRecipes))
     }, []);
+
+    useEffect(() => {
+      fetch("/recipes")
+        .then((r) => r.json())
+        .then((fetchedRecipes) => setRecipes(fetchedRecipes))
+    }, [updatedRecipe]);
 
 
     const handleDelete = (id) => {
@@ -33,8 +40,9 @@ function RecipeList() {
       setIsEditing(true)
     }
 
-    const handleUpdatedRecipe = (updatedRecipe) => {
-      console.log("updated recipe after handle:", updatedRecipe)
+    const handleUpdatedRecipe = (changedRecipe) => {
+      console.log("updated recipe after handle:", changedRecipe)
+      setUpdatedRecipe(changedRecipe)
     }
 
     const eachRecipe = recipes.map((recipe) => {

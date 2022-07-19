@@ -13,7 +13,7 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
         source: selectedRecipe.source
     })
     const [ ingredientInputs, setIngredientInputs ] = useState(selectedRecipe.ingredients)
- 
+    
 
     const [ displayFoodForm, setDisplayFoodForm ] = useState(false)
 
@@ -29,66 +29,66 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
         <option key={food.id} value={food.id}>{food.name}</option>
         )
 
-        const handleIngredientInputs = (e, index) => {
-            console.log("ingredient input change:", e.target.value)
-            if (e.target.value === "addNew"){
-                setDisplayFoodForm(true)
-                console.log(displayFoodForm)
-            }
-            const { name, value } = e.target;
-            const list = [...ingredientInputs];
-            list[index][name] = value;
-            setIngredientInputs(list);
-            console.log("ingredient inputs after set:",ingredientInputs)
-            }
-    
-        const addIngredientField = (e) => {
-            e.preventDefault();
-            setIngredientInputs([...ingredientInputs, {
-                amount:"",
-                measurement: "",
-                food_id:""
-            }])
+    const handleIngredientInputs = (e, index) => {
+        console.log("ingredient input change:", e.target.value)
+        if (e.target.value === "addNew"){
+            setDisplayFoodForm(true)
+            console.log(displayFoodForm)
         }
+        const { name, value } = e.target;
+        const list = [...ingredientInputs];
+        list[index][name] = value;
+        setIngredientInputs(list);
+        console.log("ingredient inputs after set:",ingredientInputs)
+        }
+    
+    const addIngredientField = (e) => {
+        e.preventDefault();
+        setIngredientInputs([...ingredientInputs, {
+            amount:"",
+            measurement: "",
+            food_id:""
+        }])
+    }
         
 
-const handleSelectedRecipe = (e) => {
-    setRecipeInputs({
-        ...recipeInputs,
-        [e.target.name]: e.target.value})
-}
+    const handleSelectedRecipe = (e) => {
+        setRecipeInputs({
+            ...recipeInputs,
+            [e.target.name]: e.target.value})
+    }
 
-const handleSubmit = (e) => {
-e.preventDefault();
-console.log("ingredient inputs:", ingredientInputs)
-const full_recipe = 
-            {...recipeInputs, 
-            ingredients_attributes: ingredientInputs
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("ingredient inputs:", ingredientInputs)
+        const full_recipe = 
+                    {...recipeInputs, 
+                    ingredients_attributes: ingredientInputs
+                    }
+        console.log("full_recipe:", full_recipe)
+
+    fetch(`/recipes/${full_recipe.id}`, {
+        method: 'PATCH',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(full_recipe)
+        })
+
+        .then(resp => resp.json())
+        .then((data) => {
+            if (data.errors){
+                alert(data.errors)
+            } else {
+            setIsEditing(false)
+            handleUpdatedRecipe(data)
+
+            //   updatedRecipes(data)
+            
+            // console.log("data inside post-fecth:", data)
+            // setFoodIngredientOptions([...foodIngredientOptions, data])
+            // console.log("updated food ingredient options:", foodIngredientOptions)
             }
-            console.log("full_recipe:", full_recipe)
-
-fetch(`/recipes/${full_recipe.id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body:JSON.stringify(full_recipe)
-    })
-
-    .then(resp => resp.json())
-    .then((data) => {
-        if (data.errors){
-            alert(data.errors)
-        } else {
-          setIsEditing(false)
-          handleUpdatedRecipe(data)
-
-        //   updatedRecipes(data)
-          
-          // console.log("data inside post-fecth:", data)
-          // setFoodIngredientOptions([...foodIngredientOptions, data])
-          // console.log("updated food ingredient options:", foodIngredientOptions)
-        }
     })
 
 
