@@ -10,15 +10,17 @@ function FoodList() {
     }, []);
 
     console.log('fetched food', foods[0])
+    
 
-    const foodList = foods.map((food) => (
+    const foodList = foods.map((food) => 
+      (
         <div key={food.id}>
             <h2 >{food.name}</h2>
-            <p>
+
               <h3>
                   Type: {food.food_type}
                   <br/>
-                  Common Allergen: {food.common_allergen.toString()}
+                  Common Allergen: {String(food.common_allergen)}
                   <br/>
                   Age: {food.age}
                   <br/>
@@ -28,7 +30,7 @@ function FoodList() {
 
               </h3>
               <cite>By {food.user_id}</cite>
-            </p>
+
             </div>
       ))
   return (
