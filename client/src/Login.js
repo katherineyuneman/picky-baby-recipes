@@ -52,7 +52,7 @@ function Login() {
               <input type="password" name="password" value={loginCredentials.password} onChange={handleInputs}/>
             </label>
             <br/>
-              <button>Login</button>
+              <button class="button">Login</button>
         </form>
         <ul>
             {errorsList}
