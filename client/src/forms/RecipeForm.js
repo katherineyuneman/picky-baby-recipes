@@ -81,10 +81,11 @@ function RecipeForm() {
                     setCreateFoodErrorsList(errorLis)
                     
                 } else {
-                  setDisplayFoodForm(false)
-                  console.log("data inside post-fetch:", data)
-                  setFoodIngredientOptions([...foodIngredientOptions, data])
-                  console.log("updated food ingredient options:", foodIngredientOptions)
+                    setCreateFoodErrorsList([])
+                    setDisplayFoodForm(false)
+                    console.log("data inside post-fetch:", data)
+                    setFoodIngredientOptions([...foodIngredientOptions, data])
+                    console.log("updated food ingredient options:", foodIngredientOptions)
                 }
             })
     }

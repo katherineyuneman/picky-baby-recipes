@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
     def create
         new_food = current_user.foods.create(food_params)
         if new_food.valid?
-            render json: :new_food, status: :created
+            render json: new_food, status: :created
         else render json: {errors: new_food.errors.full_messages}, status: :unprocessable_entity
         end
     end

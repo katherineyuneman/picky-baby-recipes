@@ -7,7 +7,7 @@ class Food < ApplicationRecord
   validates :food_type, presence: true
   validates :age, presence: true
   validates :nutrition_rating, presence: true
-  validates :common_allergen, presence: true
+  # validates :common_allergen, presence: true
   validates :full_desc, presence: true
 
 end
