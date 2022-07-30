@@ -6,22 +6,19 @@ function RecipeForm() {
 
     const [foodIngredientOptions, setFoodIngredientOptions] = useState([])
     const [ displayFoodForm, setDisplayFoodForm ] = useState(false)
-
-    const navigate = useNavigate()
-    
     const [ recipeInputs, setRecipeInputs ] = useState({
         title:"",
         directions: "",
         source:""
     })
-
     const [ ingredientInputs, setIngredientInputs ] = useState([{
         amount:"",
         measurement: "",
         food_id:""
     }])
+    const [ createFoodErrorsList, setCreateFoodErrorsList ] = useState([])
 
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch ('/foods')
@@ -57,7 +54,6 @@ function RecipeForm() {
 
     const addIngredientField = (e) => {
         e.preventDefault();
-        debugger;
         setIngredientInputs([...ingredientInputs, {
             amount:"",
             measurement: "",
@@ -80,10 +76,13 @@ function RecipeForm() {
             .then(resp => resp.json())
             .then((data) => {
                 if (data.errors){
-                    alert(data.errors)
+                    console.log("data errors inside post for food:", data.errors)
+                    const errorLis = data.errors.map((e) => <li>{e}</li>)
+                    setCreateFoodErrorsList(errorLis)
+                    
                 } else {
                   setDisplayFoodForm(false)
-                  console.log("data inside post-fecth:", data)
+                  console.log("data inside post-fetch:", data)
                   setFoodIngredientOptions([...foodIngredientOptions, data])
                   console.log("updated food ingredient options:", foodIngredientOptions)
                 }
@@ -144,6 +143,7 @@ function RecipeForm() {
             <br/>
             <br/>
             <br/>
+            <br />
             {ingredientInputs.map((data, index) => {
                 return (
                     <div>
@@ -171,8 +171,7 @@ function RecipeForm() {
         </form>
         { displayFoodForm === true ? <FoodForm handleFoodSubmit={handleFoodSubmit}/> : console.log("else statement food_id:",ingredientInputs[0].food_id)}
         <br/>
-        <br/>
-        
+        <ul>{createFoodErrorsList}</ul>
         </div>
   )
     
