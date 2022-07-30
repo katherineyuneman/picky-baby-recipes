@@ -394,40 +394,63 @@ const CartDiv = styled.div`
     }
 `
 
-const CartCardStyle = styled.div`
+const TitleDiv = styled.div`
     flex-wrap: wrap;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
-    column-count: 4;
+    /* column-count: 4; */
     border: solid 2px gray;
     border-radius: 5px;
-/* display: inline-block; */
+    /* display: inline-block; */
     font-size: 14px;
-    flex-direction:row;
-  font-family: "Montserrat";
-  justify-content: left;
-  /* margin: 3em; */
-  margin-bottom: .2em;
-  margin-top:.2em;
-  padding: .5em;
-  width:70%;
-  height: 100px;
-  overflow: hidden;
-  .amount{
-      color:#E7717D;
-  }
+    /* flex-direction:row; */
+    font-family: "Montserrat";
+    margin: 3em;
+    margin-bottom: 0;
+    margin-top:2em;
+    margin-left: 15em;
+    width:20%;
+    height: auto;
+    display: block;
+    text-align: center;
+    align-items: right;
+    background-color: gray;
+    color: white;
+`
+const RecipeCardStyle = styled.div`
+    flex-wrap: wrap;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+    /* column-count: 4; */
+    border: solid 2px gray;
+    border-radius: 5px;
+    /* display: inline-block; */
+    font-size: 14px;
+    /* flex-direction:row; */
+    font-family: "Montserrat";
+    margin: 3em;
+    margin-top:0;
+    margin-left: 15em;
+    padding: .5em;
+    width:50%;
+    height: auto;
+    display: block;
+    text-align: center;
+    align-items: center;
     button{
-        display:block;
-        width: 50%;
         background-color:white;
         color:#FEC90E;
-        border: 0px;
+        border: solid 1px gray;
+        border-radius: 5px;
+        padding: .5em;
+        /* text-align: center; */
+        /* width: 100%; */
     }
       button:hover{
-        border: 0px;
+        border: solid 1px gray;
         border-radius: 5px;
         font-style: bolder;
         color:white;
         box-shadow: 5px 3px 3px gray;
+        background-color: #FEC90E;
     };
       button:active{
         background-color:#FEC90E;
@@ -437,6 +460,8 @@ const CartCardStyle = styled.div`
         font-style: bold;
     }
 `
+
+
 const LeftPiece = styled.div`
 overflow:hidden;
   position: left;
@@ -462,7 +487,6 @@ const MiddleDescription = styled.div`
 const Quantity = styled.div`
   justify-content:center;
   /* width: 100%; */
-  
   padding-top:1em;
   margin-left: 4em;
   button{
@@ -600,7 +624,7 @@ const DetailButton = styled.div`
 
 
 export {
-  GeneralStyle, DashContainer, HomeContainer, Container, Card, Header, ProductFeatureContainer, CartCardStyle,
+  GeneralStyle, DashContainer, HomeContainer, Container, Card, Header, ProductFeatureContainer, RecipeCardStyle,
   LeftPiece, MiddleDescription, Quantity,TotalCost, DropDown, SearchStyle,
-  CartDiv,PopupCheckout, DetailCard, DetailButton
+  CartDiv,PopupCheckout, DetailCard, DetailButton, TitleDiv
 }
