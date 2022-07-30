@@ -57,6 +57,7 @@ function RecipeForm() {
 
     const addIngredientField = (e) => {
         e.preventDefault();
+        debugger;
         setIngredientInputs([...ingredientInputs, {
             amount:"",
             measurement: "",

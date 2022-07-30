@@ -13,7 +13,7 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
         source: selectedRecipe.source
     })
     const [ ingredientInputs, setIngredientInputs ] = useState(selectedRecipe.ingredients)
-    
+ 
 
     const [ displayFoodForm, setDisplayFoodForm ] = useState(false)
 
@@ -89,7 +89,7 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
             // setFoodIngredientOptions([...foodIngredientOptions, data])
             // console.log("updated food ingredient options:", foodIngredientOptions)
             }
-    })
+        })
 
 
 }
@@ -141,7 +141,7 @@ const handleFoodSubmit = (e, foodInputs) => {
                 return (
                     <div>
                         <select name="food_id" value={data.food_id} required onChange={(e)=>handleIngredientInputs(e, index)}>
-                            {isEditing && data.food.id === data.food.id ? <option name="default" value={data.food.id}>{data.food.name}</option> : <option name="default" value="default">Select Food</option> }
+                            <option name="default" value="default">Select Food Item</option>
                             {foodDropDownOptions}
                             <option name="addNew" value="addNew">Add New Food</option>
                         </select>
