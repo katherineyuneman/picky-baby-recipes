@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 
     def index
-        user_recipes = current_user.recipes
+        user_recipes = current_user.recipes.includes(:ingredients, :foods)
         render json: user_recipes, include: ['ingredients', 'ingredients.food']
     end
     
