@@ -1,7 +1,7 @@
 class FoodsController < ApplicationController
 
     def index
-        food_list = Food.all
+        food_list = Food.sorted_food
         render json: food_list, status: :ok
     end
 

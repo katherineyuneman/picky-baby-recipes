@@ -34,7 +34,7 @@ function FoodForm({handleFoodSubmit}) {
             <label>Age:
                 <input type="text" name="age" value={foodInputs.age} maxLength={50} onChange={handleFoodInputs}/>
             </label>
-            <label>Nutrition Rating:
+            <label>Nutrition Rating (1 lowest, 10 highest):
                 <input type="integer" name="nutrition_rating" value={foodInputs.nutrition_rating} maxLength={50} onChange={handleFoodInputs}/>
             </label>
             <label>Description:
