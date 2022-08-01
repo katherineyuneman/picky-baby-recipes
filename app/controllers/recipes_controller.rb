@@ -1,5 +1,14 @@
 class RecipesController < ApplicationController
 
+    def show
+        recipe = current_user.recipes.find_by_id(params[:id])
+            if recipe
+              render json: recipe, include: ['ingredients', 'ingredients.food']
+            else
+              render json: { error: "Recipe not found" }, status: :not_found
+            end
+    end
+    
     def index
         user_recipes = current_user.recipes.includes(:ingredients, :foods)
         render json: user_recipes, include: ['ingredients', 'ingredients.food']

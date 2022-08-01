@@ -15,6 +15,7 @@ function Login() {
 
     const handleSubmit = e => {
         e.preventDefault()
+        console.log("submit", e)
         fetch('/login', {
             method: 'POST',
             headers: { 'Content-type': 'application/json'},
@@ -52,7 +53,7 @@ function Login() {
               <input type="password" name="password" value={loginCredentials.password} onChange={handleInputs}/>
             </label>
             <br/>
-              <button class="button">Login</button>
+              <button className="button">Login</button>
         </form>
         <ul>
             {errorsList}

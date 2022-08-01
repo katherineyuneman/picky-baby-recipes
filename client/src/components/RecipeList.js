@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import RecipeEditForm from '../forms/RecipeEditForm';
 import { RecipeCardStyle, TitleDiv } from '../styled-components/styleIndex';
 import { UserContext } from '../context/user';
+import { Link } from 'react-router-dom';
 
 function RecipeList() {
     const [recipes, setRecipes] = useState([]);
@@ -52,7 +53,9 @@ function RecipeList() {
       return <div><TitleDiv key={recipe.id}>
       {/* <div key={recipe.id}> */}
           <br/>
-          <h2 className='title'>{recipe.title}</h2>
+          <Link to={`/recipes/${recipe.id}`} id={recipe.id}>
+            <h2 className='title'>{recipe.title}</h2>
+          </Link>
           </TitleDiv>
           
           <RecipeCardStyle>

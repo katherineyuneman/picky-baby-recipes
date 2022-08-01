@@ -24,35 +24,35 @@ function Navbar() {
    console.log(loggedIn)
     if (!loggedIn){
         return (
-            <div class="columns">
-                <div class="column is-four-fifths">
+            <div className="columns">
+                <div className="column is-four-fifths">
                 <h2>NavBar</h2>
                 <h2>
                     <Link to="/signup">
-                        <button class="button">Signup</button>
+                        <button className="button">Signup</button>
                     </Link>
                     <Link to="/login">
-                        <button class="button">Login</button>
+                        <button className="button">Login</button>
                     </Link>
                     <Link to="/foodlist">
-                        <button class="button">Food List</button>
+                        <button className="button">Food List</button>
                     </Link>
                 </h2>
             </div>
             </div>)
     } else
             {return (
-    <div class="columns">
+    <div className="columns">
       
-      <button class="button" onClick={logoutUser}>Logout</button>
+      <button className="button" onClick={logoutUser}>Logout</button>
       <Link to="/foodlist">
-                        <button class="button">Food List</button>
+                        <button className="button">Food List</button>
                     </Link>
     <Link to="/myrecipes">
-        <button class="button">My Recipes</button>
+        <button className="button">My Recipes</button>
     </Link>
     <Link to="/recipes/new">
-        <button class="button">Add a Recipe</button>
+        <button className="button">Add a Recipe</button>
     </Link>
     </div>
     )
