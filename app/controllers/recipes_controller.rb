@@ -43,6 +43,19 @@ class RecipesController < ApplicationController
             end
     end
 
+    def food_ingredient
+        food = Food.find_by_id(params[:id])
+        user_recipes = current_user.recipes.includes(:ingredients, :foods)
+        user_recipes_food = user_recipes.filter {
+            |recipe| recipe.ingredients.filter {
+                |ingredient| ingredient.food_id == food[:id]
+            }
+            
+        }
+        render json: user_recipes_food, include: ['ingredients', 'ingredients.food']
+    
+    end
+
 
     private
 

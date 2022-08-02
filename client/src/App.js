@@ -11,6 +11,7 @@ import RecipeForm from './forms/RecipeForm';
 import RecipeEditForm from './forms/RecipeEditForm';
 import FoodContainer from './containers/FoodContainer';
 import Recipe from './components/Recipe';
+import FoodRecipes from './components/FoodRecipes';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/foodlist" element={<FoodContainer />} />
+          <Route path="recipes/foods/:id" element={<FoodRecipes />} />
           <Route path="/myrecipes" element={<RecipeList />} />
           <Route path="/recipes/new" element={<RecipeForm />} />
           <Route path="/recipes/edit/:id" element={<RecipeEditForm />} />

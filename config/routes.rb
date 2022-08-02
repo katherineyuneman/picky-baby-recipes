@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :foods, only: [:index, :create]
   resources :recipes
   # , only: [:index, :create, :destroy, :update, :show]
+  #custom route for recipes with specific food
+  get '/recipes/foods/:id', to: 'recipes#food_ingredient'
   resources :ingredients, only: [:create]
   
 

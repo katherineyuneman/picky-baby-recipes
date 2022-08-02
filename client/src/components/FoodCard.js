@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from '../styled-components/styleIndex'
+import { Link } from 'react-router-dom'
 
 function FoodCard({food}) {
   return (
@@ -23,6 +24,9 @@ function FoodCard({food}) {
                 <ul>Save</ul>
                 <ul>Edit</ul>
                 <ul>Delete</ul>
+                <Link to={`/recipes/foods/${food.id}`}>
+                  <ul>{food.name} recipes</ul>
+                </Link>
                 <cite>By User_ID: {food.user_id}</cite>
                 </footer>
               

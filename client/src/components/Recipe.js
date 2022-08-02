@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { TitleDiv, RecipeCardStyle } from '../styled-components/styleIndex';
 
 function Recipe() {
@@ -30,7 +30,9 @@ function Recipe() {
         
     return (
       <div>
-          <button>Back</button>
+          <Link to={"/myrecipes/"}>
+            <button>Back</button>
+          </Link>
           <TitleDiv key={recipe.id}>
           <br/>
             <h2 className='title'>{recipe.title}</h2>
