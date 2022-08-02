@@ -30,18 +30,13 @@ function Recipe() {
         
     return (
       <div>
+          <button>Back</button>
           <TitleDiv key={recipe.id}>
           <br/>
             <h2 className='title'>{recipe.title}</h2>
           </TitleDiv>
           <RecipeCardStyle>
               {ingredient_map}
-          {/* Ingredients:
-          { recipe.ingredients.length === 0 ? <h1>Loading...</h1> : <em>{recipe.ingredients.map((ingredient => {
-              return <div key={ingredient.id}>
-                  <em>{ingredient.amount} {ingredient.measurement} {ingredient.food.name}</em> 
-              </div>
-          }))}</em> } */}
           
           <br/>
           <em>Directions: {recipe.directions}</em>

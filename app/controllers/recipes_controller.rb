@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 
     def show
-        recipe = current_user.recipes.find_by_id(params[:id])
+        recipe = current_user.recipes.includes(:ingredients, :foods).find_by_id(params[:id])
             if recipe
               render json: recipe, include: ['ingredients', 'ingredients.food']
             else
