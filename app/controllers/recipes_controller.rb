@@ -45,14 +45,24 @@ class RecipesController < ApplicationController
 
     def food_ingredient
         food = Food.find_by_id(params[:id])
-        user_recipes = current_user.recipes.includes(:ingredients, :foods)
-        user_recipes_food = user_recipes.filter {
-            |recipe| recipe.ingredients.filter {
-                |ingredient| ingredient.food_id == food[:id]
-            }
+        ingredients_with_food = food.ingredients
+        recipe_ids = ingredients_with_food.map { | ingredient | ingredient.recipe_id}
+        # ingredients_with_food = user_recipes.ingredients.filter { | ingredient | ingredient.food_id === food[:id]}
+        user_recipes_food = current_user.recipes.filter {|recipe| recipe_ids.map {|id| recipe.id != id }}
+        byebug
+    
+        # user_recipes_food = user_recipes.filter {
+        #     |recipe| recipe.ingredients.filter {
+        #         |ingredient| ingredient.food_id == food[:id]
             
-        }
-        render json: user_recipes_food, include: ['ingredients', 'ingredients.food']
+        #     }
+        # }
+        # if user_recipes_food.valid?
+            render json: user_recipes_food
+            # , include: ['ingredients', 'ingredients.food']
+        # else
+        #     render json: {error: "Recipes not Found"}
+        # end
     
     end
 
