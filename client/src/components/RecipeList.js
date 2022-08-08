@@ -50,7 +50,7 @@ function RecipeList() {
     }
 
     const eachRecipe = recipes.map((recipe) => {
-      return <div><TitleDiv key={recipe.id}>
+      return <div key={recipe.id}><TitleDiv>
       {/* <div key={recipe.id}> */}
           <br/>
           <Link to={`/recipes/${recipe.id}`} id={recipe.id}>

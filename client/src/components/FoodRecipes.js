@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 
 function FoodRecipes() {
@@ -12,17 +12,25 @@ function FoodRecipes() {
         fetch (`/recipes/foods/${id}`)
         .then(response => response.json())
         .then(data => {
-            setRecipes(data)
-            setIngredients(data.ingredients)
+            setIngredients(data)
         })
         .catch(err => alert(err))
         },[])
 
-    console.log("hi from FoodRecipes component", id, recipes)
+
+
+    const recipeArray = ingredients.map((ingredient => {
+        return (
+            <h4>
+                <Link to={`/recipes/${ingredient.recipe.id}`}>
+                    {ingredient.recipe.title}
+                </Link>
+            </h4>)
+    }))
 
   return (
     <div>
-      
+      {recipeArray}
     </div>
   )
 }

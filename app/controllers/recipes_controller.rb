@@ -48,10 +48,10 @@ class RecipesController < ApplicationController
         ingredients_with_food = food.ingredients
         recipe_ids = ingredients_with_food.map { | ingredient | ingredient.recipe_id}
         recipes = ingredients_with_food.includes(:recipe).to_a
-   
+        # recipe_test = ingredients_with_food.includes(:recipe).map{|ingredient|ingredient.recipe}
+        # recipe_test_serialized = recipe_test.includes(:ingredients, :foods)
         # ingredients_with_food = user_recipes.ingredients.filter { | ingredient | ingredient.food_id === food[:id]}
-        user_recipes_food = current_user.recipes.filter {|recipe| recipe_ids.map {|id| recipe.id != id }}
-    
+        # user_recipes_food = current_user.recipes.filter {|recipe| recipe_ids.map {|id| recipe.id != id }}
         # user_recipes_food = user_recipes.filter {
         #     |recipe| recipe.ingredients.filter {
         #         |ingredient| ingredient.food_id == food[:id]
@@ -59,7 +59,7 @@ class RecipesController < ApplicationController
         #     }
         # }
         # if user_recipes_food.valid?
-            render json: recipes, include: ['recipe', 'food']
+            render json: recipes , include: ['recipe']
         # else
         #     render json: {error: "Recipes not Found"}
         # end

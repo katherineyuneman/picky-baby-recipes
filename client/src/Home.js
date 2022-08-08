@@ -10,7 +10,11 @@ function Home() {
 
     
     if (loggedIn === true) {
-        return <h1>Hello, {user.first_name} </h1>
+        return (
+            <div>
+                <h1>Hello, {user.first_name} </h1>
+                <h3>Welcome to your child's recipe guide!</h3>
+            </div>)
     } else {
         return <h1>Please login or signup</h1>
         }

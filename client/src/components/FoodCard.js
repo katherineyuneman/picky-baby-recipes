@@ -18,9 +18,9 @@ function FoodCard({food}) {
                   Nutrition Rating: {food.nutrition_rating}
                   <br/>
                   Description: {food.full_desc}
-
+                  <img src={`${food.image_url}`} alt={food.name}></img>
               </p>
-              <footer>Save Edit
+              <footer>
                 <ul>Save</ul>
                 <ul>Edit</ul>
                 <ul>Delete</ul>
