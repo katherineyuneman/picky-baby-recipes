@@ -13,6 +13,25 @@ class FoodsController < ApplicationController
         end
     end
 
+    def show
+        food = Food.find_by_id(params[:id])
+            if food
+              render json: food, status: :ok
+            else
+              render json: { error: "Food not found."}, status: :not_found
+            end
+    end
+
+    def update
+        food = current_user.foods.find_by_id(params[:id])
+        if food
+          food.update(food_params)
+          render json: food
+        else
+          render json: { error: "Food not Found" }, status: :not_found
+        end
+end
+
     private
 
     def current_user

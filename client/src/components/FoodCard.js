@@ -22,8 +22,9 @@ function FoodCard({food}) {
               </p>
               <footer>
                 <ul>Save</ul>
-                <ul>Edit</ul>
-                <ul>Delete</ul>
+                <Link to={`/foods/${food.id}`}>
+                  <ul>Details about this Food</ul>
+                </Link>
                 <Link to={`/recipes/foods/${food.id}`}>
                   <ul>{food.name} recipes</ul>
                 </Link>

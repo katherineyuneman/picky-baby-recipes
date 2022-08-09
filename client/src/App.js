@@ -12,6 +12,7 @@ import RecipeEditForm from './forms/RecipeEditForm';
 import FoodContainer from './containers/FoodContainer';
 import Recipe from './components/Recipe';
 import FoodRecipes from './components/FoodRecipes';
+import FoodDetail from './components/FoodDetail';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/recipes/new" element={<RecipeForm />} />
           <Route path="/recipes/edit/:id" element={<RecipeEditForm />} />
           <Route path="/recipes/:id" element={<Recipe />} />
+          <Route path="/foods/:id" element={<FoodDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           

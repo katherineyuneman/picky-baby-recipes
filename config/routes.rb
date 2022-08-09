@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
 
-  resources :foods, only: [:index, :create]
+  resources :foods, only: [:index, :create, :show, :update]
   resources :recipes
   # , only: [:index, :create, :destroy, :update, :show]
   #custom route for recipes with specific food
