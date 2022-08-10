@@ -10,7 +10,7 @@ class RecipesController < ApplicationController
     end
     
     def index
-        user_recipes = current_user.recipes.includes(:ingredients, :foods)
+        user_recipes = current_user.recipes.sorted_recipes.includes(:ingredients, :foods)
         render json: user_recipes, include: ['ingredients', 'ingredients.food']
     end
     

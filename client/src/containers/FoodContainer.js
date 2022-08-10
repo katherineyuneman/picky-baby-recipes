@@ -1,22 +1,31 @@
 import { useState, useEffect } from 'react';
 import FoodList from '../components/FoodList'
 import { HomeContainer } from '../styled-components/styleIndex';
+import { useParams, useNavigate } from 'react-router-dom';
 
-function FoodContainer() {
+function FoodContainer({foodSubmitted}) {
 
+    const { search } = useParams()
+    const navigate = useNavigate()
     const [ searchInputs, setSearchInputs ] = useState("")
     const [foods, setFoods] = useState([]);
     const [ filteredFoods, setFilteredFoods ] = useState([])
 
+    console.log("search params:", search)
+
+    console.log("foodSubmitted:",foodSubmitted)
     useEffect(() => {
       fetch("/foods")
         .then((r) => r.json())
         .then((fetchedFood) => {
           setFoods(fetchedFood)
-          setFilteredFoods(fetchedFood)
+          if (search) {
+            const paramSearchFoods = fetchedFood.filter(food => food.name.toLowerCase().includes(search))
+            setFilteredFoods(paramSearchFoods)
+          } else setFilteredFoods(fetchedFood)
         })
     }, []);
-    
+
     const handleSearchInputs = (e) => {
       console.log(e.target.value)
       setSearchInputs(e.target.value)
@@ -25,14 +34,20 @@ function FoodContainer() {
 
     const handleSearchSubmit = (e) => {
       e.preventDefault();
+      navigate('/foodlist')
       console.log("inside submit:", searchInputs)
-      const searchedFoods = foods.filter(food => food.name.includes(searchInputs) )
+      const searchedFoods = foods.filter(food => food.name.toLowerCase().includes(searchInputs.toLowerCase()) )
       setFilteredFoods(searchedFoods)
       console.log("searched foods inside submit:",searchedFoods)
     }
 
     const handleResetSearch = () => {
+      if (search) {
+        navigate('/foodlist')
+        setFilteredFoods(foods)
+      } else
       setFilteredFoods(foods)
+      setSearchInputs("")
     }
 
   return (

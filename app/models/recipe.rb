@@ -4,4 +4,8 @@ class Recipe < ApplicationRecord
   has_many :foods, through: :ingredients
   accepts_nested_attributes_for :ingredients
 
+  def self.sorted_recipes
+    self.order(:title)
+  end
+
 end

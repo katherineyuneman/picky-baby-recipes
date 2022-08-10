@@ -42,6 +42,16 @@ function FoodDetail() {
             setSaved(saved => !saved)
         }
 
+        // let editButton
+        // if (loggedIn === user.length !== 0 && user.id === food.user_id && displayEdit === false) {
+        //     return editButton = <button onClick={handleEditFood}>Edit {food.name}</button>
+        //  } else if (user.id !== food.user_id) {
+        //     return editButton = <h5>You do not have access to edit this food.</h5>
+        //  } else return editButton = null
+        
+
+
+
   return (
     <div>
       <Card>
@@ -61,11 +71,12 @@ function FoodDetail() {
                   <img src={`${food.image_url}`} alt={food.name}></img>
               </p>
               <footer>
-                {loggedIn === true && user.length !== 0 && displayEdit === false ? <button onClick={handleEditFood}>Edit Food</button> : null}
+                {(user.length !== 0 && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
+                {displayEdit === false && user.id !== food.user_id ? <h5>You do not have access to edit this food.</h5> : null}
                 {displayEdit ? <FoodEditForm food={food} setDisplayEdit={setDisplayEdit} handleSave={handleSave} /> : null}
-                <Link to={`/recipes/foods/${food.id}`}>
-                  <ul>My {food.name} recipes</ul>
-                </Link>
+                    <Link to={`/recipes/foods/${food.id}`}>
+                    <ul>My {food.name} recipes</ul>
+                    </Link>
                 </footer>
               
             </div>
