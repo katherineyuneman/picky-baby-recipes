@@ -8,4 +8,8 @@ class Recipe < ApplicationRecord
     self.order(:title)
   end
 
+  # def format_title
+
+  # end
+
 end

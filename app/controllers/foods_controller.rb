@@ -1,8 +1,13 @@
 class FoodsController < ApplicationController
 
     def index
-        food_list = Food.sorted_food
-        render json: food_list, status: :ok
+        # food_list = current_user.foods.sorted_food
+         # byebug
+        user_food = current_user.foods.sorted_food
+        admin_food = admin.foods.sorted_food
+        combined_food = (user_food | admin_food)
+        combined_food_sorted = combined_food
+        render json: combined_food_sorted, status: :ok
     end
 
     def create
@@ -36,6 +41,10 @@ end
 
     def current_user
         @current_user = User.find_by(id: session[:user_id])
+    end
+
+    def admin
+        @admin_user = User.find_by(id: 1)
     end
 
     def food_params

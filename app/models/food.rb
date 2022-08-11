@@ -14,4 +14,9 @@ class Food < ApplicationRecord
   def self.sorted_food
     self.order(:name)
   end
+
+  # def self.sorted_food_instance
+  #   self.order(:name)
+  # end
+
 end
