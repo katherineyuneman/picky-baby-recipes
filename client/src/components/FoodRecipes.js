@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom';
-
+import { HomeContainer } from '../styled-components/styleIndex';
 
 function FoodRecipes() {
 
@@ -29,9 +29,11 @@ function FoodRecipes() {
     }))
 
   return (
+    <HomeContainer>
     <div>
       {recipeArray}
     </div>
+    </HomeContainer>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom';
-import { TitleDiv, RecipeCardStyle } from '../styled-components/styleIndex';
+import { TitleDiv, RecipeCardStyle, HomeContainer } from '../styled-components/styleIndex';
 
 function Recipe() {
     const {id} = useParams()
@@ -29,9 +29,10 @@ function Recipe() {
 
         
     return (
+        <HomeContainer>
       <div>
           <Link to={"/myrecipes/"}>
-            <button>Back</button>
+            <button>Back to My Recipes</button>
           </Link>
           <TitleDiv key={recipe.id}>
           <br/>
@@ -48,6 +49,7 @@ function Recipe() {
           {/* {isEditing && selectedRecipe.id === recipe.id ? <RecipeEditForm handleUpdatedRecipe={handleUpdatedRecipe} isEditing={isEditing} setIsEditing={setIsEditing} selectedRecipe={selectedRecipe}/> :  <button onClick={(e) => handleEdit(e, recipe)}>Edit Recipe</button>} */}
           </RecipeCardStyle>
           </div>
+          </HomeContainer>
 
   )
 }

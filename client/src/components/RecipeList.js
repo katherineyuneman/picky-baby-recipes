@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import RecipeEditForm from '../forms/RecipeEditForm';
-import { RecipeCardStyle, TitleDiv } from '../styled-components/styleIndex';
+import { RecipeCardStyle, TitleDiv, HomeContainer } from '../styled-components/styleIndex';
 import { UserContext } from '../context/user';
 import { Link } from 'react-router-dom';
 
@@ -79,13 +79,20 @@ function RecipeList() {
 
   
     if (loggedIn === true) {
-      return <div>
+      return (
+      <HomeContainer>
+        <div>
         <h1>{user.first_name}'s Recipes </h1>
         {eachRecipe}
-      </div>
+        </div>
+      </HomeContainer>
+      )
 
   } else {
-      return <h1>Please login or signup</h1>
+      return (
+        <HomeContainer>
+          <h1>Please login or signup</h1>
+        </HomeContainer>)
       }
 }
 

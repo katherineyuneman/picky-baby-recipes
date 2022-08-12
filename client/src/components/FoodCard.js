@@ -11,25 +11,30 @@ function FoodCard({food}) {
             <p>
                   Type: {food.food_type}
                   <br/>
+                  <br/>
                   Common Allergen: {String(food.common_allergen)}
+                  <br/>
                   <br/>
                   Age: {food.age}
                   <br/>
+                  <br/>
                   Nutrition Rating: {food.nutrition_rating}
+                  <br/>
                   <br/>
                   Description: {food.full_desc}
                   <img src={`${food.image_url}`} alt={food.name}></img>
               </p>
-              <footer>
-                <ul>Save</ul>
+              
                 <Link to={`/foods/${food.id}`}>
-                  <ul>Details about this Food</ul>
+                  Details about this Food
                 </Link>
-                <Link to={`/foods/${food.id}/recipes`}>
-                  <ul>{food.name} recipes</ul>
-                </Link>
-                <cite>By User_ID: {food.user_id}</cite>
-                </footer>
+                <br />
+                <h5><Link to={`/foods/${food.id}/recipes`}>
+                  My {food.name} recipes
+                </Link></h5>
+                <br />
+                <p>Created By User_ID: {food.user_id}</p>
+                
               
             </div>
             </Card>

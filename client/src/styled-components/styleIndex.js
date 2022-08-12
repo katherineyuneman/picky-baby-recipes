@@ -4,9 +4,10 @@ const GeneralStyle = styled.div`
 
 
 `
+
 const Header = styled.div`
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&family=Playfair+Display:ital,wght@1,800&display=swap');
-  background: #7E685A;
+  background: white;
   color: #F8F8F8;
   position: fixed;
   top: 0;
@@ -20,7 +21,7 @@ const Header = styled.div`
       line-height:50px;
       display: flex;
       flex: 70%;
-      color: white;
+      color: blue;
       float: left;
       margin-left: 28px;
       font-size: 2em;
@@ -31,7 +32,7 @@ const Header = styled.div`
   }
 
   nav{
-    background-color:#7E685A;
+    background-color:white;
     display: block;
     float: right;
     font-size: 15px;
@@ -41,8 +42,8 @@ const Header = styled.div`
     padding: 20px;
     display: inline-block;
     text-align: right;
-    color: white;
-    height: 20px,
+    color: blue;
+    height: 100px,
   }
   .circle{
         align-content: center;
@@ -177,12 +178,13 @@ const HomeContainer = styled.div`
     background-color:#C2B9B0;
     color:white;
     border: 2px solid #E7717D;
-    border-radius: 5px;
+    border-radius: 25px;
     font-style: bolder;
     font-size: 20px;
     font-family: "Playfair Display";
     font-style: bolder;
     padding: .5em;
+    width: 150px
   }
   button:hover{
     background-color:white;
@@ -210,18 +212,21 @@ const Card = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
   /* transition: 0.3s; */
   padding: 2px 16px;
-  border-radius: 5px;
+  border-radius: 25px;
   margin: 1em;
-  width:165px;
+  margin-top: 0em;
+  width:180px;
   justify-content: center;
   h5{
     flex-wrap: wrap;
     padding: 2px 10px;
     margin:1em;
-    background-color:#7E685A;
+    background-color:#000080;
     color: white;
     font-family: "Montserrat", sans-serif;
     font-style: italic;
+    font-size: 20px;
+    border-radius: 25px;
   };
   img{
     width:100%;
@@ -242,6 +247,9 @@ const Card = styled.div`
     height: 20px;
   };
   h6{
+    font-family: "Montserrat", sans-serif;
+  };
+  p{
     font-family: "Montserrat", sans-serif;
   };
   .link{
@@ -323,24 +331,29 @@ const SearchStyle = styled.div`
     margin-bottom:.5em;
   }
   input[type=text] {
+    margin-right: .25em;
     margin-bottom: 1em;
     position: relative;
-    /* background-color: #FEC90E; */
+    background-color: white;
     font-family:"Montserrat";
     /* color: white; */
     font-style: none;
-    border: solid, white;
-    border-radius: 5px;
+    font-size: 20px;
+    border: solid #E7717D;
+    border-radius: 25px;
+    height: 50px;
+    text-align: center;
+    width: 300px;
 }
-input[type=submit], input[type=button]{
+/* input[type=submit], input[type=button]{
     background-color:white;
     color:#FEC90E;
-    border: 2px solid #FEC90E;
-    border-radius: 5px;
+    border: 2px solid #E7717D;
+    border-radius: 25px;
     font-style: bolder;
-  };
+  }; */
   input[type=submit]:active,input[type=button]:active{
-    background-color:#FEC90E;
+    background-color:white;
     color:white;
     border: 2px solid white;
     box-shadow: 5px 3px 3px gray;
@@ -576,6 +589,7 @@ const DetailCard = styled.div`
     color: white;
     font-family: "Montserrat", sans-serif;
     font-style: italic;
+    font-size: 15px;
   };
   img{
     width:25%;
@@ -619,8 +633,6 @@ const DetailButton = styled.div`
   };
 
 `
-
-
 
 
 export {

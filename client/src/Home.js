@@ -2,12 +2,13 @@ import React, { useContext, useState } from 'react'
 import { UserContext } from './context/user'
 import { useNavigate } from 'react-router-dom'
 import FoodContainer from './containers/FoodContainer'
+import { HomeContainer, SearchStyle } from './styled-components/styleIndex'
 
 
 function Home() {
 
     const { user, loggedIn } = useContext(UserContext)
-    const [ searchInput , setSearchInput ] = useState("")
+    const [ searchInput , setSearchInput ] = useState("Search for any food here..")
     const [ foodSubmitted, setFoodSubmitted ] = useState ("")
     const navigate = useNavigate()
 
@@ -25,20 +26,32 @@ function Home() {
         const lowerCaseSearch = searchInput.toLowerCase()
         navigate(`/foodlist/${lowerCaseSearch}`)
     }
+
+    const handleStartTyping = (e) => {
+        setSearchInput("")
+    }
     
     if (loggedIn === true) {
         return (
-            <div>
-                <h1>Hello, {user.first_name} </h1>
-                <h3>Welcome to your child's recipe guide!</h3>
-                <h4>Search for any food here:</h4>
-                <form onSubmit={handleFoodSubmit}>
-                    <input type="text" onChange={handleTextInput} value={searchInput}></input>
-                    <button>Search</button>
-                </form>
-            </div>)
+            <HomeContainer>
+                <div>
+                    <h1>Hello, {user.first_name} </h1>
+                    <h3>Welcome to your child's recipe guide!</h3>
+                    <SearchStyle>
+                    <form onSubmit={handleFoodSubmit}>
+                        <input type="text" onChange={handleTextInput} value={searchInput} onClick={handleStartTyping}></input>
+                        <button>Search</button>
+                    </form>
+                    </SearchStyle>
+                </div>
+            </HomeContainer>
+            )
     } else {
-        return <h1>Please login or signup</h1>
+        return (
+        <HomeContainer>
+            <h1>Please login or signup</h1>
+        </HomeContainer>
+        )
         }
 }
 

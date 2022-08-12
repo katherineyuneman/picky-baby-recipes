@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import FoodList from '../components/FoodList'
-import { HomeContainer } from '../styled-components/styleIndex';
+import { HomeContainer, Container, SearchStyle } from '../styled-components/styleIndex';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function FoodContainer({foodSubmitted}) {
@@ -51,17 +51,21 @@ function FoodContainer({foodSubmitted}) {
     }
 
   return (
+    <HomeContainer>
     <div>
       <br/>
+      <SearchStyle>
       <form onSubmit={handleSearchSubmit}>
         <input type="text" value={searchInputs} onChange={handleSearchInputs}/>
         <button>Search</button>
       </form>
       <button onClick={handleResetSearch}>Reset Search</button>
+      </SearchStyle>
       <br/>
       <FoodList foods={filteredFoods}/>
       
       </div>
+      </HomeContainer>
   )
 }
 

@@ -43,15 +43,6 @@ class RecipesController < ApplicationController
             end
     end
 
-    def food_recipes
-        food = Food.find_by_id(params[:id])
-        ingredients_with_food = food.ingredients
-        recipe_ids = ingredients_with_food.map { | ingredient | ingredient.recipe_id}
-        ingredients_with_recipes = ingredients_with_food.includes(:recipe).to_a
-        render json: ingredients_with_recipes , include: ['recipe']
-    end
-
-
     private
 
     def current_user

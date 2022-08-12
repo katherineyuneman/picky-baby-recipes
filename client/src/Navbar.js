@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 // import Signup from './Signup'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from './context/user'
+import { Header } from './styled-components/styleIndex'
 
 function Navbar() {
 
@@ -29,32 +30,29 @@ function Navbar() {
                 <h2>NavBar</h2>
                 <h2>
                     <Link to="/signup">
-                        <button className="button">Signup</button>
+                        Signup
                     </Link>
                     <Link to="/login">
-                        <button className="button">Login</button>
+                        Login
                     </Link>
                     <Link to="/foodlist">
-                        <button className="button">Food List</button>
+                        Food List
                     </Link>
                 </h2>
             </div>
             </div>)
     } else
             {return (
-    <div className="columns">
-      
-      <button className="button" onClick={logoutUser}>Logout</button>
-      <Link to="/foodlist">
-                        <button className="button">Food List</button>
-                    </Link>
-    <Link to="/myrecipes">
-        <button className="button">My Recipes</button>
-    </Link>
-    <Link to="/recipes/new">
-        <button className="button">Add a Recipe</button>
-    </Link>
-    </div>
+                <Header>
+                    <h1>Picky Eater App</h1>
+                    <nav>
+                        <Link to="/foodlist"> Food List </Link>
+                        <Link to="/myrecipes"> My Recipes </Link>
+                        <Link to="/recipes/new"> Add a Recipe </Link>
+                        <a href="#" onClick={logoutUser}>Logout</a>
+                    </nav>
+                    
+                </Header>
     )
         }
   
