@@ -1,13 +1,10 @@
 class FoodsController < ApplicationController
 
     def index
-        # food_list = current_user.foods.sorted_food
-         # byebug
         user_food = current_user.foods.sorted_food
         admin_food = admin.foods.sorted_food
-        combined_food = (user_food | admin_food)
-        combined_food_sorted = combined_food
-        render json: combined_food_sorted, status: :ok
+        combined_food = (user_food | admin_food).sort_by{|food| food[:name]}
+        render json: combined_food, status: :ok
     end
 
     def create

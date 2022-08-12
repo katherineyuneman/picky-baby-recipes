@@ -25,7 +25,7 @@ function FoodCard({food}) {
                 <Link to={`/foods/${food.id}`}>
                   <ul>Details about this Food</ul>
                 </Link>
-                <Link to={`/recipes/foods/${food.id}`}>
+                <Link to={`/foods/${food.id}/recipes`}>
                   <ul>{food.name} recipes</ul>
                 </Link>
                 <cite>By User_ID: {food.user_id}</cite>

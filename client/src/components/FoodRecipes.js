@@ -5,11 +5,11 @@ import { useParams, Link } from 'react-router-dom';
 function FoodRecipes() {
 
     const {id} = useParams()
-    const [ recipes, setRecipes ] = useState([])
+    // const [ recipes, setRecipes ] = useState([])
     const [ ingredients, setIngredients ] = useState([])
 
     useEffect(() => {
-        fetch (`/recipes/foods/${id}`)
+        fetch (`/foods/${id}/recipes`)
         .then(response => response.json())
         .then(data => {
             setIngredients(data)
