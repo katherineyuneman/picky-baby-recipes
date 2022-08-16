@@ -53,7 +53,7 @@ function RecipeList() {
       return <div key={recipe.id}><TitleDiv>
       {/* <div key={recipe.id}> */}
           <br/>
-          <Link to={`/recipes/${recipe.id}`} id={recipe.id}>
+          <Link to={`/recipes/${recipe.id}`} id={recipe.id} className="link">
             <h2 className='title'>{recipe.title}</h2>
           </Link>
           </TitleDiv>

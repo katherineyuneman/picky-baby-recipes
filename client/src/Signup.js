@@ -1,6 +1,7 @@
 import {useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './context/user'
+import { HomeContainer } from './styled-components/styleIndex'
 
 function Signup() {
 
@@ -54,6 +55,7 @@ function Signup() {
      }
 
   return (
+    <HomeContainer>
     <div>
       <p> Please sign up for an account with your details below:</p>
 
@@ -84,6 +86,7 @@ function Signup() {
             {errorsList}
         </ul>
     </div>
+    </HomeContainer>
   )
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams, Link } from 'react-router-dom';
-import { Card } from "../styled-components/styleIndex";
+import { Card, HomeContainer } from "../styled-components/styleIndex";
 import FoodEditForm from "../forms/FoodEditForm";
 import { UserContext } from '../context/user';
 
@@ -54,6 +54,7 @@ function FoodDetail() {
 
   return (
     <div>
+        <HomeContainer>
       <Card>
         <div key={food.id}>
             <h5>{food.name}</h5>
@@ -74,13 +75,17 @@ function FoodDetail() {
                 {(user.length !== 0 && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
                 {displayEdit === false && user.id !== food.user_id ? <h5>You do not have access to edit this food.</h5> : null}
                 {displayEdit ? <FoodEditForm food={food} setDisplayEdit={setDisplayEdit} handleSave={handleSave} /> : null}
-                    <Link to={`/recipes/foods/${food.id}`}>
-                    <ul>My {food.name} recipes</ul>
+                    <Link to={`/foods/${food.id}/recipes`}>
+                        <br />
+                    My {food.name} recipes
                     </Link>
+                    <br />
+                    <br />
                 </footer>
               
             </div>
             </Card>
+            </HomeContainer>
     </div>
   )
 

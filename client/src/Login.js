@@ -1,6 +1,7 @@
 import {useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './context/user'
+import { HomeContainer } from './styled-components/styleIndex'
 
 
 function Login() {
@@ -42,6 +43,7 @@ function Login() {
      }
 
   return (
+    <HomeContainer>
     <div>
         <p>Please login with your email address and password:</p>
       <form onSubmit={handleSubmit}>
@@ -59,6 +61,7 @@ function Login() {
             {errorsList}
         </ul>
     </div>
+    </HomeContainer>
   )
 }
 

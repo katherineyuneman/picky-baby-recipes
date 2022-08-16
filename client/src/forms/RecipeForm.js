@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import FoodForm from './FoodForm'
+import { HomeContainer } from '../styled-components/styleIndex'
 
 function RecipeForm() {
 
@@ -98,6 +99,8 @@ function RecipeForm() {
             {...recipeInputs, 
             ingredients_attributes: [...ingredientInputs]
             }
+            console.log("full-recipe:", full_recipe)
+
             
 
         fetch('/recipes', {
@@ -128,7 +131,9 @@ function RecipeForm() {
 
     
   return (
+      <HomeContainer>
       <div>
+          <h1>Add your recipe below:</h1>
         <form onSubmit={handleSubmit}>
             <label>Recipe Title:
               <input type="text" name="title" value={recipeInputs.title} maxLength={30} onChange={handleRecipeInputs}/>
@@ -150,8 +155,8 @@ function RecipeForm() {
                     <div>
                         <select name="food_id" value={data.food_id} required onChange={(e)=>handleIngredientInputs(e, index)}>
                             <option name="default" value="default">Select Food Item</option>
+                            <option name="addNew" value="addNew">ADD NEW FOOD</option>
                             {foodDropDownOptions}
-                            <option name="addNew" value="addNew">Add New Food</option>
                         </select>
                         <label>Amount:
                             <input type="decimal" name="amount" value={data.amount} maxLength={10} onChange={(e)=>handleIngredientInputs(e, index)}/>
@@ -174,7 +179,9 @@ function RecipeForm() {
         <br/>
         <ul>{createFoodErrorsList}</ul>
         </div>
+        </HomeContainer>
   )
     
 }
 export default RecipeForm
+

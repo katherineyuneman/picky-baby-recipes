@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from './context/user'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import FoodContainer from './containers/FoodContainer'
 import { HomeContainer, SearchStyle } from './styled-components/styleIndex'
 
@@ -49,7 +49,9 @@ function Home() {
     } else {
         return (
         <HomeContainer>
-            <h1>Please login or signup</h1>
+            <h1>Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
+            
+
         </HomeContainer>
         )
         }

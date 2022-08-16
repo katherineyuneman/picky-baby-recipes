@@ -59,7 +59,7 @@ function FoodContainer({foodSubmitted}) {
         <input type="text" value={searchInputs} onChange={handleSearchInputs}/>
         <button>Search</button>
       </form>
-      <button onClick={handleResetSearch}>Reset Search</button>
+      <button onClick={handleResetSearch}>See all food</button>
       </SearchStyle>
       <br/>
       <FoodList foods={filteredFoods}/>

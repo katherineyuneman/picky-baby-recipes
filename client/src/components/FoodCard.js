@@ -25,11 +25,11 @@ function FoodCard({food}) {
                   <img src={`${food.image_url}`} alt={food.name}></img>
               </p>
               
-                <Link to={`/foods/${food.id}`}>
+                <Link to={`/foods/${food.id}`} className="link">
                   Details about this Food
                 </Link>
                 <br />
-                <h5><Link to={`/foods/${food.id}/recipes`}>
+                <h5><Link to={`/foods/${food.id}/recipes`} className="linkbg">
                   My {food.name} recipes
                 </Link></h5>
                 <br />

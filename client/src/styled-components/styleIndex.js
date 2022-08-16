@@ -6,9 +6,9 @@ const GeneralStyle = styled.div`
 `
 
 const Header = styled.div`
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&family=Playfair+Display:ital,wght@1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Montserrat:ital,wght@1,500&family=Playfair+Display:ital,wght@1,800&display=swap');
   background: white;
-  color: #F8F8F8;
+  color: #000080;
   position: fixed;
   top: 0;
   height: 100px;
@@ -16,34 +16,56 @@ const Header = styled.div`
   width: 100vw;
   /* z-index: 10; */
   border-bottom: double 10.5px #E7717D;
-
+  .logo{
+        color:#000080;
+        text-decoration: none;
+        };
+ 
   h1 {
       line-height:50px;
       display: flex;
       flex: 70%;
-      color: blue;
+      color: #000080;
       float: left;
       margin-left: 28px;
-      font-size: 2em;
+      font-size: 3em;
       height: 15px;
       letter-spacing: 1px;
-      font-family: "Playfair Display";
-      font-style: italic
-  }
+      font-family: "Bungee Shade";
+      /* font-style: italic; */
+        .logo{
+        color:#000080;
+        };
+    }
 
   nav{
     background-color:white;
     display: block;
     float: right;
-    font-size: 15px;
+    font-size: 20px;
     /* flex: 30%; */
     /* top: 50px; */
     justify-content: right;
     padding: 20px;
+    margin-top: 25px;
     display: inline-block;
     text-align: right;
-    color: blue;
-    height: 100px,
+    color: #000080;
+    font-style: bold;
+
+    .link{
+    color:black;
+    text-decoration: none;
+    };
+    .link:hover{
+      color:#E7717D;
+      /* background-color: #E7717D; */
+      text-decoration: none;
+    };
+    .link:active{
+      color:white;
+      text-decoration: none;
+    };
   }
   .circle{
         align-content: center;
@@ -59,17 +81,18 @@ const Header = styled.div`
         /* border: 3px solid #000; */
         background: #AFD275;
     }
-  li{
-  color: white;
-  display: inline-block;
-  padding: 0px 10px;
-  /* border-radius: 50px; */
-  }
-  li:hover {
-  background-color: #C2B9B0;
-  color: white;
-  /* height:100%; */
-  }
+    li{
+    color: white;
+    display: inline-block;
+    padding: 0px 10px;
+    margin: 2em;
+    /* border-radius: 50px; */
+    }
+    li:hover {
+    background-color: #C2B9B0;
+    color: white;
+    /* height:100%; */
+    }
     
 `
 
@@ -175,7 +198,7 @@ const HomeContainer = styled.div`
     font-family: "Playfair Display";
   }
   button{
-    background-color:#C2B9B0;
+    background-color:#000080;
     color:white;
     border: 2px solid #E7717D;
     border-radius: 25px;
@@ -188,7 +211,7 @@ const HomeContainer = styled.div`
   }
   button:hover{
     background-color:white;
-    color:#E7717D;
+    color:#000080;
     border: 2px solid #E7717D;
   };
   button:active{
@@ -252,14 +275,21 @@ const Card = styled.div`
   p{
     font-family: "Montserrat", sans-serif;
   };
+  .linkbg{
+    color:white;
+  };
   .link{
-    color:#E7717D;
+    color:black;
   };
   .link:hover{
-    color:#AFD275;
+    color:white;
+    background-color: #E7717D;
   };
   .link:active{
-    color:#E7717D;
+    color:white;
+  };
+  .link:visited{
+    color:purple;
   };
   .deleteButton{
     width: 100%;
@@ -344,20 +374,25 @@ const SearchStyle = styled.div`
     height: 50px;
     text-align: center;
     width: 300px;
+    input:active{
+      border: solid #E7717D;
+      border-radius: 25px;
+    }
 }
-/* input[type=submit], input[type=button]{
+input[type=submit], input[type=button]{
     background-color:white;
-    color:#FEC90E;
-    border: 2px solid #E7717D;
+    color:#000080;
+    border: 2px solid #000080;
     border-radius: 25px;
     font-style: bolder;
-  }; */
+  };
   input[type=submit]:active,input[type=button]:active{
     background-color:white;
     color:white;
     border: 2px solid white;
     box-shadow: 5px 3px 3px gray;
     font-style: bold;
+    font-family: "Bungee Shade";
   }
 `
 
@@ -417,17 +452,35 @@ const TitleDiv = styled.div`
     font-size: 14px;
     /* flex-direction:row; */
     font-family: "Montserrat";
+    font-size: 15px;
     margin: 3em;
     margin-bottom: 0;
     margin-top:2em;
-    margin-left: 15em;
-    width:20%;
+    margin-left: 14em;
+    width:25%;
     height: auto;
     display: block;
     text-align: center;
     align-items: right;
-    background-color: gray;
+    background-color: #000080;
     color: white;
+    .link{
+    color:white;
+    text-decoration: none;
+    };
+    .link:hover{
+      color:#E7717D;
+      /* background-color: #E7717D; */
+      text-decoration: none;
+    };
+    .link:active{
+      color:white;
+      text-decoration: none;
+    };
+    /* .link:visited{
+      color:white;
+      text-decoration: none;
+    } */
 `
 const RecipeCardStyle = styled.div`
     flex-wrap: wrap;

@@ -66,6 +66,9 @@ function FoodEditForm({food, setDisplayEdit, handleSave}) {
             <label>Description:
                 <input type="text" name="full_desc" value={foodInputs.full_desc} maxLength={50} onChange={handleFoodInputs}/>
             </label>
+            <label>Image URL:
+                <input type="textarea" name="image_url" value={foodInputs.image_url} onChange={handleFoodInputs}/>
+            </label>
             <button>Save Update</button>
             <br/>
         </form>
