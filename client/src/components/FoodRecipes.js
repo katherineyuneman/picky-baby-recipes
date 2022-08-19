@@ -12,8 +12,12 @@ function FoodRecipes() {
         fetch (`/foods/${id}/recipes`)
         .then(response => response.json())
         .then(data => {
+            if (data.errors){
+                console.log("data errors inside food fetch:", data.errors)}
+            else {
             setIngredients(data)
-        })
+            console.log("ingredients:", ingredients)
+        }})
         .catch(err => alert(err))
         },[])
 

@@ -9,6 +9,18 @@ class IngredientsController < ApplicationController
     #         render json: {errors: new_ingredient.errors.full_messages}, status: :unprocessable_entity
     # end
 
+    def index
+        recipe = find_recipe
+        ingredients = recipe.ingredients
+        render json: ingredients
+    end
+
+    def destroy
+        
+    end
+
+
+
     private
     def find_recipe
         Recipe.find_by(id: params[:recipe_id])

@@ -18,11 +18,18 @@ class RecipesController < ApplicationController
     end
     
     def index
+        if params[:food_id]
+            food = Food.find_by_id(params[:food_id])
+            ingredients_with_food = food.ingredients
+            recipe_ids = ingredients_with_food.map { | ingredient | ingredient.recipe_id}
+            ingredients_with_recipes = ingredients_with_food.includes(:recipe).to_a
+            render json: ingredients_with_recipes , include: ['recipe']
+        else
         user_recipes = current_user.recipes.sorted_recipes.includes(:ingredients, :foods)
         render json: user_recipes, include: ['ingredients', 'ingredients.food']
+        end
     end
-    
-    
+
 
     def destroy
         recipe = current_user.recipes.find_by_id(params[:id])
