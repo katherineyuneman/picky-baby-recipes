@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import FoodForm from './FoodForm'
-import { HomeContainer } from '../styled-components/styleIndex'
+import FoodForm from '../../food/food_forms/FoodForm'
+import { HomeContainer } from '../../../styled-components/styleIndex'
 
 function RecipeForm() {
 

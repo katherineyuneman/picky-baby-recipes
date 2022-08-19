@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from '../styled-components/styleIndex'
+import { Card } from '../../styled-components/styleIndex'
 import { Link } from 'react-router-dom'
 
 function FoodCard({food}) {

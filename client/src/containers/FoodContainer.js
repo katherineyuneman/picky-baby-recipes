@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import FoodList from '../components/FoodList'
-import { HomeContainer, Container, SearchStyle } from '../styled-components/styleIndex';
+import FoodList from '../components/food/FoodList';
+import { HomeContainer, SearchStyle } from '../styled-components/styleIndex';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function FoodContainer({foodSubmitted}) {

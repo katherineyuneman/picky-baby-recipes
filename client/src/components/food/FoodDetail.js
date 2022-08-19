@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams, Link } from 'react-router-dom';
-import { Card, HomeContainer } from "../styled-components/styleIndex";
-import FoodEditForm from "../forms/FoodEditForm";
-import { UserContext } from '../context/user';
+import { Card, HomeContainer } from "../../styled-components/styleIndex";
+import FoodEditForm from "./food_forms/FoodEditForm";
+import { UserContext } from "../../context/user";
 
 function FoodDetail() {
     const {id} = useParams()

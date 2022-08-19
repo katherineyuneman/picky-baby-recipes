@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import FoodForm from './FoodForm'
+import FoodForm from '../../food/food_forms/FoodForm'
 
 
 

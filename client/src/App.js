@@ -3,17 +3,15 @@ import Home from './Home';
 import Navbar from './Navbar';
 import Login from './Login';
 import Signup from './Signup';
+import RecipeList from './components/recipes/RecipeList';
+import RecipeForm from './components/recipes/recipe_forms/RecipeForm';
+import RecipeEditForm from './components/recipes/recipe_forms/RecipeEditForm';
+import FoodContainer from './containers/FoodContainer';
+import Recipe from './components/recipes/Recipe';
+import FoodRecipes from './components/FoodRecipes';
+import FoodDetail from './components/food/FoodDetail';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import { UserProvider } from './context/user';
-import FoodList from './components/FoodList';
-import RecipeList from './components/RecipeList';
-import RecipeForm from './forms/RecipeForm';
-import RecipeEditForm from './forms/RecipeEditForm';
-import FoodContainer from './containers/FoodContainer';
-import Recipe from './components/Recipe';
-import FoodRecipes from './components/FoodRecipes';
-import FoodDetail from './components/FoodDetail';
-
 
 function App() {
 

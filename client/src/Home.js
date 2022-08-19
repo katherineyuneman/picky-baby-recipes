@@ -1,9 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from './context/user'
 import { useNavigate, Link } from 'react-router-dom'
-import FoodContainer from './containers/FoodContainer'
 import { HomeContainer, SearchStyle } from './styled-components/styleIndex'
-
 
 function Home() {
 

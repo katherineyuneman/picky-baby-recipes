@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
-import RecipeEditForm from '../forms/RecipeEditForm';
-import { RecipeCardStyle, TitleDiv, HomeContainer } from '../styled-components/styleIndex';
-import { UserContext } from '../context/user';
+import RecipeEditForm from './recipe_forms/RecipeEditForm';
+import { RecipeCardStyle, TitleDiv, HomeContainer} from '../../styled-components/styleIndex';
+import { UserContext } from '../../context/user';
 import { Link } from 'react-router-dom';
 
 function RecipeList() {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom';
-import { TitleDiv, RecipeCardStyle, HomeContainer } from '../styled-components/styleIndex';
+import { TitleDiv, RecipeCardStyle, HomeContainer } from '../../styled-components/styleIndex';
 
 function Recipe() {
     const {id} = useParams()
