@@ -1,21 +1,20 @@
 class RecipesController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
     def create
-        new_recipe = current_user.recipes.create(recipe_params)
-        if new_recipe.valid?
-            render json: new_recipe, status: :created
-        else
-        render json: {errors: new_recipe.errors.full_messages}, status: :unprocessable_entity
-        end
+        new_recipe = current_user.recipes.create!(recipe_params)
+        render json: new_recipe, status: :created
     end
 
     def show
         recipe = current_user.recipes.includes(:ingredients, :foods).find_by_id(params[:id])
-            if recipe
-              render json: recipe, include: ['ingredients', 'ingredients.food']
-            else
-              render json: { error: "Recipe not found" }, status: :not_found
-            end
+        render json: recipe, include: ['ingredients', 'ingredients.food']
+            # if recipe
+            #   render json: recipe, include: ['ingredients', 'ingredients.food']
+            # else
+            #   render json: { error: "Recipe not found" }, status: :not_found
+            # end
     end
     
     def index
@@ -27,22 +26,14 @@ class RecipesController < ApplicationController
 
     def destroy
         recipe = current_user.recipes.find_by_id(params[:id])
-        if recipe
-            recipe.destroy
-            head :no_content
-        else
-            render json: {errors: ["This recipe no longer exists"]}, status: :unauthorized
-        end
+        recipe.destroy
+        head :no_content
     end
 
     def update
             recipe = current_user.recipes.find_by_id(params[:id])
-            if recipe
-              recipe.update(update_recipe_params)
-              render json: recipe, include: ['ingredients', 'ingredients.food']
-            else
-              render json: { error: "Recipe not Found" }, status: :not_found
-            end
+            recipe.update!(update_recipe_params)
+            render json: recipe, include: ['ingredients', 'ingredients.food']
     end
 
     private
@@ -58,6 +49,14 @@ class RecipesController < ApplicationController
     def update_recipe_params
         params.require(:recipe).permit(
             :id, :title, :directions, :source, ingredients_attributes: [:id, :amount, :measurement, :food_id])
+    end
+
+    def render_not_found_response
+        render json: { error: "Item not found" }, status: :not_found
+    end
+
+    def render_unprocessable_entity_response(invalid)
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
 end

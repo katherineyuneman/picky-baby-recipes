@@ -7,7 +7,7 @@ function FoodList({foods}) {
     
     const foodList = foods.map((food) => 
       (
-        <FoodCard food={food}/>
+        <FoodCard key={food.id} food={food}/>
            
       ))
   return (

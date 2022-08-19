@@ -18,6 +18,7 @@ function RecipeForm() {
         food_id:""
     }])
     const [ createFoodErrorsList, setCreateFoodErrorsList ] = useState([])
+    const [ createRecipeErrorsList, setCreateRecipeErrorsList ] = useState([])
 
     const navigate = useNavigate()
 
@@ -113,9 +114,12 @@ function RecipeForm() {
 
           .then(resp => resp.json())
           .then((data) => {
-              if (data.errors){
-                  alert(data.errors)
-              } else {
+            if (data.errors){
+                console.log("data errors inside post for food:", data.errors)
+                const errorLis = data.errors.map((e) => <li>{e}</li>)
+                setCreateRecipeErrorsList(errorLis)
+                
+            } else {
                 setRecipeInputs({title:"",
                 directions: "",
                 source:""})
@@ -125,6 +129,7 @@ function RecipeForm() {
                     food_id:""
                 }])
                   navigate("/myrecipes")
+                  setCreateRecipeErrorsList([])
               }
           })
     }
@@ -175,6 +180,7 @@ function RecipeForm() {
             <br/>
               <button>Create Recipe</button>
         </form>
+        <ul>{createRecipeErrorsList}</ul>
         { displayFoodForm === true ? <FoodForm handleFoodSubmit={handleFoodSubmit}/> : console.log("else statement food_id:",ingredientInputs[0].food_id)}
         <br/>
         <ul>{createFoodErrorsList}</ul>
