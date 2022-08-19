@@ -2,6 +2,7 @@ class Food < ApplicationRecord
   belongs_to :user
   has_many :ingredients
   has_many :recipes, through: :ingredients
+  before_save :capitalize_food
 
   validates :name, presence: true, uniqueness: true
   validates :food_type, presence: true
@@ -11,6 +12,8 @@ class Food < ApplicationRecord
   validates :full_desc, presence: true
 
 
+
+
   def self.sorted_food
     self.order(:name)
   end
@@ -18,6 +21,10 @@ class Food < ApplicationRecord
   def sorted_food_instance
     self.order(:name)
   end
+
+  def capitalize_food
+    self.capitalize()
+end
   
 
 end
