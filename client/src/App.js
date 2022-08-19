@@ -23,8 +23,8 @@ function App() {
       <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/foodlist" element={<FoodContainer />} />
-          <Route path="/foodlist/:search" element={<FoodContainer />} />
+          <Route path="/foods" element={<FoodContainer />} />
+          <Route path="/foods/:search" element={<FoodContainer />} />
           <Route path="foods/:id/recipes" element={<FoodRecipes />} />
           <Route path="/myrecipes" element={<RecipeList />} />
           <Route path="/recipes/new" element={<RecipeForm />} />

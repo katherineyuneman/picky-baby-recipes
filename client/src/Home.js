@@ -22,7 +22,7 @@ function Home() {
         e.preventDefault();
         setFoodSubmitted(searchInput)
         const lowerCaseSearch = searchInput.toLowerCase()
-        navigate(`/foodlist/${lowerCaseSearch}`)
+        navigate(`/foods/${lowerCaseSearch}`)
     }
 
     const handleStartTyping = (e) => {

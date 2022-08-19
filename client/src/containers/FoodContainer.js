@@ -34,7 +34,7 @@ function FoodContainer({foodSubmitted}) {
 
     const handleSearchSubmit = (e) => {
       e.preventDefault();
-      navigate('/foodlist')
+      navigate('/foods')
       console.log("inside submit:", searchInputs)
       const searchedFoods = foods.filter(food => food.name.toLowerCase().includes(searchInputs.toLowerCase()) )
       setFilteredFoods(searchedFoods)
@@ -43,7 +43,7 @@ function FoodContainer({foodSubmitted}) {
 
     const handleResetSearch = () => {
       if (search) {
-        navigate('/foodlist')
+        navigate('/foods')
         setFilteredFoods(foods)
       } else
       setFilteredFoods(foods)
