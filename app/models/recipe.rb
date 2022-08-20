@@ -10,8 +10,8 @@ class Recipe < ApplicationRecord
     self.order(:title)
   end
 
-  # def format_title
-
+  # def self.most_ingredients
+  #   self.preload(:ingredients).all.max_by{ |r| r.ingredients.length}
   # end
 
 end

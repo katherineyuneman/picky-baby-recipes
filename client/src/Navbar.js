@@ -34,7 +34,7 @@ function Navbar() {
                 <nav>
                     <Link to="/signup" className='link'> Signup </Link> | 
                     <Link to="/login" className='link'> Login </Link> | 
-                    <Link to="/foodlist" className='link'> Food List</Link> |
+                    <Link to="/foods" className='link'> Food List</Link> |
                 </nav>
             </div>
             </div>
@@ -46,7 +46,7 @@ function Navbar() {
                         <Link to="/" className='logo'> Picky Eater App </Link>
                     </h1>
                     <nav>
-                        <Link to="/foodlist" className='link'> Food List </Link> | 
+                        <Link to="/foods" className='link'> Food List </Link> | 
                         <Link to="/myrecipes" className='link'> My Recipes </Link> | 
                         <Link to="/recipes/new" className='link'> Add a Recipe </Link> | 
                         <a href="#" onClick={logoutUser} className='link'> Logout</a>
