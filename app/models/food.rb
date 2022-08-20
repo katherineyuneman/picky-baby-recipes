@@ -19,7 +19,7 @@ class Food < ApplicationRecord
   end
 
   def capitalize_food
-    self.capitalize()
+    self.capitalize
   end
   
 

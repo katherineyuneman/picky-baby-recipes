@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
 
-  resources :foods do
+  resources :foods, only: [:index, :show, :update, :create] do
+    get "search", on: :collection;
     resources :recipes, only: [:index]
   end
+
+  post '/foodsearch', to:'foods#index'
 
   resources :recipes do
     resources :ingredients, only: [:index, :destroy, :update]

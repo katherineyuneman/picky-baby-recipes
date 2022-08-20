@@ -3,12 +3,14 @@ import { UserContext } from './context/user'
 import { useNavigate, Link } from 'react-router-dom'
 import { HomeContainer, SearchStyle } from './styled-components/styleIndex'
 
-function Home() {
+function Home({handleFoodSubmit}) {
 
     const { user, loggedIn } = useContext(UserContext)
     const [ searchInput , setSearchInput ] = useState("Search for any food here..")
-    const [ foodSubmitted, setFoodSubmitted ] = useState ("")
+    
+    const [foodId, setFoodId ] = useState("")
     const navigate = useNavigate()
+
 
     console.log("user in home:", user, "logged in:", loggedIn)
 
@@ -18,12 +20,32 @@ function Home() {
         setSearchInput(input)
     }
 
-    const handleFoodSubmit =(e) => {
-        e.preventDefault();
-        setFoodSubmitted(searchInput)
-        const lowerCaseSearch = searchInput.toLowerCase()
-        navigate(`/foods/${lowerCaseSearch}`)
-    }
+    // const handleFoodSubmit =(e) => {
+    //     e.preventDefault();
+    //     setFoodSubmitted(searchInput)
+
+    //     const lowerCaseSearch = searchInput.toLowerCase()
+    //     fetch ("/foodsearch", {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body:JSON.stringify({
+    //             search: lowerCaseSearch
+    //         })
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.errors){
+    //                 console.log(data.errors)
+    //             } else{
+    //             console.log("fetched:", data)
+    //             // setFoodId(data.id)
+    //             navigate(`/foods`)
+    //         }
+    //         })
+        
+    // }
 
     const handleStartTyping = (e) => {
         setSearchInput("")
@@ -36,7 +58,9 @@ function Home() {
                     <h1>Hello, {user.first_name} </h1>
                     <h3>Welcome to your child's recipe guide!</h3>
                     <SearchStyle>
-                    <form onSubmit={handleFoodSubmit}>
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        handleFoodSubmit(searchInput)}}>
                         <input type="text" onChange={handleTextInput} value={searchInput} onClick={handleStartTyping}></input>
                         <button>Search</button>
                     </form>

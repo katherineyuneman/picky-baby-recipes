@@ -11,15 +11,20 @@ function FoodDetail() {
     const [ saved, setSaved ] = useState(false)
     const { user, loggedIn } = useContext(UserContext)
 
-    
+    console.log("id within fooddetail:", id)
+    console.log("user:", user)
+
     useEffect(() => {
         fetch (`/foods/${id}`)
         .then(response => response.json())
         .then(data => {
+            if (data.errors){
+                console.log(data.errors)
+            } else {
             console.log("fetched:", data)
             setFood(data)
+            }
         })
-        .catch(err => alert(err))
         },[])
 
         useEffect(() => {
@@ -72,7 +77,7 @@ function FoodDetail() {
                   <img src={`${food.image_url}`} alt={food.name}></img>
               </p>
               <footer>
-                {(user.length !== 0 && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
+                {(user && user.length !== 0 && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
                 {displayEdit === false && user.id !== food.user_id ? <h5>You do not have access to edit this food.</h5> : null}
                 {displayEdit ? <FoodEditForm food={food} setDisplayEdit={setDisplayEdit} handleSave={handleSave} /> : null}
                     <Link to={`/foods/${food.id}/recipes`}>

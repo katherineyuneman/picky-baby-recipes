@@ -3,7 +3,7 @@ import FoodList from '../components/food/FoodList';
 import { HomeContainer, SearchStyle } from '../styled-components/styleIndex';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function FoodContainer({foodSubmitted}) {
+function FoodContainer({foodSubmitted, homeSearchedFoods}) {
 
     const { search } = useParams()
     const navigate = useNavigate()
@@ -11,20 +11,34 @@ function FoodContainer({foodSubmitted}) {
     const [foods, setFoods] = useState([]);
     const [ filteredFoods, setFilteredFoods ] = useState([])
 
+    console.log("searched foods within Food COntainer:", homeSearchedFoods)
+
     console.log("search params:", search)
 
-    console.log("foodSubmitted:",foodSubmitted)
     useEffect(() => {
-      fetch("/foods")
-        .then((r) => r.json())
-        .then((fetchedFood) => {
-          setFoods(fetchedFood)
-          if (search) {
-            const paramSearchFoods = fetchedFood.filter(food => food.name.toLowerCase().includes(search))
-            setFilteredFoods(paramSearchFoods)
-          } else setFilteredFoods(fetchedFood)
-        })
+      if (homeSearchedFoods.length !== 0) {
+        console.log("hi from searched foods")
+        setFilteredFoods(homeSearchedFoods)
+        
+      } else {
+        fetchFood()}
     }, []);
+
+    const fetchFood = () => {
+      fetch("/foods")
+      .then((r) => r.json())
+      .then((fetchedFood) => {
+        setFoods(fetchedFood)
+         if (search) {
+          const paramSearchFoods = fetchedFood.filter(food => food.name.toLowerCase().includes(search))
+          setFilteredFoods(paramSearchFoods)
+        } else setFilteredFoods(fetchedFood)
+      })
+    }
+
+
+    console.log("foodSubmitted:",foodSubmitted)
+    
 
     const handleSearchInputs = (e) => {
       console.log(e.target.value)
@@ -42,10 +56,11 @@ function FoodContainer({foodSubmitted}) {
     }
 
     const handleResetSearch = () => {
-      if (search) {
-        navigate('/foods')
-        setFilteredFoods(foods)
-      } else
+      // if (search) {
+      //   navigate('/foods')
+      //   setFilteredFoods(foods)
+      // } else
+      fetchFood()
       setFilteredFoods(foods)
       setSearchInputs("")
     }
