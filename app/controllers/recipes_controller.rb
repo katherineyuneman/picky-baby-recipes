@@ -46,14 +46,12 @@ class RecipesController < ApplicationController
     end
 
     def find_recipe
-        @recipe = current_user.recipes.includes(:ingredients, :foods).find_by_id(params[:id])
+        @recipe = current_user.recipes.includes(:ingredients, :foods).find(params[:id])
     end
 
     def serialize_recipe
         render json: @recipe, include: ['ingredients', 'ingredients.food']
     end
-
-    
 
     def recipe_params
         params.require(:full_recipe).permit(:title, :directions, :source, ingredients_attributes: [:amount, :measurement, :food_id])
@@ -65,7 +63,7 @@ class RecipesController < ApplicationController
     end
 
     def render_not_found_response
-        render json: { error: "Item not found" }, status: :not_found
+        render json: { error: "Resource not found with id #{params[:id]}." }, status: :not_found
     end
 
     def render_unprocessable_entity_response(invalid)

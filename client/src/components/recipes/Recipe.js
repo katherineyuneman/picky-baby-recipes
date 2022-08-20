@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { TitleDiv, RecipeCardStyle, HomeContainer } from '../../styled-components/styleIndex';
+
 
 function Recipe() {
     const {id} = useParams()
+    const navigate = useNavigate()
     const [ recipe, setRecipe ] = useState({})
     const [ ingredients, setIngredients ] = useState([])
 
@@ -12,12 +14,14 @@ function Recipe() {
         fetch (`/recipes/${id}`)
         .then(response => response.json())
         .then(data => {
-            setRecipe(data)
-            setIngredients(data.ingredients)
-        })
-        .catch(err => alert(err))
-        },[])
-
+          if (data.error){
+            alert(data.error)
+            navigate('/myrecipes')
+        } else {
+          setRecipe(data)
+          setIngredients(data.ingredients)
+        }})
+      })
         console.log(recipe.ingredients)
         // const ingredients = recipe.ingredients
 
