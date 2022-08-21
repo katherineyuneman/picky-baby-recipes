@@ -3,10 +3,10 @@ class FoodsController < ApplicationController
     before_action :find_food, only: [:show, :update, :destroy]
 
     def index
-        if params[:search]
+        if params[:search]     
+            # multiple_user_foods = Food.where(user_id: [1, session[:user_id]])
             searchParam = (params[:search].capitalize)
-            searched_food = current_user.foods.where("name LIKE ?", searchParam + "%")
-         
+            searched_food = multiple_user_foods.where("name LIKE ?", searchParam + "%")
             render json: searched_food, status: :ok
         else
             user_food = current_user.foods.sorted_food
@@ -53,6 +53,10 @@ end
 
     def admin
         @admin_user = User.find_by(id: 1)
+    end
+    
+    def multiple_user_foods
+        @users_food = Food.where(user_id: [1, session[:user_id]])
     end
 
     def find_food
