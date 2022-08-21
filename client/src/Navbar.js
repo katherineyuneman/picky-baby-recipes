@@ -18,8 +18,8 @@ function Navbar() {
             headers: { 'Content-type': 'application/json'}
         })
         .then(() => {
-            logout();
             navigate('/')
+            logout();
         })
     }
    console.log(loggedIn)
@@ -49,7 +49,7 @@ function Navbar() {
                         <Link to="/foods" className='link'> Food List </Link> | 
                         <Link to="/myrecipes" className='link'> My Recipes </Link> | 
                         <Link to="/recipes/new" className='link'> Add a Recipe </Link> | 
-                        <a href="#" onClick={logoutUser} className='link'> Logout</a>
+                        <Link to="/" onClick={logoutUser} className='link'> Logout</Link>
                     </nav>
                     
                 </Header>

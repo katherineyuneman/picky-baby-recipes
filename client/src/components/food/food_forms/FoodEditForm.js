@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function FoodEditForm({food, setDisplayEdit, handleSave}) {
+function FoodEditForm({food, setDisplayEdit, handleSave, errorMessage}) {
 
     const [ foodInputs, setFoodInputs ] = useState({
         name:food.name,
@@ -12,6 +12,8 @@ function FoodEditForm({food, setDisplayEdit, handleSave}) {
         image_url:food.image_url,
         user_id: food.user_id
     })
+    
+    
 
     const handleFoodInputs = e => {
         setFoodInputs({
@@ -32,12 +34,14 @@ function FoodEditForm({food, setDisplayEdit, handleSave}) {
     
             .then(resp => resp.json())
             .then((data) => {
-                if (data.errors){
-                    alert(data.errors)
+                if (data.error){
+                    console.log("data error inside patch:", data.error)
+                    errorMessage(data.error)
+                    setDisplayEdit(false)
                 } else {
                     setDisplayEdit(false)
                     handleSave()
-                  console.log("data inside post-fetch:", data)
+                //   console.log("data inside post-fetch:", data)
                 //   setFoodIngredientOptions([...foodIngredientOptions, data])
                 //   console.log("updated food ingredient options:", foodIngredientOptions)
                 }
@@ -47,10 +51,12 @@ function FoodEditForm({food, setDisplayEdit, handleSave}) {
 
   return (
     <div>
+        < br/>
         <h1>Edit Food</h1>
+        
         <form onSubmit={(e) => handlFoodUpdate(e, foodInputs)}>
             <label>Food Name:
-                <input type="text" name="name" value={foodInputs.name} maxLength={30} onChange={handleFoodInputs}/>
+                <input type="txext" name="name" value={foodInputs.name} maxLength={30} onChange={handleFoodInputs}/>
             </label>
             <br/>
             <label>Food Type:

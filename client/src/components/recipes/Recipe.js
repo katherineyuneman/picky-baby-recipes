@@ -21,7 +21,8 @@ function Recipe() {
           setRecipe(data)
           setIngredients(data.ingredients)
         }})
-      })
+      }, [])
+      
         console.log(recipe.ingredients)
         // const ingredients = recipe.ingredients
 

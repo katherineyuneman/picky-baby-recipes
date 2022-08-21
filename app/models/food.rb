@@ -4,7 +4,7 @@ class Food < ApplicationRecord
   has_many :recipes, through: :ingredients
   before_save :capitalize_food
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :food_type, presence: true
   validates :age, presence: true
   validates :nutrition_rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
@@ -19,8 +19,7 @@ class Food < ApplicationRecord
   end
 
   def capitalize_food
-    self.capitalize
+    self.name.capitalize()
   end
   
-
 end

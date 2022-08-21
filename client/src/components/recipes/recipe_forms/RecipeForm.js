@@ -26,8 +26,11 @@ function RecipeForm() {
         fetch ('/foods')
         .then(response => response.json())
         .then((food) => setFoodIngredientOptions(food))
-        .catch(err => alert(err))
+        return () => {
+            setFoodIngredientOptions([])
+        }
       }
+      
       ,[])
     
     const foodDropDownOptions = foodIngredientOptions.map((food) => 
@@ -102,8 +105,7 @@ function RecipeForm() {
             }
             console.log("full-recipe:", full_recipe)
 
-            
-
+    
         fetch('/recipes', {
           method: 'POST',
           headers: {

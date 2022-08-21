@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     before_action :find_recipe, only: [:show, :update, :destroy]
+    before_action :authorize
 
     def index
         if params[:food_id]
@@ -60,6 +61,10 @@ class RecipesController < ApplicationController
     def update_recipe_params
         params.require(:recipe).permit(
             :id, :title, :directions, :source, ingredients_attributes: [:id, :amount, :measurement, :food_id])
+    end
+
+    def authorize
+        return render json: {error: "Not authorized"}, status: :unauthorized unless session.include? :user_id
     end
 
     def render_not_found_response

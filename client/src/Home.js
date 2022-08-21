@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from './context/user'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { HomeContainer, SearchStyle } from './styled-components/styleIndex'
 
 function Home({handleFoodSubmit}) {
@@ -8,8 +8,8 @@ function Home({handleFoodSubmit}) {
     const { user, loggedIn } = useContext(UserContext)
     const [ searchInput , setSearchInput ] = useState("Search for any food here..")
     
-    const [foodId, setFoodId ] = useState("")
-    const navigate = useNavigate()
+    
+    
 
 
     console.log("user in home:", user, "logged in:", loggedIn)
@@ -19,33 +19,8 @@ function Home({handleFoodSubmit}) {
         const input = e.target.value
         setSearchInput(input)
     }
-
-    // const handleFoodSubmit =(e) => {
-    //     e.preventDefault();
-    //     setFoodSubmitted(searchInput)
-
-    //     const lowerCaseSearch = searchInput.toLowerCase()
-    //     fetch ("/foodsearch", {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body:JSON.stringify({
-    //             search: lowerCaseSearch
-    //         })
-    //         })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.errors){
-    //                 console.log(data.errors)
-    //             } else{
-    //             console.log("fetched:", data)
-    //             // setFoodId(data.id)
-    //             navigate(`/foods`)
-    //         }
-    //         })
         
-    // }
+
 
     const handleStartTyping = (e) => {
         setSearchInput("")
@@ -56,7 +31,7 @@ function Home({handleFoodSubmit}) {
             <HomeContainer>
                 <div>
                     <h1>Hello, {user.first_name} </h1>
-                    <h3>Welcome to your child's recipe guide!</h3>
+                    <h3>Welcome to your Solid Foods database and Recipe Guide!</h3>
                     <SearchStyle>
                     <form onSubmit={(e) => {
                         e.preventDefault();

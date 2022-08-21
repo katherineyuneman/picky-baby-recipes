@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import { Container, Card } from '../../styled-components/styleIndex';
+import React, {useContext} from 'react'
+import { Container} from '../../styled-components/styleIndex';
 import FoodCard from './FoodCard';
+import { UserContext } from '../../context/user';
 
 function FoodList({foods}) {
     

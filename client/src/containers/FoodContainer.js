@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import FoodList from '../components/food/FoodList';
 import { HomeContainer, SearchStyle } from '../styled-components/styleIndex';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { UserContext } from '../context/user';
 
 function FoodContainer({foodSubmitted, homeSearchedFoods}) {
 
@@ -10,36 +11,43 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
     const [ searchInputs, setSearchInputs ] = useState("")
     const [foods, setFoods] = useState([]);
     const [ filteredFoods, setFilteredFoods ] = useState([])
-
-    console.log("searched foods within Food COntainer:", homeSearchedFoods)
-
-    console.log("search params:", search)
+    const { user, loggedIn } = useContext(UserContext)
+    const [ homeSearchedFoodsState, setHomeSearchedFoodsState ] = useState(homeSearchedFoods)
+    
 
     useEffect(() => {
-      if (homeSearchedFoods.length !== 0) {
+      
+      if (homeSearchedFoodsState.length !== 0){
         console.log("hi from searched foods")
-        setFilteredFoods(homeSearchedFoods)
-        
-      } else {
-        fetchFood()}
-    }, []);
+        setFilteredFoods(homeSearchedFoodsState)
+      }
+      else if (user) {
+        fetchFood()
+      }
+      
+        return setFoods([])
+    }, [homeSearchedFoodsState]);
+
+
+    const isLoading = () => {
+      return (<h1>Loading...</h1>)
+    }
+
 
     const fetchFood = () => {
       fetch("/foods")
       .then((r) => r.json())
       .then((fetchedFood) => {
         setFoods(fetchedFood)
-         if (search) {
-          const paramSearchFoods = fetchedFood.filter(food => food.name.toLowerCase().includes(search))
+        console.log("search:", search)
+         if (searchInputs) {
+          const paramSearchFoods = fetchedFood.filter(food => food.name.toLowerCase().includes(searchInputs))
           setFilteredFoods(paramSearchFoods)
         } else setFilteredFoods(fetchedFood)
       })
     }
 
-
-    console.log("foodSubmitted:",foodSubmitted)
     
-
     const handleSearchInputs = (e) => {
       console.log(e.target.value)
       setSearchInputs(e.target.value)
@@ -48,40 +56,50 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
 
     const handleSearchSubmit = (e) => {
       e.preventDefault();
-      navigate('/foods')
+      if (foods.length === 0){
+      setHomeSearchedFoodsState("")
+      } else{
+
+      
+      
       console.log("inside submit:", searchInputs)
-      const searchedFoods = foods.filter(food => food.name.toLowerCase().includes(searchInputs.toLowerCase()) )
-      setFilteredFoods(searchedFoods)
-      console.log("searched foods inside submit:",searchedFoods)
+        const searchedFoods = foods.filter(food => food.name.toLowerCase().includes(searchInputs.toLowerCase()) )
+        setFilteredFoods(searchedFoods)
+      console.log("searched foods inside submit:", searchedFoods)
+    }
     }
 
     const handleResetSearch = () => {
-      // if (search) {
-      //   navigate('/foods')
-      //   setFilteredFoods(foods)
-      // } else
-      fetchFood()
-      setFilteredFoods(foods)
-      setSearchInputs("")
+      if (homeSearchedFoodsState.length > 0){
+        fetchFood()
+      } else {
+        setFilteredFoods(foods)
+        setSearchInputs("")
+      }
     }
 
-  return (
-    <HomeContainer>
-    <div>
-      <br/>
-      <SearchStyle>
-      <form onSubmit={handleSearchSubmit}>
-        <input type="text" value={searchInputs} onChange={handleSearchInputs}/>
-        <button>Search</button>
-      </form>
-      <button onClick={handleResetSearch}>See all food</button>
-      </SearchStyle>
-      <br/>
-      <FoodList foods={filteredFoods}/>
-      
-      </div>
-      </HomeContainer>
-  )
+    if (user){
+      return (
+        <HomeContainer>
+          <br/>
+          <SearchStyle>
+            <form onSubmit={handleSearchSubmit}>
+              <input type="text" value={searchInputs} onChange={handleSearchInputs}/>
+              <button>Search</button>
+            </form>
+            <button onClick={handleResetSearch}>See all food</button>
+          </SearchStyle>
+          <br/>
+          <FoodList foods={filteredFoods}/>
+        </HomeContainer>
+        )}
+    else if (user === null){
+      return (
+        <HomeContainer>
+          <h1>Not Authorized.  Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
+        </HomeContainer>
+      )
+    }
 }
 
 export default FoodContainer

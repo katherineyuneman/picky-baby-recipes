@@ -1,7 +1,8 @@
 class FoodsController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+    before_action :find_food, only: [:show, :update, :destroy]
 
     def index
-        
         if params[:search]
             searchParam = (params[:search].capitalize)
             searched_food = Food.where("name LIKE ?", searchParam + "%")
@@ -13,17 +14,13 @@ class FoodsController < ApplicationController
             combined_food = (user_food | admin_food).sort_by{|food| food[:name]}
             render json: combined_food, status: :ok
         end
-
     end
 
     def show
-        food = Food.find_by_id(params[:id])
-            if food
-              render json: food, status: :ok
-            else
-              render json: { error: "Food not found."}, status: :not_found
-            end
+        food = Food.find(params[:id])
+        render json: food, status: :ok
     end
+
 
     def create
         new_food = current_user.foods.create(food_params)
@@ -39,21 +36,15 @@ class FoodsController < ApplicationController
           food.update(food_params)
           render json: food
         else
-          render json: { error: "Food not Found" }, status: :not_found
+          render json: { error: "You are not authorized to edit this food" }, status: :unauthorized
         end
+        
 end
-
-    
 
     private
 
-    def search
-        
-        if food
-            render json: food, status: :ok
-          else
-            render json: { error: "Food not found."}, status: :not_found
-          end
+    def render_not_found_response
+        render json: { error: "Resource not found with id #{params[:id]}." }, status: :not_found
     end
 
     def current_user
@@ -62,6 +53,10 @@ end
 
     def admin
         @admin_user = User.find_by(id: 1)
+    end
+
+    def find_food
+        @food = Food.find(params[:id])
     end
 
     def food_params

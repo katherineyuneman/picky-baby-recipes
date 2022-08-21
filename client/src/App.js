@@ -10,9 +10,11 @@ import FoodContainer from './containers/FoodContainer';
 import Recipe from './components/recipes/Recipe';
 import FoodRecipes from './components/FoodRecipes';
 import FoodDetail from './components/food/FoodDetail';
-import {BrowserRouter, Navigate, Route, Routes, useNavigate} from "react-router-dom"
+import {Route, Routes, useNavigate} from "react-router-dom"
 import { UserProvider } from './context/user';
 import { useState } from 'react';
+
+
 
 function App() {
   const [ foodSubmitted, setFoodSubmitted ] = useState ("")
@@ -41,13 +43,12 @@ function App() {
             } else {
             console.log("fetched:", data)
             setSearchedFoods(data)
-            console.log("searched food inside fetch:", homeSearchedFoods)
             renderFoodContainer()
-            
         }
         })
     
 }
+
 
 const renderFoodContainer = () => {
   navigate("/foods")
@@ -60,9 +61,11 @@ const renderFoodContainer = () => {
       <UserProvider>
       <Navbar/>
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Home handleFoodSubmit={handleFoodSubmit}/>} />
           <Route path="/foods" element={<FoodContainer homeSearchedFoods={homeSearchedFoods}/>} />
-          <Route path="/foods/:id" element={<FoodDetail />} />
+          <Route path="foods/:id" element={<FoodDetail />} />
           {/* <Route path="/foods/:search" element={<FoodContainer />} /> */}
           <Route path="foods/:id/recipes" element={<FoodRecipes />} />
           <Route path="/myrecipes" element={<RecipeList />} />
@@ -70,8 +73,7 @@ const renderFoodContainer = () => {
           <Route path="/recipes/edit/:id" element={<RecipeEditForm />} />
           <Route path="/recipes/:id" element={<Recipe />} />
           
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          
         </Routes>
       </UserProvider>
     </div>

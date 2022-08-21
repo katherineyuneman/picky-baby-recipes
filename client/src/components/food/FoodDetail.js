@@ -10,33 +10,38 @@ function FoodDetail() {
     const [ displayEdit, setDisplayEdit ] = useState(false)
     const [ saved, setSaved ] = useState(false)
     const { user, loggedIn } = useContext(UserContext)
+    const [ error, setError ] = useState([])
 
     console.log("id within fooddetail:", id)
     console.log("user:", user)
+    console.log("logged in:", loggedIn)
+    
 
     useEffect(() => {
-        fetch (`/foods/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.errors){
-                console.log(data.errors)
-            } else {
-            console.log("fetched:", data)
-            setFood(data)
-            }
-        })
+        console.log("hitting this useEffect:", displayEdit)
+        if (id)
+        fetchShow()
+        else console.log("Loading...")
         },[])
 
-        useEffect(() => {
+        const fetchShow = () => {
             fetch (`/foods/${id}`)
             .then(response => response.json())
             .then(data => {
+                if (data.error){
+                    console.log(data.error)
+                    setError(data.error)
+                } else {
                 console.log("fetched:", data)
                 setFood(data)
+                }
             })
-            .catch(err => alert(err))
-            },[saved])
+        }
 
+        const errorMessage = (errorFoodForm) => {
+            setError(errorFoodForm)
+            console.log(errorFoodForm)
+        }
         
 
         const handleEditFood = (e) => {
@@ -47,16 +52,10 @@ function FoodDetail() {
             setSaved(saved => !saved)
         }
 
-        // let editButton
-        // if (loggedIn === user.length !== 0 && user.id === food.user_id && displayEdit === false) {
-        //     return editButton = <button onClick={handleEditFood}>Edit {food.name}</button>
-        //  } else if (user.id !== food.user_id) {
-        //     return editButton = <h5>You do not have access to edit this food.</h5>
-        //  } else return editButton = null
-        
 
 
 
+if (user) {
   return (
     <div>
         <HomeContainer>
@@ -77,9 +76,11 @@ function FoodDetail() {
                   <img src={`${food.image_url}`} alt={food.name}></img>
               </p>
               <footer>
-                {(user && user.length !== 0 && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
+                <h2>{error}</h2>
+                {(loggedIn && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
                 {displayEdit === false && user.id !== food.user_id ? <h5>You do not have access to edit this food.</h5> : null}
-                {displayEdit ? <FoodEditForm food={food} setDisplayEdit={setDisplayEdit} handleSave={handleSave} /> : null}
+                {displayEdit ? <FoodEditForm errorMessage={errorMessage} food={food} setDisplayEdit={setDisplayEdit} handleSave={handleSave} /> : null}
+                
                     <Link to={`/foods/${food.id}/recipes`}>
                         <br />
                     My {food.name} recipes
@@ -92,7 +93,14 @@ function FoodDetail() {
             </Card>
             </HomeContainer>
     </div>
-  )
+  ) }
+  else return (
+      <HomeContainer>
+    <h1>
+        Loading...
+    </h1>
+    </HomeContainer>
+    )
 
             // if (Object.keys(user).length === 0)
             // return <h1>Loading...</h1>
