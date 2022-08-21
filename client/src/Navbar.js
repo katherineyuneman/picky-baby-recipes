@@ -18,7 +18,7 @@ function Navbar() {
             headers: { 'Content-type': 'application/json'}
         })
         .then(() => {
-            navigate('/')
+            navigate('/login')
             logout();
         })
     }

@@ -15,13 +15,28 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
     const [ homeSearchedFoodsState, setHomeSearchedFoodsState ] = useState(homeSearchedFoods)
     
 
+    console.log("TEST", foods)
+
+    // if (homeSearchedFoodsState.length !== 0){
+    //   console.log("hi from searched foods")
+    //   setFilteredFoods(homeSearchedFoodsState)
+    // }
+
     useEffect(() => {
-      
+      if (homeSearchedFoodsState.length === 0){
+        console.log("hi from if")
+        fetchFood()
+      } else {setFilteredFoods(homeSearchedFoodsState)}
+        return setFoods([])
+    }, []);
+
+    useEffect(() => {
       if (homeSearchedFoodsState.length !== 0){
         console.log("hi from searched foods")
         setFilteredFoods(homeSearchedFoodsState)
       }
       else if (user) {
+        console.log("hi from if")
         fetchFood()
       }
       
@@ -73,6 +88,7 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
       if (homeSearchedFoodsState.length > 0){
         fetchFood()
       } else {
+        console.log(foods)
         setFilteredFoods(foods)
         setSearchInputs("")
       }

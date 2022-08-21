@@ -38,7 +38,8 @@ function FoodCard({food}) {
                   My {food.name} recipes
                 </Link></h5>
                 <br />
-                <p>Created By User_ID: {food.user_id}</p>
+                
+                <p>{food.user_id === 1 ? "Added by ADMIN" : "Added by Me"}</p>
                 
               
             </div>
