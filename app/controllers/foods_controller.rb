@@ -5,7 +5,7 @@ class FoodsController < ApplicationController
     def index
         if params[:search]
             searchParam = (params[:search].capitalize)
-            searched_food = Food.where("name LIKE ?", searchParam + "%")
+            searched_food = current_user.foods.where("name LIKE ?", searchParam + "%")
          
             render json: searched_food, status: :ok
         else
