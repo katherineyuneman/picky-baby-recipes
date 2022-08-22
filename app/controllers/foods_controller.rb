@@ -1,14 +1,11 @@
 class FoodsController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     before_action :find_food, only: [:show, :update, :destroy]
     before_action :authorize
 
     def index
         if params[:search]     
-            # multiple_user_foods = Food.where(user_id: [1, session[:user_id]])
             searchParam = (params[:search].capitalize)
             searched_food = multiple_user_foods.where("name LIKE ?", searchParam + "%")
-            # searched_food = multiple_user_foods.where("name LIKE ?", searchParam + "%")
             render json: searched_food, status: :ok
         else
             user_food = current_user.foods.sorted_food
@@ -19,10 +16,9 @@ class FoodsController < ApplicationController
     end
 
     def show
-        food = Food.find(params[:id])
+        food = multiple_user_foods.find(params[:id])
         render json: food, status: :ok
     end
-
 
     def create
         new_food = current_user.foods.create(food_params)
@@ -40,14 +36,9 @@ class FoodsController < ApplicationController
         else
           render json: { error: "You are not authorized to edit this food" }, status: :unauthorized
         end
-        
 end
 
     private
-
-    def render_not_found_response
-        render json: { error: "Resource not found with id #{params[:id]}." }, status: :not_found
-    end
 
     def current_user
         @current_user = User.find_by(id: session[:user_id])

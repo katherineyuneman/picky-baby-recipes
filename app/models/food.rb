@@ -3,6 +3,7 @@ class Food < ApplicationRecord
   has_many :ingredients
   has_many :recipes, through: :ingredients
   before_save :capitalize_food
+  scope :sorted_food, -> {order(:name)}
 
   validates :name, presence: true
   validates :food_type, presence: true
@@ -10,15 +11,6 @@ class Food < ApplicationRecord
   validates :nutrition_rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
   validates :full_desc, presence: true
 
-  scope :admin_user_current_user, -> { where(user_id: 1).or(user_id: session[:user_id])}
-
-  def self.sorted_food
-    self.order(:name)
-  end
-
-  def sorted_food_instance
-    self.order(:name)
-  end
 
   def capitalize_food
     self.name.capitalize()

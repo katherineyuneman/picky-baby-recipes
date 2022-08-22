@@ -32,8 +32,11 @@ function Recipe() {
     return (
         <HomeContainer>
       <div>
-          <Link to={"/recipes/"}>
+          <Link to={"/recipes"}>
             <button>Back to My Recipes</button>
+          </Link>
+          <Link to={"/foods"}>
+            <button>Back to My Food</button>
           </Link>
           <TitleDiv key={recipe.id}>
           <br/>

@@ -24,8 +24,7 @@ function FoodRecipes() {
 
     const recipeArray = ingredients.map((ingredient => {
         return (
-            <div>
-            <h1>My {ingredient.food.name} Recipes</h1>
+            <div key={ingredient.id}>
             <h4 key={ingredient.id}>
                 <Link to={`/recipes/${ingredient.recipe.id}`}>
                     {ingredient.recipe.title}
@@ -37,6 +36,7 @@ function FoodRecipes() {
 
   return (
     <HomeContainer>
+    <h1>My Recipes</h1>
       {recipeArray}
     </HomeContainer>
   )

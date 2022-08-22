@@ -8,15 +8,15 @@ function FoodDetail() {
     const {id} = useParams()
     const [ food, setFood ] = useState({})
     const [ displayEdit, setDisplayEdit ] = useState(false)
-    // const [ saved, setSaved ] = useState(false)
     const { user, loggedIn } = useContext(UserContext)
     const [ error, setError ] = useState([])
     
     useEffect(() => {
         fetchShow()
-        },[])
-
+    },[])
+    
     const fetchShow = () => {
+        console.log('id', id)
         fetch (`/foods/${id}`)
         .then(response => response.json())
         .then(data => {
@@ -24,19 +24,22 @@ function FoodDetail() {
                 setError(data.error)
             } else {
                 setFood(data)
+                }
             }
-            })
+        )
     }
 
     const errorMessage = (errorFoodForm) => setError(errorFoodForm)
      
     const handleEditFood = (e) => setDisplayEdit(true)
     
-    // const handleSave = () => setSaved(saved => !saved)
-
     if (user) {
         return (
             <HomeContainer>
+                <Link to={"/foods"}>
+                    <button>Back to Food</button>
+                </Link>
+                <h1>{error}</h1>
                 <Card key={food.id}>
                     <h5>{food.name}</h5>
                     <p>
@@ -52,7 +55,6 @@ function FoodDetail() {
                         <img src={`${food.image_url}`} alt={food.name}></img>
                     </p>
                     <footer>
-                        <h2>{error}</h2>
                         {(loggedIn && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
                         {displayEdit === false && user.id !== food.user_id ? <h5>You do not have access to edit this food.</h5> : null}
                         {displayEdit ? <FoodEditForm setFood={setFood} errorMessage={errorMessage} food={food} setDisplayEdit={setDisplayEdit} /> : null}
@@ -66,14 +68,14 @@ function FoodDetail() {
                 </Card>
              </HomeContainer>
         )
-    }
-    else return (
-      <HomeContainer>
-        <h1>
-        Loading...
-    </h1>
-    </HomeContainer>
-    )
+    } else
+        return (
+            <HomeContainer>
+            <h1>
+                Loading...
+            </h1>
+            </HomeContainer>
+        )
 }
 
 export default FoodDetail

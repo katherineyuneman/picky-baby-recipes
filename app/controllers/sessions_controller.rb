@@ -23,8 +23,4 @@ class SessionsController < ApplicationController
         # session.clear
     end
 
-    private
-    def login_params
-        
-    end
 end
