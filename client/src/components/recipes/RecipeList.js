@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import RecipeEditForm from './recipe_forms/RecipeEditForm';
+import RecipeEditForm from './recipe-forms/RecipeEditForm';
 import { RecipeCardStyle, TitleDiv, HomeContainer} from '../../styled-components/styleIndex';
 import { UserContext } from '../../context/user';
 import { Link } from 'react-router-dom';
@@ -19,11 +19,11 @@ function RecipeList() {
         .then((fetchedRecipes) => setRecipes(fetchedRecipes))
     }, []);
 
-    useEffect(() => {
-      fetch("/recipes")
-        .then((r) => r.json())
-        .then((fetchedRecipes) => setRecipes(fetchedRecipes))
-    }, [updatedRecipe]);
+    // useEffect(() => {
+    //   fetch("/recipes")
+    //     .then((r) => r.json())
+    //     .then((fetchedRecipes) => setRecipes(fetchedRecipes))
+    // }, [updatedRecipe]);
 
 
     const handleDelete = (id) => {
@@ -46,7 +46,8 @@ function RecipeList() {
 
     const handleUpdatedRecipe = (changedRecipe) => {
       console.log("updated recipe after handle:", changedRecipe)
-      setUpdatedRecipe(changedRecipe)
+      const updatedRecipeList = recipes.filter((recipe) => recipe.id !== changedRecipe.id)
+      setRecipes([changedRecipe, ...updatedRecipeList])
     }
 
     const eachRecipe = recipes.map((recipe) => {

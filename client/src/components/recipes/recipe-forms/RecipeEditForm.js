@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import FoodForm from '../../food/food_forms/FoodForm'
+import FoodForm from '../../food/food-forms/FoodForm'
 
 
 
@@ -65,7 +65,7 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
                     {...recipeInputs, 
                     ingredients_attributes: ingredientInputs
                     }
-        console.log("full_recipe:", full_recipe)
+        
 
     fetch(`/recipes/${full_recipe.id}`, {
         method: 'PATCH',
@@ -74,7 +74,6 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
         },
         body:JSON.stringify(full_recipe)
         })
-
         .then(resp => resp.json())
         .then((data) => {
             if (data.errors){
@@ -82,7 +81,8 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
             } else {
             setIsEditing(false)
             handleUpdatedRecipe(data)
-
+             
+             console.log("returned data post-patch:", data)   
             //   updatedRecipes(data)
             
             // console.log("data inside post-fecth:", data)
@@ -139,7 +139,7 @@ const handleFoodSubmit = (e, foodInputs) => {
             <br/>
             {ingredientInputs.map((data, index) => {
                 return (
-                    <div>
+                    <div key={data.id}>
                         <select name="food_id" value={data.food_id} required onChange={(e)=>handleIngredientInputs(e, index)}>
                             <option name="default" value="default">Select Food Item</option>
                             {foodDropDownOptions}
