@@ -80,7 +80,7 @@ function RecipeForm() {
             .then(resp => resp.json())
             .then((data) => {
                 if (data.errors){
-                    const errorLis = data.errors.map((e) => <li>{e}</li>)
+                    const errorLis = data.errors.map((error, index) => <li key={index}>{index + 1}. {error}</li>)
                     setCreateFoodErrorsList(errorLis)
                     
                 } else {
@@ -109,8 +109,9 @@ function RecipeForm() {
 
           .then(resp => resp.json())
           .then((data) => {
+              console.log(data.errors)
             if (data.errors){
-                const errorLis = data.errors.map((e) => <li>{e}</li>)
+                const errorLis = data.errors.map((error, index) => <li key={[index]}>{index+1}. {error}</li>)
                 setCreateRecipeErrorsList(errorLis)
                 
             } else {
@@ -151,7 +152,7 @@ function RecipeForm() {
             <br />
             {ingredientInputs.map((data, index) => {
                 return (
-                    <div>
+                    <div key={data.id}>
                         <select name="food_id" value={data.food_id} required onChange={(e)=>handleIngredientInputs(e, index)}>
                             <option name="default" value="default">Select Food Item</option>
                             <option name="addNew" value="addNew">ADD NEW FOOD</option>

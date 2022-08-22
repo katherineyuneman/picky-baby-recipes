@@ -8,7 +8,6 @@ function RecipeContainer() {
     const [recipes, setRecipes] = useState([]);
     const { user, loggedIn } = useContext(UserContext)
     const [ errors, setErrors ] = useState([])
-    
 
     useEffect(() => {
       fetch("/recipes")

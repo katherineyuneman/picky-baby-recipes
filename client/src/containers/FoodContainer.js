@@ -87,7 +87,7 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
             <button onClick={handleResetSearch}>See all food</button>
           </SearchStyle>
           <br/>
-          <FoodList foods={filteredFoods}/>
+          {filteredFoods.length === 0 ? <h1>No foods found with that name.</h1> : <FoodList foods={filteredFoods}/>}
         </HomeContainer>
         )}
     else if (user === null){
