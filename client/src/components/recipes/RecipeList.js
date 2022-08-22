@@ -62,7 +62,6 @@ function RecipeList({recipes, setRecipes}) {
       )
     }
   )
-
     
       return (
         <HomeContainer>
@@ -71,24 +70,6 @@ function RecipeList({recipes, setRecipes}) {
           </div>
         </HomeContainer>
         )
-    
-
-    // if (recipes.length > 0 && loggedIn === true) {
-    //   return (
-    //   <HomeContainer>
-    //     <div>
-    //     {errors ? <h1>{errors}</h1>: null }
-    //     <h1>{user.first_name}'s Recipes </h1>
-    //     {eachRecipe}
-    //     </div>
-    //   </HomeContainer>
-    //   )
-    // } else {
-    //   return (
-    //     <HomeContainer>
-    //       <h1>Not Authorized.  Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
-    //     </HomeContainer>)
-    //   }
 }
 
 export default RecipeList

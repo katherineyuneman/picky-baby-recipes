@@ -26,7 +26,7 @@ function RecipeContainer() {
     console.log(recipes)
 
 
-    if (recipes.length === 0 && loggedIn === false){
+    if (errors && loggedIn === false){
       return (
         <HomeContainer>
           <h1>Not Authorized.  Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
