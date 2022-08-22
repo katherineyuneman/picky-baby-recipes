@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function FoodEditForm({food, setDisplayEdit, handleSave, errorMessage}) {
+function FoodEditForm({setFood, food, setDisplayEdit, handleSave, errorMessage}) {
 
     const [ foodInputs, setFoodInputs ] = useState({
         name:food.name,
@@ -12,6 +12,8 @@ function FoodEditForm({food, setDisplayEdit, handleSave, errorMessage}) {
         image_url:food.image_url,
         user_id: food.user_id
     })
+
+    
     
     
 
@@ -39,14 +41,11 @@ function FoodEditForm({food, setDisplayEdit, handleSave, errorMessage}) {
                     errorMessage(data.error)
                     setDisplayEdit(false)
                 } else {
+                    setFood(data)
                     setDisplayEdit(false)
                     handleSave()
-                //   console.log("data inside post-fetch:", data)
-                //   setFoodIngredientOptions([...foodIngredientOptions, data])
-                //   console.log("updated food ingredient options:", foodIngredientOptions)
                 }
             })
-
     }
 
   return (

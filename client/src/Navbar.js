@@ -47,7 +47,7 @@ function Navbar() {
                     </h1>
                     <nav>
                         <Link to="/foods" className='link'> Food List </Link> | 
-                        <Link to="/myrecipes" className='link'> My Recipes </Link> | 
+                        <Link to="/recipes" className='link'> My Recipes </Link> | 
                         <Link to="/recipes/new" className='link'> Add a Recipe </Link> | 
                         <Link to="/" onClick={logoutUser} className='link'> Logout</Link>
                     </nav>

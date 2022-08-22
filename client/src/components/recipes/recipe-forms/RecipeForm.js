@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import FoodForm from '../../food/food_forms/FoodForm'
+import FoodForm from '../../food/food-forms/FoodForm'
 import { HomeContainer } from '../../../styled-components/styleIndex'
 
 function RecipeForm() {
@@ -17,6 +17,7 @@ function RecipeForm() {
         measurement: "",
         food_id:""
     }])
+
     const [ createFoodErrorsList, setCreateFoodErrorsList ] = useState([])
     const [ createRecipeErrorsList, setCreateRecipeErrorsList ] = useState([])
 
@@ -130,7 +131,7 @@ function RecipeForm() {
                     measurement: "",
                     food_id:""
                 }])
-                  navigate("/myrecipes")
+                  navigate("/recipes")
                   setCreateRecipeErrorsList([])
               }
           })

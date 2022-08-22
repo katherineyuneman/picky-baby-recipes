@@ -24,19 +24,22 @@ function FoodRecipes() {
 
 
     const recipeArray = ingredients.map((ingredient => {
+        console.log("ingredient",ingredient)
         return (
+            <div>
+            <h1>My {ingredient.food.name} Recipes</h1>
             <h4 key={ingredient.id}>
                 <Link to={`/recipes/${ingredient.recipe.id}`}>
                     {ingredient.recipe.title}
                 </Link>
-            </h4>)
+            </h4>
+            </div>)
     }))
+
 
   return (
     <HomeContainer>
-    <div>
       {recipeArray}
-    </div>
     </HomeContainer>
   )
 }

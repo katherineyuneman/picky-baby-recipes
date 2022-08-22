@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams, Link } from 'react-router-dom';
 import { Card, HomeContainer } from "../../styled-components/styleIndex";
-import FoodEditForm from "./food_forms/FoodEditForm";
+import FoodEditForm from "./food-forms/FoodEditForm";
 import { UserContext } from "../../context/user";
 
 function FoodDetail() {
@@ -79,7 +79,7 @@ if (user) {
                 <h2>{error}</h2>
                 {(loggedIn && user.id === food.user_id && displayEdit === false) ? <button onClick={handleEditFood}>Edit Food</button> : null}
                 {displayEdit === false && user.id !== food.user_id ? <h5>You do not have access to edit this food.</h5> : null}
-                {displayEdit ? <FoodEditForm errorMessage={errorMessage} food={food} setDisplayEdit={setDisplayEdit} handleSave={handleSave} /> : null}
+                {displayEdit ? <FoodEditForm setFood={setFood} errorMessage={errorMessage} food={food} setDisplayEdit={setDisplayEdit} handleSave={handleSave} /> : null}
                 
                     <Link to={`/foods/${food.id}/recipes`}>
                         <br />

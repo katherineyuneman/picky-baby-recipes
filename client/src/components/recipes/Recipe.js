@@ -16,13 +16,13 @@ function Recipe() {
         .then(data => {
           if (data.error){
             alert(data.error)
-            navigate('/myrecipes')
+            navigate('/recipes')
         } else {
           setRecipe(data)
           setIngredients(data.ingredients)
         }})
       }, [])
-      
+
         console.log(recipe.ingredients)
         // const ingredients = recipe.ingredients
 
@@ -36,7 +36,7 @@ function Recipe() {
     return (
         <HomeContainer>
       <div>
-          <Link to={"/myrecipes/"}>
+          <Link to={"/recipes/"}>
             <button>Back to My Recipes</button>
           </Link>
           <TitleDiv key={recipe.id}>

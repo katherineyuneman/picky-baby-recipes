@@ -4,8 +4,8 @@ import Navbar from './Navbar';
 import Login from './Login';
 import Signup from './Signup';
 import RecipeList from './components/recipes/RecipeList';
-import RecipeForm from './components/recipes/recipe_forms/RecipeForm';
-import RecipeEditForm from './components/recipes/recipe_forms/RecipeEditForm';
+import RecipeForm from './components/recipes/recipe-forms/RecipeForm';
+import RecipeEditForm from './components/recipes/recipe-forms/RecipeEditForm';
 import FoodContainer from './containers/FoodContainer';
 import Recipe from './components/recipes/Recipe';
 import FoodRecipes from './components/FoodRecipes';
@@ -68,7 +68,7 @@ const renderFoodContainer = () => {
           <Route path="foods/:id" element={<FoodDetail />} />
           {/* <Route path="/foods/:search" element={<FoodContainer />} /> */}
           <Route path="foods/:id/recipes" element={<FoodRecipes />} />
-          <Route path="/myrecipes" element={<RecipeList />} />
+          <Route path="/recipes" element={<RecipeList />} />
           <Route path="/recipes/new" element={<RecipeForm />} />
           <Route path="/recipes/edit/:id" element={<RecipeEditForm />} />
           <Route path="/recipes/:id" element={<Recipe />} />
