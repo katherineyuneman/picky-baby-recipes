@@ -6,10 +6,7 @@ import { UserContext } from './context/user'
 import { Header } from './styled-components/styleIndex'
 
 function Navbar() {
-
-    const { user, logout, loggedIn } = useContext(UserContext)
-    console.log("user inside navbar:", user)
-
+    const { logout, loggedIn } = useContext(UserContext)
     const navigate = useNavigate()
 
     const logoutUser = () => {
@@ -22,7 +19,7 @@ function Navbar() {
             logout();
         })
     }
-   console.log(loggedIn)
+   
     if (!loggedIn){
         return (
             <Header>

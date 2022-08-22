@@ -50,7 +50,6 @@ function RecipeForm() {
     const handleIngredientInputs = (e, index) => {
         if (e.target.value === "addNew"){
             setDisplayFoodForm(true)
-            console.log(displayFoodForm)
         }
         const { name, value } = e.target;
         const list = [...ingredientInputs];
@@ -69,7 +68,6 @@ function RecipeForm() {
 
     const handleFoodSubmit = (e, foodInputs) => {
         e.preventDefault()
-        console.log(foodInputs)
 
         fetch('/foods', {
             method: 'POST',
@@ -82,30 +80,24 @@ function RecipeForm() {
             .then(resp => resp.json())
             .then((data) => {
                 if (data.errors){
-                    console.log("data errors inside post for food:", data.errors)
                     const errorLis = data.errors.map((e) => <li>{e}</li>)
                     setCreateFoodErrorsList(errorLis)
                     
                 } else {
                     setCreateFoodErrorsList([])
                     setDisplayFoodForm(false)
-                    console.log("data inside post-fetch:", data)
                     setFoodIngredientOptions([...foodIngredientOptions, data])
-                    console.log("updated food ingredient options:", foodIngredientOptions)
                 }
             })
     }
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log("ingredient inputs:", ingredientInputs)
         // set up the array to send
         const full_recipe = 
             {...recipeInputs, 
             ingredients_attributes: [...ingredientInputs]
             }
-            console.log("full-recipe:", full_recipe)
-
     
         fetch('/recipes', {
           method: 'POST',
@@ -118,7 +110,6 @@ function RecipeForm() {
           .then(resp => resp.json())
           .then((data) => {
             if (data.errors){
-                console.log("data errors inside post for food:", data.errors)
                 const errorLis = data.errors.map((e) => <li>{e}</li>)
                 setCreateRecipeErrorsList(errorLis)
                 
@@ -184,7 +175,7 @@ function RecipeForm() {
               <button>Create Recipe</button>
         </form>
         <ul>{createRecipeErrorsList}</ul>
-        { displayFoodForm === true ? <FoodForm handleFoodSubmit={handleFoodSubmit}/> : console.log("else statement food_id:",ingredientInputs[0].food_id)}
+        { displayFoodForm === true ? <FoodForm handleFoodSubmit={handleFoodSubmit}/> : null}
         <br/>
         <ul>{createFoodErrorsList}</ul>
         </div>

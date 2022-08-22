@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+
     before_action :find_recipe, only: [:show, :update, :destroy]
     before_action :authorize
 
@@ -13,7 +14,11 @@ class RecipesController < ApplicationController
             render json: ingredients_with_recipes , include: ['recipe', 'food']
         else
             user_recipes = current_user.recipes.sorted_recipes.includes(:ingredients, :foods)
-            render json: user_recipes, include: ['ingredients', 'ingredients.food']
+            if user_recipes
+                render json: user_recipes, include: ['ingredients', 'ingredients.food']
+            else
+                render json: { error: "Not authorized" }, status: :unauthorized
+            end
         end
     end
 
@@ -65,6 +70,7 @@ class RecipesController < ApplicationController
     def authorize
         return render json: {error: "Not authorized"}, status: :unauthorized unless session.include? :user_id
     end
+    
 
     def render_not_found_response
         render json: { error: "Resource not found with id #{params[:id]}." }, status: :not_found

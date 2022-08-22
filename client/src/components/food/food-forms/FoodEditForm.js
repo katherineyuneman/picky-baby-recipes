@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function FoodEditForm({setFood, food, setDisplayEdit, handleSave, errorMessage}) {
+function FoodEditForm({setFood, food, setDisplayEdit, errorMessage}) {
 
     const [ foodInputs, setFoodInputs ] = useState({
         name:food.name,
@@ -37,13 +37,11 @@ function FoodEditForm({setFood, food, setDisplayEdit, handleSave, errorMessage})
             .then(resp => resp.json())
             .then((data) => {
                 if (data.error){
-                    console.log("data error inside patch:", data.error)
                     errorMessage(data.error)
                     setDisplayEdit(false)
                 } else {
                     setFood(data)
                     setDisplayEdit(false)
-                    handleSave()
                 }
             })
     }

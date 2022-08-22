@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import { HomeContainer } from '../styled-components/styleIndex';
 
 function FoodRecipes() {
-
     const {id} = useParams()
     // const [ recipes, setRecipes ] = useState([])
     const [ ingredients, setIngredients ] = useState([])
@@ -13,10 +12,10 @@ function FoodRecipes() {
         .then(response => response.json())
         .then(data => {
             if (data.errors){
-                console.log("data errors inside food fetch:", data.errors)}
+                console.log("data errors inside food fetch:", data.errors)
+            }
             else {
             setIngredients(data)
-            console.log("ingredients:", ingredients)
         }})
         .catch(err => alert(err))
         },[])
@@ -24,7 +23,6 @@ function FoodRecipes() {
 
 
     const recipeArray = ingredients.map((ingredient => {
-        console.log("ingredient",ingredient)
         return (
             <div>
             <h1>My {ingredient.food.name} Recipes</h1>

@@ -18,7 +18,6 @@ function Signup() {
     const navigate = useNavigate()
 
     const handleInputs = e => {
-        console.log(e.target.value)
         setSignupCredentials({
             ...signupCredentials,
             [e.target.name]: e.target.value})
@@ -47,7 +46,6 @@ function Signup() {
                 setErrorsList(errorLis)
             } else {
                 signUp(user)
-                console.log("user after signup:", user)
                 navigate('/')
             }
         })

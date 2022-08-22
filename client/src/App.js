@@ -13,20 +13,16 @@ import FoodDetail from './components/food/FoodDetail';
 import {Route, Routes, useNavigate} from "react-router-dom"
 import { UserProvider } from './context/user';
 import { useState } from 'react';
-
+import RecipeContainer from './containers/RecipeContainer';
 
 
 function App() {
-  const [ foodSubmitted, setFoodSubmitted ] = useState ("")
+  // const [ foodSubmitted, setFoodSubmitted ] = useState ("")
   const navigate = useNavigate()
   const [ homeSearchedFoods, setSearchedFoods ] = useState([])
 
   const handleFoodSubmit =(searchInput) => {
-    // e.preventDefault();
-    setFoodSubmitted(searchInput)
-    console.log(foodSubmitted)
     const lowerCaseSearch = searchInput.toLowerCase()
-    console.log("lowerCaseSearch:", lowerCaseSearch)
     fetch ("/foodsearch", {
         method: 'POST',
         headers: {
@@ -41,7 +37,6 @@ function App() {
             if (data.errors){
                 console.log(data.errors)
             } else {
-            console.log("fetched:", data)
             setSearchedFoods(data)
             renderFoodContainer()
         }
@@ -66,14 +61,11 @@ const renderFoodContainer = () => {
           <Route path="/" element={<Home handleFoodSubmit={handleFoodSubmit}/>} />
           <Route path="/foods" element={<FoodContainer homeSearchedFoods={homeSearchedFoods}/>} />
           <Route path="foods/:id" element={<FoodDetail />} />
-          {/* <Route path="/foods/:search" element={<FoodContainer />} /> */}
           <Route path="foods/:id/recipes" element={<FoodRecipes />} />
-          <Route path="/recipes" element={<RecipeList />} />
+          <Route path="/recipes" element={<RecipeContainer />} />
           <Route path="/recipes/new" element={<RecipeForm />} />
           <Route path="/recipes/edit/:id" element={<RecipeEditForm />} />
           <Route path="/recipes/:id" element={<Recipe />} />
-          
-          
         </Routes>
       </UserProvider>
     </div>

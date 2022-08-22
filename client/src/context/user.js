@@ -9,17 +9,14 @@ function UserProvider({children}){
 
     const [ user, setUser ] = useState(null)
     const [ loggedIn, setLoggedIn ] = useState(false)
-    const [ loginErrors, setLoginErrors] = useState([])
+    // const [ loginErrors, setLoginErrors] = useState([])
     
-    
-
     useEffect (() => {
         fetch('/me')
         .then(resp => resp.json())
         .then((data)=> {
             if (data.errors) {
-                console.log("data errors at initial /me fetch")
-                setLoginErrors(data.errors)
+                // setLoginErrors(data.errors)
                 setLoggedIn(false)
             } else {
             setUser(data)
@@ -31,20 +28,16 @@ function UserProvider({children}){
 
     const login = (user) => {
         setUser(user)
-        console.log("//////user within context set user:", user)
         setLoggedIn(true)
     }
 
     const logout = () => {
         setLoggedIn(false)
         setUser(null)
-        console.log("//////user within context set user:", user)
-        
     }
 
     const signUp = (user) => {
         setUser(user)
-        console.log("///////user within context set user:", user)
         setLoggedIn(true)
     }
 

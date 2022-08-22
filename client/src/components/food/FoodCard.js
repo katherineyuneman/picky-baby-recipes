@@ -1,12 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Card } from '../../styled-components/styleIndex'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../../context/user'
 
 function FoodCard({food}) {
-  const { user, loggedIn } = useContext(UserContext)
-
-  
+  // const { user, loggedIn } = useContext(UserContext)
 
   const food_id = food.id
   return (

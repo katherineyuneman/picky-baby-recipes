@@ -30,16 +30,13 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
         )
 
     const handleIngredientInputs = (e, index) => {
-        console.log("ingredient input change:", e.target.value)
         if (e.target.value === "addNew"){
             setDisplayFoodForm(true)
-            console.log(displayFoodForm)
         }
         const { name, value } = e.target;
         const list = [...ingredientInputs];
         list[index][name] = value;
         setIngredientInputs(list);
-        console.log("ingredient inputs after set:",ingredientInputs)
         }
     
     const addIngredientField = (e) => {
@@ -60,7 +57,6 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("ingredient inputs:", ingredientInputs)
         const full_recipe = 
                     {...recipeInputs, 
                     ingredients_attributes: ingredientInputs
@@ -81,13 +77,6 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
             } else {
             setIsEditing(false)
             handleUpdatedRecipe(data)
-             
-             console.log("returned data post-patch:", data)   
-            //   updatedRecipes(data)
-            
-            // console.log("data inside post-fecth:", data)
-            // setFoodIngredientOptions([...foodIngredientOptions, data])
-            // console.log("updated food ingredient options:", foodIngredientOptions)
             }
         })
 
@@ -96,7 +85,6 @@ function RecipeEditForm({selectedRecipe, setIsEditing, isEditing, handleUpdatedR
 
 const handleFoodSubmit = (e, foodInputs) => {
     e.preventDefault()
-    console.log(foodInputs)
 
     fetch('/foods', {
         method: 'POST',
@@ -112,9 +100,7 @@ const handleFoodSubmit = (e, foodInputs) => {
                 alert(data.errors)
             } else {
               setDisplayFoodForm(false)
-              console.log("data inside post-fecth:", data)
               setFoodIngredientOptions([...foodIngredientOptions, data])
-              console.log("updated food ingredient options:", foodIngredientOptions)
             }
         })
 }
@@ -161,7 +147,7 @@ const handleFoodSubmit = (e, foodInputs) => {
             <br/>
               <button>Update Recipe</button>
         </form>
-        { displayFoodForm === true ? <FoodForm handleFoodSubmit={handleFoodSubmit}/> : console.log("else statement food_id:",ingredientInputs[0].food_id)}
+        { displayFoodForm === true ? <FoodForm handleFoodSubmit={handleFoodSubmit}/> : null}
         <br/>
         <br/>
         

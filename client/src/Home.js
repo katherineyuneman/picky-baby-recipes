@@ -7,21 +7,12 @@ function Home({handleFoodSubmit}) {
 
     const { user, loggedIn } = useContext(UserContext)
     const [ searchInput , setSearchInput ] = useState("Search for any food here..")
-    
-    
-    
 
-
-    console.log("user in home:", user, "logged in:", loggedIn)
-
-    console.log("search INput:", searchInput)
     const handleTextInput = (e) => {
         const input = e.target.value
         setSearchInput(input)
     }
-        
-
-
+    
     const handleStartTyping = (e) => {
         setSearchInput("")
     }

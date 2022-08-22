@@ -9,7 +9,6 @@ function Recipe() {
     const [ recipe, setRecipe ] = useState({})
     const [ ingredients, setIngredients ] = useState([])
 
-    console.log(id)
     useEffect(() => {
         fetch (`/recipes/${id}`)
         .then(response => response.json())
@@ -22,9 +21,6 @@ function Recipe() {
           setIngredients(data.ingredients)
         }})
       }, [])
-
-        console.log(recipe.ingredients)
-        // const ingredients = recipe.ingredients
 
         const ingredient_map = ingredients.map((ingredient) => {
                 return <div key={ingredient.id}>
