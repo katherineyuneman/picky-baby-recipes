@@ -38,8 +38,6 @@ function Home({handleFoodSubmit}) {
         return (
         <HomeContainer>
             <h1>Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
-            
-
         </HomeContainer>
         )
         }

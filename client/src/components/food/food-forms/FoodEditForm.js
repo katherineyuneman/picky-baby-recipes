@@ -13,9 +13,6 @@ function FoodEditForm({setFood, food, setDisplayEdit, errorMessage}) {
         user_id: food.user_id
     })
 
-    
-    
-    
 
     const handleFoodInputs = e => {
         setFoodInputs({

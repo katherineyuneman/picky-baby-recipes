@@ -15,6 +15,11 @@ class FoodsController < ApplicationController
         end
     end
 
+    def nutrition
+        nutritious_food = multiple_user_foods.where("nutrition_rating >= 7")
+        render json: nutritious_food, status: :ok
+    end
+
     def show
         food = multiple_user_foods.find(params[:id])
         render json: food, status: :ok
@@ -22,7 +27,7 @@ class FoodsController < ApplicationController
 
     def create
         new_food = current_user.foods.create(food_params)
-        if new_food
+        if new_food.valid?
             render json: new_food, status: :created
         else render json: {errors: new_food.errors.full_messages}, status: :unprocessable_entity
         end

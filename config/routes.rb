@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   post '/foodsearch', to:'foods#index'
+  get '/nutrition', to: 'foods#nutrition'
 
   resources :recipes do
     resources :ingredients, only: [:index, :destroy, :update]

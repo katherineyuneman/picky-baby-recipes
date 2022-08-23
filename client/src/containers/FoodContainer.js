@@ -75,6 +75,15 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
       }
     }
 
+    const handleNutritious = () => {
+      console.log("handle submit")
+      fetch("/nutrition")
+      .then((r) => r.json())
+      .then((fetchedFood) => {
+         setFilteredFoods(fetchedFood)
+      })
+    }
+
     if (user){
       return (
         <HomeContainer>
@@ -85,6 +94,7 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
               <button>Search</button>
             </form>
             <button onClick={handleResetSearch}>See all food</button>
+            <button onClick={handleNutritious}>See nutritious food.</button>
           </SearchStyle>
           <br/>
           {filteredFoods.length === 0 ? <h1>No foods found with that name.</h1> : <FoodList foods={filteredFoods}/>}

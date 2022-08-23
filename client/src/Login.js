@@ -16,7 +16,6 @@ function Login() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log("submit", e)
         fetch('/login', {
             method: 'POST',
             headers: { 'Content-type': 'application/json'},
@@ -25,7 +24,6 @@ function Login() {
         .then(resp => resp.json())
         .then((user) => {
             if (user.errors){
-                console.log(user.errors)
                 setErrorsList(user.errors)
             } else {
                 login(user)

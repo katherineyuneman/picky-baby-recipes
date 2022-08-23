@@ -21,7 +21,6 @@ function FoodRecipes() {
         },[])
 
 
-
     const recipeArray = ingredients.map((ingredient => {
         return (
             <div key={ingredient.id}>
