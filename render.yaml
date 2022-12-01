@@ -2,6 +2,7 @@ databases:
   - name: app_name
     databaseName: app_name
     user: app_name
+    plan: free
 
 services:
   - type: web
