@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import RecipeList from '../components/recipes/RecipeList';
 import { UserContext } from '../context/user';
-import { HomeContainer } from '../styled-components/styleIndex';
+import { HomeContainer, SearchStyle } from '../styled-components/styleIndex';
 import { Link } from 'react-router-dom';
 
 function RecipeContainer() {
     const [recipes, setRecipes] = useState([]);
+    const [filteredRecipes, setFilteredRecipes] = useState([])
+    const [searchInputs, setSearchInputs] = useState("")
     const { user, loggedIn } = useContext(UserContext)
     const [ errors, setErrors ] = useState([])
 
@@ -18,12 +20,27 @@ function RecipeContainer() {
               setErrors(data.errors)
           } else {
             setRecipes(data)
+            setFilteredRecipes(data)
             console.log(data)
           }
       })
     }, []);
 
-    console.log(recipes)
+    const handleSearchInputs = (e) => {
+      console.log(e.target.value)
+      setSearchInputs(e.target.value)
+    }
+
+    const handleSearchSubmit = (e) => {
+      e.preventDefault();
+        const searchedRecipes = recipes.filter(recipe => recipe.title.toLowerCase().includes(searchInputs.toLowerCase()) )
+        setFilteredRecipes(searchedRecipes)
+      }
+
+    const handleResetSearch = (e) => {
+      setFilteredRecipes(recipes)
+      setSearchInputs("")
+    }
 
 
     if (errors && loggedIn === false){
@@ -34,31 +51,25 @@ function RecipeContainer() {
     } else {
       return (
         <HomeContainer>
-          <div>
-          {errors ? <h1>{errors}</h1>: null }
-          <h1>{user.first_name}'s Recipes </h1>
-          <RecipeList setRecipes={setRecipes} recipes={recipes}/>
-          </div>
+          <SearchStyle>
+            <form onSubmit={handleSearchSubmit}>
+              <input type="text" value={searchInputs} onChange={handleSearchInputs}/>
+              <button>Search Recipes</button>
+            </form>
+            <button onClick={handleResetSearch}>See all food</button>
+          </SearchStyle>
+            {errors ? <h1>{errors}</h1>: null }
+            <h1>{user.first_name}'s Recipes </h1>
+            <RecipeList setRecipes={setRecipes} recipes={filteredRecipes}/>       
         </HomeContainer>
+
         )
+        
     }
 
-    // if (recipes.length > 0 && loggedIn === true) {
-    //   return (
-    //   <HomeContainer>
-    //     <div>
-    //     {errors ? <h1>{errors}</h1>: null }
-    //     <h1>{user.first_name}'s Recipes </h1>
-    //     {eachRecipe}
-    //     </div>
-    //   </HomeContainer>
-    //   )
-    // } else {
-    //   return (
-    //     <HomeContainer>
-    //       <h1>Not Authorized.  Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
-    //     </HomeContainer>)
-    //   }
+    
+
+
 }
 
 export default RecipeContainer
