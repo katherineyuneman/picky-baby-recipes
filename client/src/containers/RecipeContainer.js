@@ -33,8 +33,30 @@ function RecipeContainer() {
 
     const handleSearchSubmit = (e) => {
       e.preventDefault();
-        const searchedRecipes = recipes.filter(recipe => recipe.title.toLowerCase().includes(searchInputs.toLowerCase()) )
-        setFilteredRecipes(searchedRecipes)
+        // const searchedRecipes = recipes.filter(recipe => recipe.title.toLowerCase().includes(searchInputs.toLowerCase()) )
+        // setFilteredRecipes(searchedRecipes)
+          const lowerCaseSearch = searchInputs.toLowerCase()
+          fetch ("/recipe_search", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body:JSON.stringify({
+                  search: lowerCaseSearch
+              })
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.errors){
+                      console.log(data.errors)
+                  } else {
+                  setFilteredRecipes(data)
+              }
+              })
+          
+        
+
+
       }
 
     const handleResetSearch = (e) => {
@@ -62,14 +84,8 @@ function RecipeContainer() {
             <h1>{user.first_name}'s Recipes </h1>
             <RecipeList setRecipes={setRecipes} recipes={filteredRecipes}/>       
         </HomeContainer>
-
-        )
-        
+      )
     }
-
-    
-
-
 }
 
 export default RecipeContainer

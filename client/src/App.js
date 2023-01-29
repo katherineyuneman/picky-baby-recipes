@@ -42,14 +42,12 @@ function App() {
         }
         })
     
-}
+  }
 
 
 const renderFoodContainer = () => {
   navigate("/foods")
 }
-
-
 
   return (
     <div className="App">

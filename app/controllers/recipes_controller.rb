@@ -1,9 +1,9 @@
 class RecipesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
     before_action :find_recipe, only: [:show, :update, :destroy]
     before_action :authorize
+    
 
     def index
         if params[:food_id]
@@ -12,6 +12,10 @@ class RecipesController < ApplicationController
             recipe_ids = ingredients_with_food.map { | ingredient | ingredient.recipe_id}
             ingredients_with_recipes = ingredients_with_food.includes(:recipe, :food).to_a
             render json: ingredients_with_recipes , include: ['recipe', 'food']
+        elsif params[:search]
+            searchParam = (params[:search].capitalize)
+            user_recipes = current_user.recipes.where("title LIKE ?", "%" + searchParam + "%").includes(:ingredients, :foods)
+            render json: user_recipes , include: ['ingredients', 'ingredients.food'], status: :ok
         else
             user_recipes = current_user.recipes.sorted_recipes.includes(:ingredients, :foods)
             if user_recipes
@@ -67,11 +71,14 @@ class RecipesController < ApplicationController
             :id, :title, :directions, :source, ingredients_attributes: [:id, :amount, :measurement, :food_id])
     end
 
+    def search_recipe_params
+        params.permit(:search, :recipe)
+    end
+
     def authorize
         return render json: {error: "Not authorized"}, status: :unauthorized unless session.include? :user_id
     end
     
-
     def render_not_found_response
         render json: { error: "Resource not found with id #{params[:id]}." }, status: :not_found
     end
