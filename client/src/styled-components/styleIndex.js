@@ -646,8 +646,7 @@ const DetailCard = styled.div`
   };
   img{
     width:25%;
-    filter: saturate(100%);
-    
+    filter: saturate(100%)
   };
   h3{
     height: 30px;

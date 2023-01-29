@@ -31,13 +31,11 @@ function RecipeForm() {
             setFoodIngredientOptions([])
         }
       }
-      
       ,[])
     
     const foodDropDownOptions = foodIngredientOptions.map((food) => 
         <option key={food.id} value={food.id}>{food.name}</option>
         )
-
 
 
     const handleRecipeInputs = e => {

@@ -44,7 +44,7 @@ function FoodForm({handleFoodSubmit}) {
             </label>
             <br />
             <label> Image URL:
-                <input type="textarea" name="image_url" value={foodInputs.image_url} maxLength={50} onChange={handleFoodInputs}/>
+                <input type="textarea" name="image_url" value={foodInputs.image_url} onChange={handleFoodInputs}/>
             </label>
             <br />
             <button>Create New Food</button>

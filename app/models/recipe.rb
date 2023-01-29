@@ -3,6 +3,7 @@ class Recipe < ApplicationRecord
   has_many :ingredients, dependent: :destroy
   has_many :foods, through: :ingredients
   accepts_nested_attributes_for :ingredients
+  
   validates :title, presence: true
   validates :directions, presence: true
 
@@ -15,3 +16,4 @@ class Recipe < ApplicationRecord
   # end
 
 end
+
