@@ -8,9 +8,7 @@ class RecipesController < ApplicationController
     def index
         if params[:food_id]
             food = Food.find_by_id(params[:food_id])
-            ingredients_with_food = food.ingredients
-            recipe_ids = ingredients_with_food.map { | ingredient | ingredient.recipe_id}
-            ingredients_with_recipes = ingredients_with_food.includes(:recipe, :food).to_a
+            ingredients_with_recipes = food.ingredients.includes(:recipe, :food).to_a
             render json: ingredients_with_recipes , include: ['recipe', 'food']
         elsif params[:search]
             searchParam = (params[:search].capitalize)
