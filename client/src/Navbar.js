@@ -57,15 +57,34 @@ function Navbar() {
     } else
             {return (
                 <Header>
-                    <h1>
-                        <Link to="/" className='logo'> Picky Eater App </Link>
-                    </h1>
-                    <nav>
-                        <Link to="/foods" className='link'> Food List </Link> | 
-                        <Link to="/recipes" className='link'> My Recipes </Link> | 
-                        <Link to="/recipes/new" className='link'> Add a Recipe </Link> | 
-                        <Link to="/" onClick={logoutUser} className='link'> Logout</Link>
-                    </nav>
+
+                    <section class="navigation">
+                        <div className='container'>
+                            <div className='brand'>
+                                <h1><Link to="/" className='logo'> Picky Eater App </Link></h1>
+                            </div>
+                        <nav>
+                        <div class="nav-mobile"><a onClick={handleMobileClick} id="nav-toggle" href="#!"><span></span></a></div>
+                            <ul className='nav-list'>
+                            <ul className={mobileNavBarOpen}>
+                                <li>
+                                    <Link to="/foods" className='link'> Food List </Link> | 
+                                </li>
+                                <li>
+                                    <Link to="/recipes" className='link'> My Recipes </Link> | 
+                                </li>
+                                <li>
+                                    <Link to="/recipes/new" className='link'> Add a Recipe </Link> | 
+                                </li>
+                                <li>
+                                    <Link to="/" onClick={logoutUser} className='link'> Logout</Link>
+                                </li>
+                            
+                            </ul>
+                            </ul>
+                        </nav>
+                        </div>
+                    </section>
                     
                 </Header>
     )

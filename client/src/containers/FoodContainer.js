@@ -87,23 +87,29 @@ function FoodContainer({foodSubmitted, homeSearchedFoods}) {
     if (user){
       return (
         <HomeContainer>
+          <div className='body'>
           <br/>
           <SearchStyle>
+          <div className='body'>
             <form onSubmit={handleSearchSubmit}>
               <input type="text" value={searchInputs} onChange={handleSearchInputs}/>
               <button>Search</button>
             </form>
             <button onClick={handleResetSearch}>See all food</button>
             <button onClick={handleNutritious}>See nutritious food.</button>
+            </div>
           </SearchStyle>
           <br/>
           {filteredFoods.length === 0 ? <h1>No foods found with that name.</h1> : <FoodList foods={filteredFoods}/>}
+          </div>
         </HomeContainer>
         )}
     else if (user === null){
       return (
         <HomeContainer>
-          <h1>Not Authorized.  Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
+          <div className='body'>
+            <h1>Not Authorized.  Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
+          </div>
         </HomeContainer>
       )
     }

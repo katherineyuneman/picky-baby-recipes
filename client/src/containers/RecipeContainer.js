@@ -68,21 +68,27 @@ function RecipeContainer() {
     if (errors && loggedIn === false){
       return (
         <HomeContainer>
+          <div className='body'>
           <h1>Not Authorized.  Please <Link to="/login" className='link'> login </Link> or <Link to="/signup" className='link'> sign up </Link>!</h1>
+          </div>
         </HomeContainer>)
     } else {
       return (
         <HomeContainer>
+          <div className='body'>
           <SearchStyle>
+          <div className='body'>
             <form onSubmit={handleSearchSubmit}>
               <input type="text" value={searchInputs} onChange={handleSearchInputs}/>
               <button>Search Recipes</button>
             </form>
             <button onClick={handleResetSearch}>See all food</button>
+            </div>
           </SearchStyle>
             {errors ? <h1>{errors}</h1>: null }
             <h1>{user.first_name}'s Recipes </h1>
-            <RecipeList setRecipes={setRecipes} recipes={filteredRecipes}/>       
+            <RecipeList setRecipes={setRecipes} recipes={filteredRecipes}/>  
+            </div>     
         </HomeContainer>
       )
     }

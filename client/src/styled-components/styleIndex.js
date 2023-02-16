@@ -8,7 +8,7 @@ const GeneralStyle = styled.div`
 
 const content_width= `1000px`;
 const breakpoint = `799px`;
-const nav_height = `200px`;
+const nav_height = `250px`;
 const nav_background = `#262626`;
 const nav_font_color = `#ffffff`;
 const link_hover_color = `#2581DC`;
@@ -23,14 +23,14 @@ const Header = styled.div`
   position: fixed;
   top: 0;
   height: 100px;
-  line-height: 20px;
+  line-height: 15px;
   width: 100vw;
   /* z-index: 10; */
   border-bottom: double 10.5px #E7717D;
-  .logo{
+  /* .logo{
         color:#000080;
         text-decoration: none;
-        };
+        }; */
  
   h1 {
     line-height:50px;
@@ -38,40 +38,36 @@ const Header = styled.div`
     flex: 70%;
     color: #000080;
     float: left;
-    margin-left: 28px;
+    /* margin-left: 28px; */
     font-size: 3em;
     height: 15px;
     letter-spacing: 1px;
     font-family: "Bungee Shade";
-    /* font-style: italic; */
-      .logo{
-      color:#000080;
-      };
+
     }
   .navigation {
     min-height: ${nav_height};
     background: ${nav_background};
+    width: ${content_width};
     background-repeat:no-repeat !important;
     background-size:cover !important;
   }
-
-
   .brand {
   position: absolute;
   padding-left: 20px;
-  margin: 20px;
-  float: left;
-  width: 50%;
+  /* margin: 20px; */
+  /* float: left; */
+  width: 30%;
   line-height: ${nav_height};
-  text-transform: uppercase;
-  font-size: 1.4em;
-  justify-content: center;
+  /* text-transform: uppercase; */
+  /* font-size: 1.4em; */
+  /* justify-content: center; */
   a,
   a:visited {
     color: ${nav_font_color};
     text-decoration: none;
   }
-  img {
+  /* img {
         justify-content: center;
         text-align: center;
         min-width: 120px;
@@ -80,14 +76,7 @@ const Header = styled.div`
         width: 25%;
         border-radius: 50%;
         background-color: green;
-    }
-    h3{
-        min-width: 120px;
-        text-align: center;
-        width: 30%;
-        max-width: 125px;
-        color: gray;
-    }
+    } */
 }
 
 .nav-container {
@@ -107,8 +96,8 @@ nav {
       a,
       a:visited {
         display: block;
-        padding: 0 20px;
-        line-height: ${nav_height};
+        padding: 0 5px;
+        line-height: 200px;
         background: ${nav_background};
         color: ${nav_font_color};
         text-decoration: none;
@@ -131,20 +120,6 @@ nav {
     }
   }
 }
-  .circle{
-        align-content: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
-        /* line-height: 20px; */
-        border-radius: 50%;
-        text-align: center;
-        color: white;
-        font-size: 30px;
-        padding: .5em;
-        /* border: 3px solid #000; */
-        background: #AFD275;
-    }
     li{
     color: white;
     display: inline-block;
@@ -267,105 +242,44 @@ nav {
     
 `
 
-const DashContainer = styled.div`
-    width: 90%;
-    margin-bottom: 5em;
-    margin: 3em;
-    justify-content: center;
-    align-items: center;
-   
-    .negative{
-        background-color: #E7717D;
-        color: white;
-    } 
-    .positive{
-        background-color: #AFD275;
-        color: white;
-    }
-    .topBar{
-            color: white;
-            background-color: #C2CAD0;
-            /* float: center; */
-            display: flex;
-            justify-content: center;
-            height: 50px;
-            width: 97.5%;
-            margin-left: .5em;
-            align-items: center;     
-            border-radius: 5px;
-            padding: 0;
-    }
-    .left{
-        width: 60%;
-        height: 400px;
-        /* display: block; */
-        float: left;
-        display: flex;
-        justify-content: left;
-        align-content: center;
-        margin-left: 1em;
-        margin-bottom: 1em;
-        border: solid 3px #7E685A;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
-  }
-    .right{
-        width: 35%;
-        height: 400px;
-        float: right;
-        margin-right: 1em;
-        margin-bottom: 1em;
-        border: solid 3px #7E685A;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
-        align-content: center;
-        justify-content: center;
-        .daysLeft{
-            align-content: center;
-            justify-content: center;
-            margin-left: 45%;
-            margin-top: 0em;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            border-radius: 50%;
-            padding-bottom: 0;
-            text-align: center;
-            color: white;
-            font-style: bold;
-            /* border: 3px solid #000; */
-            background: #E7717D
-        }
-        button{
-            display:block;
-            width: 50%;
-            background-color:white;
-            color:#FEC90E;
-            border: 2px solid #FEC90E;
-            border-radius: 5px;
-            font-style: bolder;
-        }
-        button:hover{
-            background-color:#FEC90E;
-            color:white;
-            border: 2px solid white;
-        };
-        button:active{
-            background-color:#FEC90E;
-            color:white;
-            border: 2px solid white;
-            box-shadow: 5px 3px 3px gray;
-            font-style: bold;
-        }
-    }
-`
-
 
 const HomeContainer = styled.div`
-
-
   margin: 2em;
-  padding-top: 85px;
+  padding-top: 250px;
+
+
+// Page content 
+.body {
+    h2{
+        text-align: center;
+    }
+  max-width: ${content_width};
+  padding: 30px;
+    .contact {
+        text-align: center;
+    }
+  
+}
+
+@media only screen and (min-width: 481px) {
+    
+}
+@media only screen and (min-width: 920px) {
+    .navigation {
+  min-height: ${nav_height};
+  background: ${nav_background};
+}
+    
+}
+@media only screen and (min-width: 1030px) {
+    
+}
+@media only screen and (min-width: 1240px) {
+    
+}
+
+
+
   h1{
     font-family: "Playfair Display";
   }
@@ -860,7 +774,7 @@ const DetailButton = styled.div`
 
 
 export {
-  GeneralStyle, DashContainer, HomeContainer, Container, Card, Header, ProductFeatureContainer, RecipeCardStyle,
+  GeneralStyle, HomeContainer, Container, Card, Header, ProductFeatureContainer, RecipeCardStyle,
   LeftPiece, MiddleDescription, Quantity,TotalCost, DropDown, SearchStyle,
   CartDiv,PopupCheckout, DetailCard, DetailButton, TitleDiv
 }
