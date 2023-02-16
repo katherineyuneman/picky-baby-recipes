@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 // import Login from './Login'
 // import Signup from './Signup'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { Header } from './styled-components/styleIndex'
 
 function Navbar() {
     const { logout, loggedIn } = useContext(UserContext)
+    const [ mobileNavBarOpen, setMobileNavBarOpen ] = useState('none')
     const navigate = useNavigate()
 
     const logoutUser = () => {
@@ -19,22 +20,39 @@ function Navbar() {
             logout();
         })
     }
+
+    const handleMobileClick = () => {
+        console.log("clicked!")
+        if (mobileNavBarOpen === 'none' ) {
+          setMobileNavBarOpen('display')}
+          else {setMobileNavBarOpen('none')}
+        }
    
     if (!loggedIn){
         return (
             <Header>
-            <h1>
-                    <Link to="/" className='logo'> Picky Eater App </Link>
-            </h1>
-            <div className="columns">
-                <div className="column is-four-fifths">
-                <nav>
-                    <Link to="/signup" className='link'> Signup </Link> | 
-                    <Link to="/login" className='link'> Login </Link> | 
-                    <Link to="/foods" className='link'> Food List</Link> |
-                </nav>
-            </div>
-            </div>
+                <section class="navigation">
+                    <div className='container'>
+                        <div className='brand'>
+                            <h3><Link to="/" className='logo'> Picky Eater App </Link></h3>
+                        </div>
+                    <nav>
+                    <div class="nav-mobile"><a onClick={handleMobileClick} id="nav-toggle" href="#!"><span></span></a></div>
+                        <ul className='nav-list'>
+                        <ul className={mobileNavBarOpen}>
+                            <li>
+                                <Link to="/signup" className='link'> Signup </Link> | 
+                            </li>
+                            <li>
+                                <Link to="/login" className='link'> Login </Link> | 
+                            </li>
+                            <li><Link to="/foods" className='link'> Food List</Link> |</li>
+                        
+                        </ul>
+                        </ul>
+                    </nav>
+                    </div>
+                </section>
             </Header>)
     } else
             {return (
