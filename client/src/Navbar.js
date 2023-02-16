@@ -68,13 +68,13 @@ function Navbar() {
                             <ul className='nav-list'>
                             <ul className={mobileNavBarOpen}>
                                 <li>
-                                    <Link to="/foods" className='link'> Food List </Link> | 
+                                    <Link to="/foods" className='link'> Food List </Link>
                                 </li>
                                 <li>
-                                    <Link to="/recipes" className='link'> My Recipes </Link> | 
+                                    <Link to="/recipes" className='link'> My Recipes </Link>
                                 </li>
                                 <li>
-                                    <Link to="/recipes/new" className='link'> Add a Recipe </Link> | 
+                                    <Link to="/recipes/new" className='link'> Add a Recipe </Link> 
                                 </li>
                                 <li>
                                     <Link to="/" onClick={logoutUser} className='link'> Logout</Link>

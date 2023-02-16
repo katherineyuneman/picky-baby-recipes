@@ -18,19 +18,7 @@ const link_hover_color = `#2581DC`;
 
 const Header = styled.div`
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Montserrat:ital,wght@1,500&family=Playfair+Display:ital,wght@1,800&display=swap');
-  background: white;
-  color: #000080;
-  position: fixed;
-  top: 0;
-  height: 100px;
-  line-height: 15px;
-  width: 100vw;
-  /* z-index: 10; */
   border-bottom: double 10.5px #E7717D;
-  /* .logo{
-        color:#000080;
-        text-decoration: none;
-        }; */
  
   h1 {
     line-height:50px;
@@ -43,12 +31,11 @@ const Header = styled.div`
     height: 15px;
     letter-spacing: 1px;
     font-family: "Bungee Shade";
-
     }
   .navigation {
     min-height: ${nav_height};
     background: ${nav_background};
-    width: ${content_width};
+    width: 100%;
     background-repeat:no-repeat !important;
     background-size:cover !important;
   }
@@ -96,7 +83,7 @@ nav {
       a,
       a:visited {
         display: block;
-        padding: 0 5px;
+        /* padding: 0 0px; */
         line-height: 200px;
         background: ${nav_background};
         color: ${nav_font_color};
@@ -245,7 +232,7 @@ nav {
 
 const HomeContainer = styled.div`
   margin: 2em;
-  padding-top: 250px;
+  /* padding-top: 100px; */
 
 
 // Page content 
@@ -254,7 +241,7 @@ const HomeContainer = styled.div`
         text-align: center;
     }
   max-width: ${content_width};
-  padding: 30px;
+  /* padding: 10px; */
     .contact {
         text-align: center;
     }
@@ -277,8 +264,6 @@ const HomeContainer = styled.div`
 @media only screen and (min-width: 1240px) {
     
 }
-
-
 
   h1{
     font-family: "Playfair Display";
