@@ -28,7 +28,7 @@ function FoodCard({food}) {
               </p>
               
                 <Link to={`/foods/${food_id}`} className="link">
-                  Details about this Food {food_id}
+                  Details about this Food
                 </Link>
                 <br />
                 <h5><Link to={`/foods/${food.id}/recipes`} className="linkbg">

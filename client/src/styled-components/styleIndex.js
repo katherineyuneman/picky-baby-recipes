@@ -8,10 +8,10 @@ const GeneralStyle = styled.div`
 
 const content_width= `1000px`;
 const breakpoint = `799px`;
-const nav_height = `250px`;
+const nav_height = `225px`;
 const nav_background = `#262626`;
 const nav_font_color = `#ffffff`;
-const link_hover_color = `#2581DC`;
+const link_hover_color = `#6B6B6B`;
 const button_color = '#262626'
 
 
@@ -22,15 +22,15 @@ const Header = styled.div`
   border-bottom: double 10.5px #E7717D;
  
   h1 {
-    line-height:50px;
+    line-height:60px;
     display: flex;
     flex: 70%;
     color: #000080;
     float: left;
     /* margin-left: 28px; */
-    font-size: 3em;
+    font-size: 50px;
     height: 15px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     font-family: "Bungee Shade";
     }
   .navigation {
@@ -39,6 +39,7 @@ const Header = styled.div`
     width: 100%;
     background-repeat:no-repeat !important;
     background-size:cover !important;
+    font-size: 20px;
   }
   .brand {
   position: absolute;
@@ -82,6 +83,8 @@ nav {
         &:hover {
           background: ${link_hover_color};
           color: ${nav_font_color};
+          line-height: 225px;
+          font-weight: bold;
         }
         &:not(:only-child):after {
           padding-left: 4px;
@@ -501,7 +504,7 @@ const TitleDiv = styled.div`
     border: solid 2px gray;
     border-radius: 5px;
     /* display: inline-block; */
-    font-size: 14px;
+    /* font-size: 14px; */
     /* flex-direction:row; */
     font-family: "Montserrat";
     font-size: 15px;
