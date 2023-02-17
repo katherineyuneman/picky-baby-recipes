@@ -12,6 +12,7 @@ const nav_height = `250px`;
 const nav_background = `#262626`;
 const nav_font_color = `#ffffff`;
 const link_hover_color = `#2581DC`;
+const button_color = '#262626'
 
 
 
@@ -54,16 +55,6 @@ const Header = styled.div`
     color: ${nav_font_color};
     text-decoration: none;
   }
-  /* img {
-        justify-content: center;
-        text-align: center;
-        min-width: 120px;
-        max-width: 125px;
-        float: left;
-        width: 25%;
-        border-radius: 50%;
-        background-color: green;
-    } */
 }
 
 .nav-container {
@@ -83,7 +74,7 @@ nav {
       a,
       a:visited {
         display: block;
-        /* padding: 0 0px; */
+        padding: 0 20px;
         line-height: 200px;
         background: ${nav_background};
         color: ${nav_font_color};
@@ -107,18 +98,6 @@ nav {
     }
   }
 }
-    li{
-    color: white;
-    display: inline-block;
-    padding: 0px 10px;
-    margin: 2em;
-    /* border-radius: 50px; */
-    }
-    li:hover {
-    background-color: #C2B9B0;
-    color: white;
-    /* height:100%; */
-    }
 
     // Dropdown list binds to JS toggle event
 .nav-dropdown {
@@ -172,6 +151,8 @@ nav {
           padding-left: 30px;
         }
       }
+      border-bottom: double 10.5px #E7717D;
+      border-top: double 10.5px #E7717D;
     }
   }
   .nav-dropdown {
@@ -269,7 +250,7 @@ const HomeContainer = styled.div`
     font-family: "Playfair Display";
   }
   button{
-    background-color:#000080;
+    background-color:${button_color};
     color:white;
     border: 2px solid #E7717D;
     border-radius: 25px;
@@ -282,7 +263,7 @@ const HomeContainer = styled.div`
   }
   button:hover{
     background-color:white;
-    color:#000080;
+    color:${button_color};
     border: 2px solid #E7717D;
   };
   button:active{
@@ -315,7 +296,7 @@ const Card = styled.div`
     flex-wrap: wrap;
     padding: 2px 10px;
     margin:1em;
-    background-color:#000080;
+    background-color:${button_color};
     color: white;
     font-family: "Montserrat", sans-serif;
     font-style: italic;
@@ -533,7 +514,7 @@ const TitleDiv = styled.div`
     display: block;
     text-align: center;
     align-items: right;
-    background-color: #000080;
+    background-color: #E7717D;
     color: white;
     .link{
     color:white;

@@ -34,7 +34,7 @@ function Navbar() {
                 <section class="navigation">
                     <div className='container'>
                         <div className='brand'>
-                            <h3><Link to="/" className='logo'> Picky Eater App </Link></h3>
+                            <h1><Link to="/" className='logo'> Picky Eater App </Link></h1>
                         </div>
                     <nav>
                     <div class="nav-mobile"><a onClick={handleMobileClick} id="nav-toggle" href="#!"><span></span></a></div>
@@ -57,7 +57,6 @@ function Navbar() {
     } else
             {return (
                 <Header>
-
                     <section class="navigation">
                         <div className='container'>
                             <div className='brand'>
